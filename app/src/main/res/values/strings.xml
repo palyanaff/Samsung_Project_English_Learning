@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Samsung_Project_English_Learning</string>
+    <string name="levels">Levels</string>
+    <string name="settings_button">Settings button</string>
+    <string name="runner">Runner</string>
+    <string name="dictionary">Dictionary</string>
+    <string name="exams">Exams</string>
+    <string name="user">User</string>
 </resources>
