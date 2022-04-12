@@ -1,14 +1,22 @@
-package ru.palyanaff.samsung_project_english_learning.screens;
+package ru.palyanaff.samsung_project_english_learning.screens.levels;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import ru.palyanaff.samsung_project_english_learning.R;
+import ru.palyanaff.samsung_project_english_learning.screens.levels.adapter.ItemAdapter;
+import ru.palyanaff.samsung_project_english_learning.screens.levels.data.Datasource;
+import ru.palyanaff.samsung_project_english_learning.screens.levels.data.Level;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,10 +65,21 @@ public class LevelsFragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        // TODO: Find out how to find view by id in fragment
+        /*ArrayList<Level> data = new Datasource().loadLevel();
+        ItemAdapter itemAdapter = new ItemAdapter(data);
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setAdapter(itemAdapter);*/
+
         return inflater.inflate(R.layout.fragment_levels, container, false);
+
+
     }
 }

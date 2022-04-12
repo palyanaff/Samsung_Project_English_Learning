@@ -7,10 +7,9 @@
     <string name="exams">Exams</string>
     <string name="user">User</string>
     <string name="menu">Menu</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
+    <string name="messages_header">First level</string>
     <string name="sync_header">Sync</string>
 
     <!-- Messages Preferences -->

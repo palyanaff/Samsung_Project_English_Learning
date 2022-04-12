@@ -11,7 +11,7 @@ import android.os.Bundle;
 import ru.palyanaff.samsung_project_english_learning.databinding.ActivityMainBinding;
 import ru.palyanaff.samsung_project_english_learning.screens.DictionaryFragment;
 import ru.palyanaff.samsung_project_english_learning.screens.ExamsFragment;
-import ru.palyanaff.samsung_project_english_learning.screens.LevelsFragment;
+import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragment;
 import ru.palyanaff.samsung_project_english_learning.screens.MenuFragment;
 import ru.palyanaff.samsung_project_english_learning.screens.RunnerFragment;
 
@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new LevelsFragment());
+
+        replaceFragment(new MenuFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
