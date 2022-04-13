@@ -1,5 +1,6 @@
 package ru.palyanaff.samsung_project_english_learning.screens.levels.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +33,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.button.setText(arrayList.get(position).getLevelId());
         holder.textView.setText(arrayList.get(position).getHeader());
-
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: switch to next fragment with level content
+                Toast.makeText(v.getContext(), arrayList.get(position).getHeader().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
