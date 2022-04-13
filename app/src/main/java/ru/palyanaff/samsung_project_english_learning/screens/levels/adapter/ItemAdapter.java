@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +35,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         holder.button.setText(arrayList.get(position).getLevelId());
         holder.textView.setText(arrayList.get(position).getHeader());
+
     }
 
     @Override

@@ -1,17 +1,21 @@
 package ru.palyanaff.samsung_project_english_learning.screens.levels;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.screens.levels.adapter.ItemAdapter;
@@ -24,6 +28,7 @@ import ru.palyanaff.samsung_project_english_learning.screens.levels.data.Level;
  * create an instance of this fragment.
  */
 public class LevelsFragment extends Fragment {
+    private final String TAG = "LevelsFragment";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,17 +74,25 @@ public class LevelsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-        // TODO: Find out how to find view by id in fragment
-        /*ArrayList<Level> data = new Datasource().loadLevel();
-        ItemAdapter itemAdapter = new ItemAdapter(data);
+        View view = inflater.inflate(R.layout.fragment_levels, container, false);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setAdapter(itemAdapter);*/
+        initRecyclerView(view);
 
-        return inflater.inflate(R.layout.fragment_levels, container, false);
+        return view;
 
 
+    }
+
+    /**
+     * Initialise RecyclerView
+     * @param view
+     */
+    public void initRecyclerView(View view){
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        ItemAdapter itemAdapter = new ItemAdapter(new Datasource().loadLevel());
+        recyclerView.setAdapter(itemAdapter);
     }
 }

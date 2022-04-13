@@ -17,7 +17,10 @@ public class Datasource {
         ArrayList<Level> list = new ArrayList<>();
 
         // TODO: make normal counter of levels(Id)
-        list.add(new Level(1, R.string.messages_header));
+        list.add(new Level("1", "First level"));
+        list.add(new Level("2", "Second level"));
+        list.add(new Level("3", "Third level"));
+
         return list;
     }
 }

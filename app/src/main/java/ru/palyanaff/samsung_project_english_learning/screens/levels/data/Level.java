@@ -5,19 +5,19 @@ package ru.palyanaff.samsung_project_english_learning.screens.levels.data;
  */
 public class Level {
 
-    private final int levelId;
-    private final int header;
+    private final String levelId;
+    private final String header;
 
-    Level(int levelId, int header){
+    Level(String levelId, String header){
         this.levelId = levelId;
         this.header = header;
     }
 
-    public int getLevelId(){
+    public String getLevelId(){
         return levelId;
     }
 
-    public int getHeader(){
+    public String getHeader(){
         return header;
     }
 }
