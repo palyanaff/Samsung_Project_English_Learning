@@ -4,23 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import java.util.ArrayList;
-
 import ru.palyanaff.samsung_project_english_learning.databinding.ActivityMainBinding;
-import ru.palyanaff.samsung_project_english_learning.screens.DictionaryFragment;
+import ru.palyanaff.samsung_project_english_learning.screens.dictionary.DictionaryFragment;
 import ru.palyanaff.samsung_project_english_learning.screens.ExamsFragment;
 import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragment;
 import ru.palyanaff.samsung_project_english_learning.screens.MenuFragment;
 import ru.palyanaff.samsung_project_english_learning.screens.RunnerFragment;
-import ru.palyanaff.samsung_project_english_learning.screens.levels.adapter.ItemAdapter;
-import ru.palyanaff.samsung_project_english_learning.screens.levels.data.Datasource;
-import ru.palyanaff.samsung_project_english_learning.screens.levels.data.Level;
 
 public class MainActivity extends AppCompatActivity {
 

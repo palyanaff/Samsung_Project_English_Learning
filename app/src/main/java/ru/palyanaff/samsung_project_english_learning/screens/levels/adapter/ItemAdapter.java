@@ -40,6 +40,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             @Override
             public void onClick(View v) {
                 // TODO: switch to next fragment with level content
+                /*FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, new RunnerFragment());
+                fragmentTransaction.commit();*/
                 Toast.makeText(v.getContext(), arrayList.get(position).getHeader().toString(), Toast.LENGTH_SHORT).show();
             }
         });

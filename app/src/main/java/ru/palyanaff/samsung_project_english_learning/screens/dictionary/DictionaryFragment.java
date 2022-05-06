@@ -1,4 +1,4 @@
-package ru.palyanaff.samsung_project_english_learning.screens;
+package ru.palyanaff.samsung_project_english_learning.screens.dictionary;
 
 import android.os.Bundle;
 
