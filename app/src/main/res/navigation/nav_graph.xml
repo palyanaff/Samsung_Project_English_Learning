@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/levelsFragment">
+
+    <fragment
+        android:id="@+id/levelsFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragment"
+        android:label="fragment_levels"
+        tools:layout="@layout/fragment_levels" >
+        <action
+            android:id="@+id/action_levelsFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/runnerFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.RunnerFragment"
+        android:label="fragment_runner"
+        tools:layout="@layout/fragment_runner" />
+    <fragment
+        android:id="@+id/dictionaryFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.DictionaryFragment"
+        android:label="fragment_dictionary"
+        tools:layout="@layout/fragment_dictionary" />
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.levels.TaskFragment"
+        android:label="fragment_task"
+        tools:layout="@layout/fragment_task" />
+</navigation>
