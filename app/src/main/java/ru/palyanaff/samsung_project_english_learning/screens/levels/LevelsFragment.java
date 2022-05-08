@@ -28,7 +28,7 @@ import ru.palyanaff.samsung_project_english_learning.screens.levels.data.Level;
  * create an instance of this fragment.
  */
 public class LevelsFragment extends Fragment {
-    private final String TAG = "LevelsFragment";
+    private static final String TAG = "LevelsFragment";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,7 +72,8 @@ public class LevelsFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_levels, container, false);
@@ -80,8 +81,6 @@ public class LevelsFragment extends Fragment {
         initRecyclerView(view);
 
         return view;
-
-
     }
 
     /**

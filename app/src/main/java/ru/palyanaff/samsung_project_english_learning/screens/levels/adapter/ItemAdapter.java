@@ -1,6 +1,9 @@
 package ru.palyanaff.samsung_project_english_learning.screens.levels.adapter;
 
+import static android.widget.Toast.LENGTH_LONG;
+
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +12,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 
+import ru.palyanaff.samsung_project_english_learning.MainActivity;
 import ru.palyanaff.samsung_project_english_learning.R;
+import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragmentDirections;
+import ru.palyanaff.samsung_project_english_learning.screens.levels.TaskFragment;
 import ru.palyanaff.samsung_project_english_learning.screens.levels.data.Level;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
     private ArrayList<Level> arrayList;
+    private static final String TAG = "ItemAdapter";
 
     public ItemAdapter(ArrayList<Level> arrayList) {
         this.arrayList = arrayList;
@@ -37,14 +46,24 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.button.setText(arrayList.get(position).getLevelId());
         holder.textView.setText(arrayList.get(position).getHeader());
         holder.button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                Toast.makeText(v.getContext(), arrayList.get(position).getLevelId(), LENGTH_LONG).show();
+                try {
+                    @NonNull LevelsFragmentDirections.ActionLevelsFragmentToTaskFragment action
+                            = LevelsFragmentDirections.actionLevelsFragmentToTaskFragment(arrayList.get(position).getTaskArr());
+                    Navigation.findNavController(v).navigate(action);
+                } catch (Exception e){
+                    Log.e(TAG,e.getMessage());
+                }
                 // TODO: switch to next fragment with level content
+               /* @NonNull NavDirections action = LevelsFragmentDirections.actionLevelsFragmentToTaskFragment();
+                Navigation.findNavController(mainActivity, R.id.nav_host_fragment).navigate(R.id.action_levelsFragment_to_taskFragment);*/
                 /*FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, new RunnerFragment());
                 fragmentTransaction.commit();*/
-                Toast.makeText(v.getContext(), arrayList.get(position).getHeader().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

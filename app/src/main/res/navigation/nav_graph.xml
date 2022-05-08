@@ -14,6 +14,7 @@
             android:id="@+id/action_levelsFragment_to_taskFragment"
             app:destination="@id/taskFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/runnerFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.RunnerFragment"
@@ -23,10 +24,32 @@
         android:id="@+id/dictionaryFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.DictionaryFragment"
         android:label="fragment_dictionary"
-        tools:layout="@layout/fragment_dictionary" />
+        tools:layout="@layout/fragment_dictionary" >
+        <action
+            android:id="@+id/action_dictionaryFragment_to_wordFragment"
+            app:destination="@id/wordFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/taskFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.levels.TaskFragment"
         android:label="fragment_task"
-        tools:layout="@layout/fragment_task" />
+        tools:layout="@layout/fragment_task" >
+        <action
+            android:id="@+id/action_taskFragment_to_levelsFragment"
+            app:destination="@id/levelsFragment" />
+        <argument
+            android:name="Task"
+            app:argType="string[]" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/wordFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.WordFragment"
+        android:label="fragment_word_list"
+        tools:layout="@layout/fragment_word_list" >
+        <action
+            android:id="@+id/action_wordFragment_to_dictionaryFragment"
+            app:destination="@id/dictionaryFragment" />
+    </fragment>
 </navigation>
