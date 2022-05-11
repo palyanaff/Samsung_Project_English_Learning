@@ -69,14 +69,30 @@ public class TaskFragment extends Fragment {
         };
     }
 
-    // TODO: make hint by adding 1 letter
     private View.OnClickListener onHintWord(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO: maybe split it in method
                 String playerWord = binding.textInputEditText.getText().toString();
+                int i = 0;
+                String hintWord = "";
+                if (!playerWord.equals("")) {
+                    for (i = 0; i < playerWord.length(); i++) {
+                        if (playerWord.charAt(i) == taskAnswer.charAt(i)) {
+                            hintWord += taskAnswer.charAt(i);
+                        } else {
+                            i++;
+                            break;
+                        }
+                    }
+                }
+                if (i < taskAnswer.length()){
+                    hintWord += taskAnswer.charAt(i);
+                }
+
                 binding.taskEditText.setErrorEnabled(false);
-                binding.textInputEditText.setText(taskAnswer);
+                binding.textInputEditText.setText(hintWord);
             }
         };
     }
