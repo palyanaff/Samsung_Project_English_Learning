@@ -73,28 +73,37 @@ public class TaskFragment extends Fragment {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: maybe split it in method
                 String playerWord = binding.textInputEditText.getText().toString();
-                int i = 0;
-                String hintWord = "";
-                if (!playerWord.equals("")) {
-                    for (i = 0; i < playerWord.length(); i++) {
-                        if (playerWord.charAt(i) == taskAnswer.charAt(i)) {
-                            hintWord += taskAnswer.charAt(i);
-                        } else {
-                            i++;
-                            break;
-                        }
-                    }
-                }
-                if (i < taskAnswer.length()){
-                    hintWord += taskAnswer.charAt(i);
-                }
+                String hintWord = getHintWord(playerWord);
 
                 binding.taskEditText.setErrorEnabled(false);
                 binding.textInputEditText.setText(hintWord);
             }
         };
+    }
+
+    // TODO: fix hint (don't work if it enter word)
+    private String getHintWord(String playerWord){
+        int i = 0;
+        String hintWord = "";
+        if (!playerWord.equals("")) {
+            for (i = 0; i < playerWord.length(); i++) {
+                if (playerWord.charAt(i) == taskAnswer.charAt(i)) {
+                    hintWord += taskAnswer.charAt(i);
+                } else {
+                    hintWord += taskAnswer.charAt(i);
+                    return hintWord;
+                }
+            }
+
+            if (i < taskAnswer.length()){
+                hintWord += taskAnswer.charAt(i);
+            }
+        }
+        else {
+            hintWord += taskAnswer.charAt(i);
+        }
+        return hintWord;
     }
 
     private void setErrorTextField(Boolean error) {
@@ -106,5 +115,6 @@ public class TaskFragment extends Fragment {
             binding.textInputEditText.setText(null);
         }
     }
+
 
 }

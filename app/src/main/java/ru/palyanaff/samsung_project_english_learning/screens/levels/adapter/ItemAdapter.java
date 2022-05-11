@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,9 +50,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), arrayList.get(position).getLevelId(), LENGTH_LONG).show();
                 try {
-                    @NonNull LevelsFragmentDirections.ActionLevelsFragmentToTaskFragment action
+                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                    NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
+                   @NonNull LevelsFragmentDirections.ActionLevelsFragmentToTaskFragment action
                             = LevelsFragmentDirections.actionLevelsFragmentToTaskFragment(arrayList.get(position).getTaskArr());
-                    Navigation.findNavController(v).navigate(action);
+                    navController.navigate(action);
                 } catch (Exception e){
                     Log.e(TAG,e.getMessage());
                 }

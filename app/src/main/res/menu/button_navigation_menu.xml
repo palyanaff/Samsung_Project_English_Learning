@@ -4,17 +4,22 @@
 
     <item android:title="@string/levels"
         android:id="@+id/level"
-        android:icon="@drawable/ic_levels" />
+        android:icon="@drawable/ic_levels"
+        android:checkable="true"/>
     <item android:title="@string/runner"
         android:id="@+id/runner"
-        android:icon="@drawable/ic_runner"/>
+        android:icon="@drawable/ic_runner"
+        android:checkable="true"/>
     <item android:title="@string/dictionary"
         android:id="@+id/dictionary"
+        android:checkable="true"
         android:icon="@drawable/ic_dictionary"/>
     <item android:title="@string/exams"
         android:id="@+id/exams"
+        android:checkable="true"
         android:icon="@drawable/ic_exam"/>
     <item android:title="@string/menu"
         android:id="@+id/menu"
+        android:checkable="true"
         android:icon="@drawable/ic_settings"/>
 </menu>
