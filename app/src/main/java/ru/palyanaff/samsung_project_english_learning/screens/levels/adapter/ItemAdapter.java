@@ -58,13 +58,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 } catch (Exception e){
                     Log.e(TAG,e.getMessage());
                 }
-                // TODO: switch to next fragment with level content
-               /* @NonNull NavDirections action = LevelsFragmentDirections.actionLevelsFragmentToTaskFragment();
-                Navigation.findNavController(mainActivity, R.id.nav_host_fragment).navigate(R.id.action_levelsFragment_to_taskFragment);*/
-                /*FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, new RunnerFragment());
-                fragmentTransaction.commit();*/
             }
         });
     }
