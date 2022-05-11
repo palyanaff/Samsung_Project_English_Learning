@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/taskFragment"
-        android:name="ru.palyanaff.samsung_project_english_learning.screens.levels.TaskFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.levels.task.TaskFragment"
         android:label="fragment_task"
         tools:layout="@layout/fragment_task" >
         <action

@@ -12,17 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 
-import ru.palyanaff.samsung_project_english_learning.MainActivity;
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragmentDirections;
-import ru.palyanaff.samsung_project_english_learning.screens.levels.TaskFragment;
 import ru.palyanaff.samsung_project_english_learning.screens.levels.data.Level;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {

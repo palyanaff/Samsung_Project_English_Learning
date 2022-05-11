@@ -17,7 +17,7 @@ public class Datasource {
         ArrayList<Level> list = new ArrayList<>();
 
         // TODO: make normal counter of levels(Id)
-        list.add(new Level("1", "First level", "First task", "DO A FLIP", "1"));
+        list.add(new Level("1", "First level", "First task", "Enter: first", "first"));
         list.add(new Level("2", "Second level", "Second task", "DO A FLIP x2", "2"));
         list.add(new Level("3", "Third level", "Third task", "DO A FLIP x3", "3"));
 
