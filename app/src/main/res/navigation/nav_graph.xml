@@ -32,12 +32,9 @@
 
     <fragment
         android:id="@+id/taskFragment"
-        android:name="ru.palyanaff.samsung_project_english_learning.screens.levels.TaskFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.levels.task.TaskFragment"
         android:label="fragment_task"
         tools:layout="@layout/fragment_task" >
-        <action
-            android:id="@+id/action_taskFragment_to_levelsFragment"
-            app:destination="@id/levelsFragment" />
         <argument
             android:name="Task"
             app:argType="string[]" />
@@ -47,9 +44,15 @@
         android:id="@+id/wordFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.WordFragment"
         android:label="fragment_word_list"
-        tools:layout="@layout/fragment_word_list" >
-        <action
-            android:id="@+id/action_wordFragment_to_dictionaryFragment"
-            app:destination="@id/dictionaryFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_word_list" />
+    <fragment
+        android:id="@+id/examsFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.ExamsFragment"
+        android:label="fragment_exams"
+        tools:layout="@layout/fragment_exams" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" />
 </navigation>

@@ -3,18 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="@string/levels"
-        android:id="@+id/level"
-        android:icon="@drawable/ic_levels" />
+        android:id="@+id/levelsFragment"
+        android:icon="@drawable/ic_levels"/>
     <item android:title="@string/runner"
-        android:id="@+id/runner"
-        android:icon="@drawable/ic_runner"/>
+        android:id="@+id/runnerFragment"
+        android:icon="@drawable/ic_runner" />
     <item android:title="@string/dictionary"
-        android:id="@+id/dictionary"
+        android:id="@+id/dictionaryFragment"
         android:icon="@drawable/ic_dictionary"/>
     <item android:title="@string/exams"
-        android:id="@+id/exams"
+        android:id="@+id/examsFragment"
         android:icon="@drawable/ic_exam"/>
     <item android:title="@string/menu"
-        android:id="@+id/menu"
+        android:id="@+id/menuFragment"
         android:icon="@drawable/ic_settings"/>
 </menu>
