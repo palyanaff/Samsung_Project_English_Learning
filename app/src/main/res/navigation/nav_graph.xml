@@ -44,7 +44,10 @@
         android:id="@+id/wordFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.WordFragment"
         android:label="fragment_word_list"
-        tools:layout="@layout/fragment_word_list" />
+        tools:layout="@layout/fragment_word_list" >
+        <argument android:name="dictionaryHeader"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/examsFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.ExamsFragment"
