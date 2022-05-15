@@ -12,12 +12,16 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
+
+import ru.palyanaff.samsung_project_english_learning.authentification.LoginActivity;
+import ru.palyanaff.samsung_project_english_learning.authentification.RegisterActivity;
 import ru.palyanaff.samsung_project_english_learning.databinding.ActivityMainBinding;
 import ru.palyanaff.samsung_project_english_learning.screens.dictionary.DictionaryFragment;
 import ru.palyanaff.samsung_project_english_learning.screens.ExamsFragment;

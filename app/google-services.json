@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "336211602461",
+    "project_id": "englearningauthentication",
+    "storage_bucket": "englearningauthentication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336211602461:android:ad69f26c8a90f075762af4",
+        "android_client_info": {
+          "package_name": "ru.palyanaff.samsung_project_english_learning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336211602461-j3avvlgricm79m070enr7rgbudh5lc9f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEUx316qqrSofFWp9gg-uj53MEgU6M9T0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336211602461-j3avvlgricm79m070enr7rgbudh5lc9f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

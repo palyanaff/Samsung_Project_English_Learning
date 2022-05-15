@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Samsung_Project_English_Learning">
         <activity
+            android:name=".authentification.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".authentification.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
