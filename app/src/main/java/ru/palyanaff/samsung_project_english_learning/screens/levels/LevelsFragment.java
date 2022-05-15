@@ -1,27 +1,19 @@
 package ru.palyanaff.samsung_project_english_learning.screens.levels;
 
-import android.nfc.Tag;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentLevelsBinding;
-import ru.palyanaff.samsung_project_english_learning.screens.levels.adapter.ItemAdapter;
-import ru.palyanaff.samsung_project_english_learning.screens.levels.data.Datasource;
-import ru.palyanaff.samsung_project_english_learning.screens.levels.data.Level;
+import ru.palyanaff.samsung_project_english_learning.adapter.ItemAdapter;
+import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
 
 /**
  * A simple {@link Fragment} subclass.

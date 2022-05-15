@@ -1,10 +1,8 @@
 package ru.palyanaff.samsung_project_english_learning.screens.dictionary;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,19 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ru.palyanaff.samsung_project_english_learning.R;
-import ru.palyanaff.samsung_project_english_learning.placeholder.PlaceholderContent;
-import ru.palyanaff.samsung_project_english_learning.screens.dictionary.adapter.MyWordRecyclerViewAdapter;
+import ru.palyanaff.samsung_project_english_learning.databinding.FragmentWordBinding;
+import ru.palyanaff.samsung_project_english_learning.adapter.WordAdapter;
+import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
 
 /**
  * A fragment representing a list of Items.
  */
 public class WordFragment extends Fragment {
-
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
-
+    private static final String TAG = "WordFragment";
+    FragmentWordBinding binding;
+    String dictionaryHeader;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -33,41 +29,28 @@ public class WordFragment extends Fragment {
     public WordFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static WordFragment newInstance(int columnCount) {
-        WordFragment fragment = new WordFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+        binding = FragmentWordBinding.inflate(getLayoutInflater());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_word_list, container, false);
+        dictionaryHeader = WordFragmentArgs.fromBundle(getArguments()).getDictionaryHeader();
+        initRecyclerView(view);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyWordRecyclerViewAdapter(PlaceholderContent.ITEMS));
-        }
         return view;
+    }
+
+    public void initRecyclerView(View view){
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_word_list);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        WordAdapter wordAdapter = new WordAdapter(new Datasource().loadWords(dictionaryHeader));
+        recyclerView.setAdapter(wordAdapter);
     }
 }
