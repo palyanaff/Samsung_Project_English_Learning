@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+<<<<<<< Updated upstream
+=======
+    android:gravity="center"
+    android:background="@color/grey_background_light"
+>>>>>>> Stashed changes
     tools:context=".screens.RunnerFragment">
 
     <!-- TODO: Update blank fragment layout -->

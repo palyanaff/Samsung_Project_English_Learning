@@ -8,7 +8,11 @@ public class Level {
     private final String levelId;
     private final String header;
 
+<<<<<<< Updated upstream
     Level(String levelId, String header){
+=======
+    public Level(String levelId, String header, String taskHeader, String taskText, String taskAnswer){
+>>>>>>> Stashed changes
         this.levelId = levelId;
         this.header = header;
     }
