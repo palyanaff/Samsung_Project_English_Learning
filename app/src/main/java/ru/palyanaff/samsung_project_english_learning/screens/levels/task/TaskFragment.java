@@ -18,7 +18,9 @@ import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragme
 
 public class TaskFragment extends Fragment {
     private static final String TAG = "TaskFragment";
+
     FragmentTaskBinding binding;
+
     private String taskHeaderText;
     private String taskTextText;
     private String taskAnswer;
@@ -54,31 +56,25 @@ public class TaskFragment extends Fragment {
     }
 
     private View.OnClickListener onSubmitWord(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String playerWord = binding.textInputEditText.getText().toString();
-                if (playerWord.equals(taskAnswer)){
-                    setErrorTextField(false);
-                    Toast.makeText(getContext(), "Correct", Toast.LENGTH_LONG).show();
-                } else {
-                    setErrorTextField(true);
+        return v -> {
+            String playerWord = binding.textInputEditText.getText().toString();
+            if (playerWord.equals(taskAnswer)){
+                setErrorTextField(false);
+                Toast.makeText(getContext(), "Correct", Toast.LENGTH_LONG).show();
+            } else {
+                setErrorTextField(true);
 
-                }
             }
         };
     }
 
     private View.OnClickListener onHintWord(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String playerWord = binding.textInputEditText.getText().toString();
-                String hintWord = getHintWord(playerWord);
+        return v -> {
+            String playerWord = binding.textInputEditText.getText().toString();
+            String hintWord = getHintWord(playerWord);
 
-                binding.taskEditText.setErrorEnabled(false);
-                binding.textInputEditText.setText(hintWord);
-            }
+            binding.taskEditText.setErrorEnabled(false);
+            binding.textInputEditText.setText(hintWord);
         };
     }
 
