@@ -1,4 +1,4 @@
-package ru.palyanaff.samsung_project_english_learning.screens.levels.adapter;
+package ru.palyanaff.samsung_project_english_learning.adapter;
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragmentDirections;
-import ru.palyanaff.samsung_project_english_learning.screens.levels.data.Level;
+import ru.palyanaff.samsung_project_english_learning.data.Level;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
@@ -44,20 +44,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public void onBindViewHolder(@NonNull ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.button.setText(arrayList.get(position).getLevelId());
         holder.textView.setText(arrayList.get(position).getHeader());
-        holder.button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), arrayList.get(position).getLevelId(), LENGTH_LONG).show();
-                try {
-                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                    NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
-                   @NonNull LevelsFragmentDirections.ActionLevelsFragmentToTaskFragment action
-                            = LevelsFragmentDirections.actionLevelsFragmentToTaskFragment(arrayList.get(position).getTaskArr());
-                    navController.navigate(action);
-                } catch (Exception e){
-                    Log.e(TAG,e.getMessage());
-                }
+        holder.button.setOnClickListener(v -> {
+            try {
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
+               @NonNull LevelsFragmentDirections.ActionLevelsFragmentToTaskFragment action
+                        = LevelsFragmentDirections.actionLevelsFragmentToTaskFragment(arrayList.get(position).getTaskArr());
+                navController.navigate(action);
+            } catch (Exception e){
+                Log.e(TAG,e.getMessage());
             }
         });
     }
