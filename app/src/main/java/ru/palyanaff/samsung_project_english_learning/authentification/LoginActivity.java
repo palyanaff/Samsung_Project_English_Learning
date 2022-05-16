@@ -42,8 +42,15 @@ public class LoginActivity extends AppCompatActivity {
     private void setListeners() {
         binding.loginButton.setOnClickListener(v -> loginUser());
 
-        binding.registerButton.setOnClickListener(v ->
-                startActivity(new Intent(this, RegisterActivity.class)));
+        binding.registerButton.setOnClickListener(v -> startActivity(
+                new Intent(this, RegisterActivity.class)));
+
+        binding.resetButton.setOnClickListener(v -> startActivity(
+                new Intent(this, ResetPasswordActivity.class)));
+
+        binding.skipLogIn.setOnClickListener(v -> startActivity(
+                new Intent(this, MainActivity.class)));
+
     }
 
     private void loginUser() {

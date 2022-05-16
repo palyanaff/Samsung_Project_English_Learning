@@ -43,4 +43,7 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="prompt_username">Username</string>
     <string name="action_register_user">Register user</string>
+    <string name="log_out">Log out</string>
+    <string name="enter_email">Enter Your E-mail</string>
+    <string name="reset_password">Reset password</string>
 </resources>
