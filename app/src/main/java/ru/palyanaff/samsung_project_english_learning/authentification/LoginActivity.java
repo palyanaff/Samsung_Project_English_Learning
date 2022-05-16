@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -79,20 +80,32 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
 
-                FirebaseUser user = mAuth.getCurrentUser();
+                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                if (firebaseUser != null) {
 
-                // TODO: realize e-mail verification in RegisterActivity while creating account,
-                //  not while logging in
-                // verifying e-mail
-                if (user.isEmailVerified()) {
-                    Toast.makeText(this, "Successfully logged in",
-                            Toast.LENGTH_LONG).show();
-                    binding.loadingLogin.setVisibility(View.GONE);
-                    startActivity(new Intent(this, MainActivity.class));
-                } else {
-                    user.sendEmailVerification();
-                    Toast.makeText(this, "Check your e-mail to verify your account",
-                            Toast.LENGTH_LONG).show();
+                    if (firebaseUser.isEmailVerified()) {
+                        Toast.makeText(this, "Successfully logged in",
+                                Toast.LENGTH_LONG).show();
+                        binding.loadingLogin.setVisibility(View.GONE);
+                        startActivity(new Intent(this, MainActivity.class));
+                    } else {
+                        firebaseUser.sendEmailVerification()
+                                .addOnCompleteListener((Task<Void> sendTask) -> {
+
+                                    String toastSendText;
+                                    if (sendTask.isSuccessful()) {
+                                        toastSendText = "Check your e-mail to verify your account " +
+                                        "and try again after verifying";
+                                    } else {
+                                        toastSendText = "Failed to send verify message on your e-mail." +
+                                                " Please try again";
+                                    }
+
+                                    Toast.makeText(this, toastSendText,
+                                            Toast.LENGTH_LONG).show();
+                                    binding.loadingLogin.setVisibility(View.GONE);
+                        });
+                    }
                 }
 
             } else {

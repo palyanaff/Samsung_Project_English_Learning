@@ -51,15 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        binding.logoReg.setOnClickListener(v -> {
-            Log.d(TAG, "1-st case");
-            startActivity(new Intent(this, LoginActivity.class));
-        });
+        binding.logoReg.setOnClickListener(v -> startActivity(
+                new Intent(this, LoginActivity.class)));
 
-        binding.registerUserButton.setOnClickListener(v -> {
-            Log.d(TAG, "2-nd case");
-            registerUser();
-        });
+        binding.registerUserButton.setOnClickListener(v -> registerUser());
     }
 
     private void registerUser() {
@@ -100,32 +95,41 @@ public class RegisterActivity extends AppCompatActivity {
 
         binding.loadingReg.setVisibility(View.VISIBLE);
 
+
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(outerTask -> {
-                    if (outerTask.isSuccessful()) {
-                        User user = new User(username, email);
+                .addOnCompleteListener((Task<AuthResult> createTask) -> {
 
-                        usersRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .setValue(user).addOnCompleteListener(innerTask -> {
-                                    if (innerTask.isSuccessful()) {
-                                        Toast.makeText(this,
-                                                "User has been successfully registered!",
-                                                Toast.LENGTH_LONG).show();
-                                        binding.loadingReg.setVisibility(View.GONE);
+                    if (createTask.isSuccessful()) {
 
-                                        startActivity(new Intent(this,
-                                                LoginActivity.class));
-                                    } else {
-                                        Toast.makeText(this,
-                                                "Failed to register user!",
-                                                Toast.LENGTH_LONG).show();
-                                        binding.loadingReg.setVisibility(View.GONE);
-                                    }
+                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                         if (firebaseUser != null) {
 
-                                });
+                             User user = new User(username, email);
+
+                             usersRef.child(firebaseUser.getUid())
+                                     .setValue(user)
+                                     .addOnCompleteListener((Task<Void> setTask) -> {
+
+                                         if (setTask.isSuccessful()) {
+                                             Toast.makeText(this,
+                                                     "User has been successfully registered!",
+                                                     Toast.LENGTH_LONG).show();
+                                             binding.loadingReg.setVisibility(View.GONE);
+
+                                             startActivity(new Intent(this,
+                                                     LoginActivity.class));
+                                         } else {
+
+                                             Toast.makeText(this,
+                                                     "Failed to register user!",
+                                                     Toast.LENGTH_LONG).show();
+                                             binding.loadingReg.setVisibility(View.GONE);
+                                         }
+                                     });
+                         }
                     } else {
                         Toast.makeText(this,
-                                "Failed to register user!",
+                                "Failed to create user!",
                                 Toast.LENGTH_LONG).show();
                         binding.loadingReg.setVisibility(View.GONE);
                     }
