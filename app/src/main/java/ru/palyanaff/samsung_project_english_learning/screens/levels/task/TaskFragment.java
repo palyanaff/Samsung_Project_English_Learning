@@ -90,8 +90,7 @@ public class TaskFragment extends Fragment {
             binding.textInputEditText.setText(hintWord);
         };
     }
-
-    // TODO: fix hint (don't work if it enter word)
+    
     private String getHintWord(String playerWord){
         int i = 0;
         String hintWord = "";

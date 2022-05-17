@@ -34,4 +34,5 @@ public class CorrectFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_correct, container, false);
     }
+
 }

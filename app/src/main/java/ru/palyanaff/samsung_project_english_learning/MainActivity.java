@@ -37,12 +37,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // TODO: set back button navigation
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.levelsFragment, R.id.dictionaryFragment, R.id.examsFragment,
+                R.id.runnerFragment, R.id.menuFragment)
+                .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
     }
 
-    
+
     public boolean onSupportNavigateUp() {
         return Navigation.findNavController(this, R.id.nav_host_fragment).navigateUp();
     }
