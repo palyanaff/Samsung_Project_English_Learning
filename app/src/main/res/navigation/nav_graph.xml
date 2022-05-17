@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_levels" >
         <action
             android:id="@+id/action_levelsFragment_to_taskFragment"
-            app:destination="@id/taskFragment" />
+            app:destination="@id/taskFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -38,6 +39,11 @@
         <argument
             android:name="Task"
             app:argType="string[]" />
+        <action
+            android:id="@+id/action_taskFragment_to_correctFragment"
+            app:destination="@id/correctFragment"
+            app:popUpTo="@id/levelsFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -58,4 +64,9 @@
         android:name="ru.palyanaff.samsung_project_english_learning.screens.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu" />
+    <fragment
+        android:id="@+id/correctFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.levels.CorrectFragment"
+        android:label="fragment_correct"
+        tools:layout="@layout/fragment_correct" />
 </navigation>

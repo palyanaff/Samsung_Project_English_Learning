@@ -3,8 +3,12 @@ package ru.palyanaff.samsung_project_english_learning.screens.levels.task;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,14 +16,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentTaskBinding;
+import ru.palyanaff.samsung_project_english_learning.screens.levels.CorrectFragment;
 import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragment;
 
 public class TaskFragment extends Fragment {
     private static final String TAG = "TaskFragment";
 
     FragmentTaskBinding binding;
+    NavController navController;
 
     private String taskHeaderText;
     private String taskTextText;
@@ -53,14 +61,19 @@ public class TaskFragment extends Fragment {
         binding.taskText.setText(taskTextText);
         binding.taskCheckButton.setOnClickListener(onSubmitWord());
         binding.taskHintButton.setOnClickListener(onHintWord());
+
+        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+        navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
     }
 
     private View.OnClickListener onSubmitWord(){
         return v -> {
-            String playerWord = binding.textInputEditText.getText().toString();
+            String playerWord = binding.textInputEditText.getText().toString().trim().toLowerCase(Locale.ROOT);
             if (playerWord.equals(taskAnswer)){
                 setErrorTextField(false);
-                Toast.makeText(getContext(), "Correct", Toast.LENGTH_LONG).show();
+
+                @NonNull NavDirections action = TaskFragmentDirections.actionTaskFragmentToCorrectFragment();
+                navController.navigate(action);
             } else {
                 setErrorTextField(true);
 
@@ -70,7 +83,7 @@ public class TaskFragment extends Fragment {
 
     private View.OnClickListener onHintWord(){
         return v -> {
-            String playerWord = binding.textInputEditText.getText().toString();
+            String playerWord = binding.textInputEditText.getText().toString().trim().toLowerCase(Locale.ROOT);
             String hintWord = getHintWord(playerWord);
 
             binding.taskEditText.setErrorEnabled(false);
