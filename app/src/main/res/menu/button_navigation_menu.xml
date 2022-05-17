@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Levels"
-        android:id="@+id/level"
+    <item android:title="@string/levels"
+        android:id="@+id/levelsFragment"
         android:icon="@drawable/ic_levels"/>
-    <item android:title="Runner"
-        android:id="@+id/runner"
-        android:icon="@drawable/ic_runner"/>
-    <item android:title="Dictionary"
-        android:id="@+id/dictionary"
+    <item android:title="@string/runner"
+        android:id="@+id/runnerFragment"
+        android:icon="@drawable/ic_runner" />
+    <item android:title="@string/dictionary"
+        android:id="@+id/dictionaryFragment"
         android:icon="@drawable/ic_dictionary"/>
-    <item android:title="Exams"
-        android:id="@+id/exams"
+    <item android:title="@string/exams"
+        android:id="@+id/examsFragment"
         android:icon="@drawable/ic_exam"/>
-    <item android:title="Menu"
-        android:id="@+id/menu"
+    <item android:title="@string/menu"
+        android:id="@+id/menuFragment"
         android:icon="@drawable/ic_settings"/>
 </menu>

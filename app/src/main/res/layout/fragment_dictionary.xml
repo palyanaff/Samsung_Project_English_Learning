@@ -3,14 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.DictionaryFragment">
+    android:name="ru.palyanaff.samsung_project_english_learning.DictionaryFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:listitem="@layout/dictionary_header_item"
+    tools:context=".screens.dictionary.DictionaryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:layout_gravity="center"
-        android:text="@string/dictionary" />
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dictionary_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:background="@color/grey_background_light"
+        app:layoutManager="LinearLayoutManager"/>
 </FrameLayout>
