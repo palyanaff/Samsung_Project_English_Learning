@@ -59,4 +59,17 @@ public class Datasource {
 
         return headers;
     }
+
+    public ArrayList<Word> runnerWords() {
+        ArrayList<Word> words = new ArrayList<>();
+
+        words.add(new Word("Привет", "Hello"));
+        words.add(new Word("Мир", "World"));
+        words.add(new Word("Английский", "English"));
+        words.add(new Word("Покидать", "Abandon"));
+        words.add(new Word("Версия", "Edition"));
+        words.add(new Word("Министр", "Minister"));
+
+        return words;
+    }
 }
