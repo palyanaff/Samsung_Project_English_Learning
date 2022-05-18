@@ -4,8 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_register.xml" value="0.33" />
-        <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_reset_password.xml" value="0.29736842105263156" />
+        <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_reset_password.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_levels.xml" value="0.29438405797101447" />
         <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_menu.xml" value="0.2752808988764045" />
         <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_runner.xml" value="0.29438405797101447" />
@@ -13,6 +12,7 @@
         <entry key="..\:/Users/aleksseiiD/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_main.xml" value="0.22418478260869565" />
         <entry key="..\:/Users/aleksseiiD/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_add_circle.xml" value="0.192" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_add_task.xml" value="0.2703125" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_baseline_add_task_24.xml" value="0.2703125" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_dictionary.xml" value="0.2703125" />
@@ -26,7 +26,7 @@
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_splash_screen.xml" value="0.24818840579710144" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/dictionary_header_item.xml" value="0.4" />
-        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_dictionary.xml" value="0.1" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_dictionary.xml" value="0.24912280701754386" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_exams.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_levels.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_levels2.xml" value="0.13020833333333334" />

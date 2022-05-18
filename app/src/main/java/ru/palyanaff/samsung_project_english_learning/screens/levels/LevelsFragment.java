@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ru.palyanaff.samsung_project_english_learning.R;
+import ru.palyanaff.samsung_project_english_learning.authentification.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentLevelsBinding;
 import ru.palyanaff.samsung_project_english_learning.adapter.ItemAdapter;
 import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
@@ -22,6 +23,7 @@ import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
 public class LevelsFragment extends Fragment {
     private static final String TAG = "LevelsFragment";
     FragmentLevelsBinding binding;
+    private User user = new User("w", "s");
 
     public LevelsFragment() {
         // Required empty public constructor
@@ -32,6 +34,7 @@ public class LevelsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentLevelsBinding.inflate(getLayoutInflater());
+        // TODO: get user from db
     }
 
 
@@ -55,7 +58,7 @@ public class LevelsFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        ItemAdapter itemAdapter = new ItemAdapter(new Datasource().loadLevel());
+        ItemAdapter itemAdapter = new ItemAdapter(new Datasource().loadLevel(), user);
         recyclerView.setAdapter(itemAdapter);
     }
 }
