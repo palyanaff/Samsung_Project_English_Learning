@@ -10,9 +10,10 @@ public class RunnerViewModel extends ViewModel {
 
     Datasource datasource = new Datasource();
     ArrayList<Word> words = datasource.runnerWords();
-
-    private Word word = words.get(0);
     MutableLiveData<Integer> wordCounter = new MutableLiveData<>(0);
+
+    private Word word = words.get(wordCounter.getValue());
+
     MutableLiveData<String> _currentWord = new MutableLiveData<>(word.getWordText());
     MutableLiveData<String> _answerWord = new MutableLiveData<>(word.getWordTranslation());
 
@@ -31,5 +32,13 @@ public class RunnerViewModel extends ViewModel {
             _currentWord.setValue(word.getWordText());
             _answerWord.setValue(word.getWordTranslation());
         }
+    }
+
+    public void getSkipWord(){
+        words.add(words.get(wordCounter.getValue()));
+        wordCounter.setValue(wordCounter.getValue() + 1);
+        word = words.get(wordCounter.getValue());
+        _currentWord.setValue(word.getWordText());
+        _answerWord.setValue(word.getWordTranslation());
     }
 }

@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +50,9 @@ public class RunnerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // TODO: update counter and words
-
         binding.runnerHeader.setText(viewModel.getCurrentWord());
+
+        // Setup a click listener for the Submit and Skip buttons.
         binding.runnerCheckButton.setOnClickListener(onSubmitWord());
         binding.runnerSkipButton.setOnClickListener(onSkipWord());
     }
@@ -60,9 +61,11 @@ public class RunnerFragment extends Fragment {
         return v -> {
             String playerWord = Objects.requireNonNull(binding.runnerInputEditText.getText()).toString().toLowerCase(Locale.ROOT).trim();
             if (playerWord.equals(viewModel.getAnswerWord().toLowerCase(Locale.ROOT))){
+
                 viewModel.getNextWord();
                 binding.runnerHeader.setText(viewModel.getCurrentWord());
                 binding.progressBar.setProgress(viewModel.wordCounter.getValue());
+
                 setErrorTextField(false);
             } else {
                 setErrorTextField(true);
@@ -73,7 +76,7 @@ public class RunnerFragment extends Fragment {
 
     private View.OnClickListener onSkipWord(){
         return v -> {
-            viewModel.getNextWord();
+            viewModel.getSkipWord();
             binding.runnerHeader.setText(viewModel.getCurrentWord());
             binding.progressBar.setProgress(viewModel.wordCounter.getValue().intValue());
 
