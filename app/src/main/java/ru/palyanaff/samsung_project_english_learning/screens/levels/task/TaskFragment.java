@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.Locale;
 
 import ru.palyanaff.samsung_project_english_learning.R;
+import ru.palyanaff.samsung_project_english_learning.authentification.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentTaskBinding;
 import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragment;
 
@@ -23,6 +24,10 @@ public class TaskFragment extends Fragment {
 
     FragmentTaskBinding binding;
 
+    // TODO: get user from db
+    private User user;
+
+    private String levelId;
     private String taskHeaderText;
     private String taskTextText;
     private String taskAnswer;
@@ -35,11 +40,14 @@ public class TaskFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentTaskBinding.inflate(getLayoutInflater());
+        // TODO: get user
+        user = new User("s", "z");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        levelId = TaskFragmentArgs.fromBundle(getArguments()).getLevelId();
         taskHeaderText = TaskFragmentArgs.fromBundle(getArguments()).getTask()[0];
         taskTextText = TaskFragmentArgs.fromBundle(getArguments()).getTask()[1];
         taskAnswer = TaskFragmentArgs.fromBundle(getArguments()).getTask()[2];
@@ -63,6 +71,7 @@ public class TaskFragment extends Fragment {
             if (playerWord.equals(taskAnswer)){
                 setErrorTextField(false);
                 Toast.makeText(getContext(), "Correct", Toast.LENGTH_LONG).show();
+                user.addCompleteLevel(levelId);
             } else {
                 setErrorTextField(true);
 
@@ -113,5 +122,9 @@ public class TaskFragment extends Fragment {
         }
     }
 
-
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        // TODO: save in db
+    }
 }
