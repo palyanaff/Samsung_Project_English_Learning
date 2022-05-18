@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/runnerFragment"
-        android:name="ru.palyanaff.samsung_project_english_learning.screens.RunnerFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.runner.RunnerFragment"
         android:label="fragment_runner"
         tools:layout="@layout/fragment_runner" />
     <fragment

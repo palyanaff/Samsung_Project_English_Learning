@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentTaskBinding;
 import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragment;
@@ -57,7 +59,7 @@ public class TaskFragment extends Fragment {
 
     private View.OnClickListener onSubmitWord(){
         return v -> {
-            String playerWord = binding.textInputEditText.getText().toString();
+            String playerWord = binding.textInputEditText.getText().toString().toLowerCase(Locale.ROOT).trim();
             if (playerWord.equals(taskAnswer)){
                 setErrorTextField(false);
                 Toast.makeText(getContext(), "Correct", Toast.LENGTH_LONG).show();
@@ -70,7 +72,7 @@ public class TaskFragment extends Fragment {
 
     private View.OnClickListener onHintWord(){
         return v -> {
-            String playerWord = binding.textInputEditText.getText().toString();
+            String playerWord = binding.textInputEditText.getText().toString().toLowerCase(Locale.ROOT).trim();
             String hintWord = getHintWord(playerWord);
 
             binding.taskEditText.setErrorEnabled(false);
@@ -78,7 +80,6 @@ public class TaskFragment extends Fragment {
         };
     }
 
-    // TODO: fix hint (don't work if it enter word)
     private String getHintWord(String playerWord){
         int i = 0;
         String hintWord = "";

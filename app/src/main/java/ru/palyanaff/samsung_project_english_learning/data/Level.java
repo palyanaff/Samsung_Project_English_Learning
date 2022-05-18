@@ -11,6 +11,7 @@ public class Level {
     private final String taskHeader;
     private final String taskText;
     private final String taskAnswer;
+    private boolean complete = false;
 
     public String[] getTaskArr() {
         return taskArr;
@@ -25,6 +26,14 @@ public class Level {
         taskArr[0] = taskHeader;
         taskArr[1] = taskText;
         taskArr[2] = taskAnswer;
+    }
+
+    public boolean isComplete() {
+        return complete;
+    }
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
 
     public String getLevelId(){
@@ -46,29 +55,5 @@ public class Level {
     public String getTaskAnswer() {
         return taskAnswer;
     }
-
-    /*class Task{
-        private final String taskHeader;
-        private final String taskText;
-        private final String taskAnswer;
-
-        Task(String taskHeader, String taskText, String taskAnswer){
-            this.taskHeader = taskHeader;
-            this.taskText = taskText;
-            this.taskAnswer = taskAnswer;
-        }
-
-        public String getTaskHeader() {
-            return taskHeader;
-        }
-
-        public String getTaskText() {
-            return taskText;
-        }
-
-        public String getTaskAnswer() {
-            return taskAnswer;
-        }
-    }*/
 
 }
