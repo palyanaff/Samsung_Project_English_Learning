@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @NonNull
     private OnCompleteListener<AuthResult> createUserOnComplete(String email, String username) {
-        return createTask -> {
+        return (Task<AuthResult> createTask) -> {
 
             if (createTask.isSuccessful()) {
 
