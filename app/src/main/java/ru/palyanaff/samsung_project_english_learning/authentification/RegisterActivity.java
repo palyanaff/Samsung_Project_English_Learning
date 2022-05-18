@@ -3,17 +3,10 @@ package ru.palyanaff.samsung_project_english_learning.authentification;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +17,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.databinding.ActivityRegisterBinding;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -97,42 +89,53 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Task<AuthResult> createTask) -> {
+                .addOnCompleteListener(createUserOnComplete(email, username));
+    }
 
-                    if (createTask.isSuccessful()) {
+    @NonNull
+    private OnCompleteListener<AuthResult> createUserOnComplete(String email, String username) {
+        return createTask -> {
 
-                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                         if (firebaseUser != null) {
+            if (createTask.isSuccessful()) {
 
-                             User user = new User(username, email);
+                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                if (firebaseUser != null) {
 
-                             usersRef.child(firebaseUser.getUid())
-                                     .setValue(user)
-                                     .addOnCompleteListener((Task<Void> setTask) -> {
+                    User user = new User(username, email);
 
-                                         if (setTask.isSuccessful()) {
-                                             Toast.makeText(this,
-                                                     "User has been successfully registered!",
-                                                     Toast.LENGTH_LONG).show();
-                                             binding.loadingReg.setVisibility(View.GONE);
+                    usersRef.child(firebaseUser.getUid())
+                            .setValue(user)
+                            .addOnCompleteListener(RegisterActivity.this.setValueOnComplete());
+                }
 
-                                             startActivity(new Intent(this,
-                                                     LoginActivity.class));
-                                         } else {
+            } else {
+                Toast.makeText(RegisterActivity.this,
+                        "Failed to create user!",
+                        Toast.LENGTH_LONG).show();
+                binding.loadingReg.setVisibility(View.GONE);
+            }
+        };
+    }
 
-                                             Toast.makeText(this,
-                                                     "Failed to register user!",
-                                                     Toast.LENGTH_LONG).show();
-                                             binding.loadingReg.setVisibility(View.GONE);
-                                         }
-                                     });
-                         }
-                    } else {
-                        Toast.makeText(this,
-                                "Failed to create user!",
-                                Toast.LENGTH_LONG).show();
-                        binding.loadingReg.setVisibility(View.GONE);
-                    }
-                });
+    @NonNull
+    private OnCompleteListener<Void> setValueOnComplete() {
+        return (Task<Void> setTask) -> {
+
+            if (setTask.isSuccessful()) {
+                Toast.makeText(RegisterActivity.this,
+                        "User has been successfully registered!",
+                        Toast.LENGTH_LONG).show();
+                binding.loadingReg.setVisibility(View.GONE);
+
+                RegisterActivity.this.startActivity(new Intent(RegisterActivity.this,
+                        LoginActivity.class));
+            } else {
+
+                Toast.makeText(RegisterActivity.this,
+                        "Failed to register user!",
+                        Toast.LENGTH_LONG).show();
+                binding.loadingReg.setVisibility(View.GONE);
+            }
+        };
     }
 }

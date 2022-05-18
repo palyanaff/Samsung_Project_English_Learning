@@ -34,7 +34,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     @NonNull
     private View.OnClickListener resetPassOnClick() {
-        return v -> {
+        return (View v) -> {
 
             String email = binding.emailReset.getText().toString().trim();
 
@@ -59,14 +59,15 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     @NonNull
     private OnCompleteListener<Void> sendPassResetOnComplete() {
-        return sendPassResetTask -> {
+        return (Task<Void> sendPassResetTask) -> {
 
-            String toastText;
             if (sendPassResetTask.isSuccessful()) {
                 Toast.makeText(this,
                         "Check your e-mail to reset your password", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(this, LoginActivity.class));
+
             } else {
+                
                 Toast.makeText(this,
                         "Failed to send password reset mail. Try again!",
                         Toast.LENGTH_LONG).show();
