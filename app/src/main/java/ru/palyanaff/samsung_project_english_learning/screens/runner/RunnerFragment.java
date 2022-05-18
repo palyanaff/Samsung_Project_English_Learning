@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.data.Word;
@@ -39,12 +40,8 @@ public class RunnerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        //binding.runnerHeader.setText(viewModel.wordCounter.toString());
-
         return binding.getRoot();
     }
 
@@ -52,18 +49,20 @@ public class RunnerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // TODO: update counter and words 
-        binding.runnerHeader.setText(viewModel.wordCounter.getValue().toString());
+        // TODO: update counter and words
 
+        binding.runnerHeader.setText(viewModel.getCurrentWord());
         binding.runnerCheckButton.setOnClickListener(onSubmitWord());
         binding.runnerSkipButton.setOnClickListener(onSkipWord());
     }
 
     private View.OnClickListener onSubmitWord(){
         return v -> {
-            String playerWord = binding.runnerInputEditText.getText().toString().toLowerCase(Locale.ROOT).trim();
-            Toast.makeText(getContext(), "Submit", Toast.LENGTH_LONG).show();
-            if (playerWord.equals("1")){
+            String playerWord = Objects.requireNonNull(binding.runnerInputEditText.getText()).toString().toLowerCase(Locale.ROOT).trim();
+            if (playerWord.equals(viewModel.getAnswerWord().toLowerCase(Locale.ROOT))){
+                viewModel.getNextWord();
+                binding.runnerHeader.setText(viewModel.getCurrentWord());
+                binding.progressBar.setProgress(viewModel.wordCounter.getValue());
                 setErrorTextField(false);
             } else {
                 setErrorTextField(true);
@@ -74,9 +73,10 @@ public class RunnerFragment extends Fragment {
 
     private View.OnClickListener onSkipWord(){
         return v -> {
-            Toast.makeText(getContext(), "Skip", Toast.LENGTH_LONG).show();
-
             viewModel.getNextWord();
+            binding.runnerHeader.setText(viewModel.getCurrentWord());
+            binding.progressBar.setProgress(viewModel.wordCounter.getValue().intValue());
+
             binding.runnerEditText.setErrorEnabled(false);
             binding.runnerInputEditText.setText(null);
         };

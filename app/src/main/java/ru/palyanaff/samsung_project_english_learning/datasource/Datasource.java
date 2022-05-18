@@ -63,12 +63,12 @@ public class Datasource {
     public ArrayList<Word> runnerWords() {
         ArrayList<Word> words = new ArrayList<>();
 
-        words.add(new Word("Hello", "Привет"));
-        words.add(new Word("Word", "Мир"));
-        words.add(new Word("English", "Английский"));
-        words.add(new Word("Abandon", "Покидать"));
-        words.add(new Word("Edition", "Версия"));
-        words.add(new Word("Minister", "Министр"));
+        words.add(new Word("Привет", "Hello"));
+        words.add(new Word("Мир", "World"));
+        words.add(new Word("Английский", "English"));
+        words.add(new Word("Покидать", "Abandon"));
+        words.add(new Word("Версия", "Edition"));
+        words.add(new Word("Министр", "Minister"));
 
         return words;
     }
