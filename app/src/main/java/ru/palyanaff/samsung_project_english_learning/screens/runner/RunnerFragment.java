@@ -65,11 +65,10 @@ public class RunnerFragment extends Fragment {
                 viewModel.getNextWord();
                 binding.runnerHeader.setText(viewModel.getCurrentWord());
                 binding.progressBar.setProgress(viewModel.wordCounter.getValue());
-
+                // TODO: add educated word in user
                 setErrorTextField(false);
             } else {
                 setErrorTextField(true);
-
             }
         };
     }

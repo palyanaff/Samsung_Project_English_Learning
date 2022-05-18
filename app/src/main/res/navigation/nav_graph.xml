@@ -38,6 +38,9 @@
         <argument
             android:name="Task"
             app:argType="string[]" />
+        <argument
+            android:name="levelId"
+            app:argType="string" />
     </fragment>
 
     <fragment
