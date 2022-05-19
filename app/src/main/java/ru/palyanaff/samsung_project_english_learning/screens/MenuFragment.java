@@ -2,6 +2,7 @@ package ru.palyanaff.samsung_project_english_learning.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,22 +60,30 @@ public class MenuFragment extends Fragment {
 
         // FIXME: 'user' keeps being null for some reason
         setUserByUserFromDB();
+
+        if (user == null) {
+            Log.e(TAG, "outer user is null");
+        } else {
+            Log.e(TAG, "outer user is not null");
+        }
         // and so it crashes here
-//        setProfileData();
+        setProfileData();
     }
 
     private void setUserByUserFromDB() {
-        usersRef.child(firebaseUser.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        user = new User(snapshot.getValue(User.class));
-                    }
+        usersRef.child(firebaseUser.getUid()).get()
+                .addOnCompleteListener(getUserTask -> {
+                    if (getUserTask.isSuccessful()) {
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(getContext(),
-                                "Failed to get actual data", Toast.LENGTH_LONG).show();
+                        DataSnapshot dataSnapshot = getUserTask.getResult();
+                        this.user = new User(dataSnapshot.getValue(User.class));
+                        if (this.user == null) {
+                            Log.e(TAG, "user in method is null");
+                        } else {
+                            Log.e(TAG, "user in method is not null");
+                        }
+                    } else {
+                        Log.e(TAG, "Error getting data", getUserTask.getException());
                     }
                 });
     }
@@ -136,7 +145,9 @@ public class MenuFragment extends Fragment {
     }
 
     private void setProfileData() {
-        binding.usernameInput.setText(user.getName());
-        binding.emailInput.setText(user.getEmail());
+        if (user != null) {
+            binding.usernameInput.setText(user.getName());
+            binding.emailInput.setText(user.getEmail());
+        }
     }
 }

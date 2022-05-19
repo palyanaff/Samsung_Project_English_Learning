@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
 
         super.onCreate(savedInstanceState);
@@ -93,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 
         return (Task<AuthResult> signInTask) -> {
 
-            if (signInTask.isSuccessful()) {
+            if (signInTask.isSuccessful() && mAuth.getCurrentUser() != null) {
 
                 Toast.makeText(LoginActivity.this, "Successfully logged in",
                         Toast.LENGTH_LONG).show();
