@@ -1,4 +1,4 @@
-package ru.palyanaff.samsung_project_english_learning.authentification;
+package ru.palyanaff.samsung_project_english_learning.data;
 
 import java.util.ArrayList;
 import java.util.List;

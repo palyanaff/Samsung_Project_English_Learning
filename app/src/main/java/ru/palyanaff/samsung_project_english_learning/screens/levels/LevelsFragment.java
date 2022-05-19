@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ru.palyanaff.samsung_project_english_learning.R;
-import ru.palyanaff.samsung_project_english_learning.authentification.User;
+import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentLevelsBinding;
 import ru.palyanaff.samsung_project_english_learning.adapter.ItemAdapter;
 import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;

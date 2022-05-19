@@ -39,10 +39,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
-        }
-
         setListeners();
     }
 
@@ -109,7 +105,8 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Successfully logged in",
                                 Toast.LENGTH_LONG).show();
                         binding.loadingLogin.setVisibility(View.GONE);
-                        LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        LoginActivity.this.startActivity(
+                                new Intent(LoginActivity.this, MainActivity.class));
                     } else {
                         firebaseUser.sendEmailVerification()
                                 .addOnCompleteListener(LoginActivity.this.sendOnComplete());
@@ -136,8 +133,8 @@ public class LoginActivity extends AppCompatActivity {
                 toastSendText = "Check your e-mail to verify your account " +
                         "and try again after verifying";
             } else {
-                toastSendText = "Failed to send verify message on your e-mail." +
-                        " Please try again";
+                toastSendText = "Failed to send verify message on your e-mail. " +
+                        "Please try again";
             }
 
             Toast.makeText(LoginActivity.this, toastSendText,
