@@ -2,16 +2,14 @@ package ru.palyanaff.samsung_project_english_learning.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,8 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import ru.palyanaff.samsung_project_english_learning.MainActivity;
-import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.authentification.LoginActivity;
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentMenuBinding;
@@ -37,7 +33,6 @@ public class MenuFragment extends Fragment {
 
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
-    private FirebaseDatabase database;
     private DatabaseReference usersRef;
 
     private FragmentMenuBinding binding;
@@ -53,7 +48,7 @@ public class MenuFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("Users");
 
         this.setProfileData();
@@ -75,7 +70,7 @@ public class MenuFragment extends Fragment {
     private View.OnClickListener logOut() {
         return v -> {
             mAuth.signOut();
-            Toast.makeText(MenuFragment.this.getActivity(), "Succefully logged out", Toast.LENGTH_LONG).show();
+            Toast.makeText(MenuFragment.this.getActivity(), "Successfully logged out", Toast.LENGTH_LONG).show();
             MenuFragment.this.startActivity(new Intent(MenuFragment.this.getActivity(), LoginActivity.class));
         };
     }

@@ -26,11 +26,10 @@ import ru.palyanaff.samsung_project_english_learning.data.Level;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
     private ArrayList<Level> arrayList;
-    // TODO: get current user
-    private User user;
+    private final User user;
     private static final String TAG = "ItemAdapter";
 
-    public ItemAdapter(ArrayList<Level> arrayList, User user) {
+    public ItemAdapter(ArrayList<Level> arrayList, @NonNull User user) {
         this.arrayList = arrayList;
         this.user = user;
     }
@@ -44,19 +43,26 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.button.setText(arrayList.get(position).getLevelId());
-        holder.textView.setText(arrayList.get(position).getHeader());
+        Level currentLevel = arrayList.get(position);
 
-        // check if level complete
-        if (user.getCompleteLevels().contains(arrayList.get(position).getLevelId())){
-            holder.button.setBackgroundTintList(AppCompatResources.getColorStateList(holder.itemView.getContext(), R.color.green));
+        holder.button.setText(currentLevel.getLevelId());
+        holder.textView.setText(currentLevel.getHeader());
+
+        if (user != null) {
+            // check if level complete
+            if (user.getCompleteLevels().contains(currentLevel.getLevelId())){
+                holder.button.setBackgroundTintList(AppCompatResources.getColorStateList(holder.itemView.getContext(), R.color.green));
+            }
         }
         holder.button.setOnClickListener(v -> {
             try {
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
                @NonNull LevelsFragmentDirections.ActionLevelsFragmentToTaskFragment action
-                        = LevelsFragmentDirections.actionLevelsFragmentToTaskFragment(arrayList.get(position).getTaskArr(), arrayList.get(position).getLevelId());
+                        = LevelsFragmentDirections.actionLevelsFragmentToTaskFragment(
+                               currentLevel.getTaskArr(),
+                               currentLevel.getLevelId());
+
                 navController.navigate(action);
             } catch (Exception e){
                 Log.e(TAG,e.getMessage());

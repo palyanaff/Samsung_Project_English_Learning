@@ -3,8 +3,6 @@ package ru.palyanaff.samsung_project_english_learning.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.palyanaff.samsung_project_english_learning.data.Word;
-
 public class User {
 
     private String name;
@@ -22,19 +20,16 @@ public class User {
         educatedWords = new ArrayList<>();
     }
 
-    public void addCompleteLevel(String id){
-        completeLevels.add(id);
-    }
+    // copy constructor
+    public User(User user) {
+        this.name = user.name;
+        this.email = user.email;
 
-    public List<Word> getEducatedWords() {
-        return educatedWords;
-    }
+        this.completeLevels = (user.completeLevels == null ?
+                new ArrayList<>() : user.completeLevels);
 
-    public void addEducatedWord(Word word) {
-        this.educatedWords.add(word);
-    }
-    public List<String> getCompleteLevels() {
-        return completeLevels;
+        this.educatedWords = (user.educatedWords == null ?
+                new ArrayList<>() : user.educatedWords);
     }
 
     public String getName() {
@@ -43,5 +38,21 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public List<String> getCompleteLevels() {
+        return completeLevels;
+    }
+
+    public List<Word> getEducatedWords() {
+        return educatedWords;
+    }
+
+    public void addCompleteLevel(String id){
+        completeLevels.add(id);
+    }
+
+    public void addEducatedWord(Word word) {
+        this.educatedWords.add(word);
     }
 }
