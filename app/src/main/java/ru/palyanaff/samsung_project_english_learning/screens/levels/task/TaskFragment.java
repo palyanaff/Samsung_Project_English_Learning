@@ -1,6 +1,7 @@
 package ru.palyanaff.samsung_project_english_learning.screens.levels.task;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,12 @@ public class TaskFragment extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        user = new User(snapshot.getValue(User.class));
+                        try {
+                            user = new User(snapshot.getValue(User.class));
+
+                        } catch (Exception e){
+                            Log.e(TAG, e.getMessage());
+                        }
                     }
 
                     @Override
