@@ -47,4 +47,7 @@
     <string name="enter_email">Enter Your E-mail</string>
     <string name="reset_password">Reset password</string>
     <string name="skip">Skip</string>
+    <string name="profile">Profile</string>
+    <string name="email_text">E-mail:</string>
+    <string name="username_text">Username:</string>
 </resources>

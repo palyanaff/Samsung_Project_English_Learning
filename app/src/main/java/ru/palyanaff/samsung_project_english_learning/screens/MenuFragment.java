@@ -14,10 +14,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import ru.palyanaff.samsung_project_english_learning.MainActivity;
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.authentification.LoginActivity;
+import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentMenuBinding;
 
 /**
@@ -29,6 +36,10 @@ public class MenuFragment extends Fragment {
     private static final String TAG = "MenuFragment";
 
     private FirebaseAuth mAuth;
+    private FirebaseUser firebaseUser;
+    private FirebaseDatabase database;
+    private DatabaseReference usersRef;
+
     private FragmentMenuBinding binding;
 
     public MenuFragment() {
@@ -38,8 +49,14 @@ public class MenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
         binding = FragmentMenuBinding.inflate(getLayoutInflater());
+
+        mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
+        database = FirebaseDatabase.getInstance();
+        usersRef = database.getReference("Users");
+
+        this.setProfileData();
     }
 
     @Override
@@ -61,5 +78,28 @@ public class MenuFragment extends Fragment {
             Toast.makeText(MenuFragment.this.getActivity(), "Succefully logged out", Toast.LENGTH_LONG).show();
             MenuFragment.this.startActivity(new Intent(MenuFragment.this.getActivity(), LoginActivity.class));
         };
+    }
+
+    private void setProfileData() {
+
+        usersRef.child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+
+                String name = user.getName();
+                String email = user.getEmail();
+
+                binding.usernameInput.setText(name);
+                binding.emailInput.setText(email);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(),
+                        "Failed to get actual data", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
