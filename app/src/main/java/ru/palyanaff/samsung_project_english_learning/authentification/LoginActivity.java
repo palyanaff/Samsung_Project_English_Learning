@@ -1,5 +1,6 @@
 package ru.palyanaff.samsung_project_english_learning.authentification;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,7 +13,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -35,10 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
-
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
-        }
 
         setListeners();
     }
@@ -88,44 +87,59 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.loadingLogin.setVisibility(View.VISIBLE);
 
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(signInOnComplete());
+    }
+
+    @NonNull
+    private OnCompleteListener<AuthResult> signInOnComplete() {
+
+        return (Task<AuthResult> signInTask) -> {
+
+            if (signInTask.isSuccessful()) {
 
                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                 if (firebaseUser != null) {
 
                     if (firebaseUser.isEmailVerified()) {
-                        Toast.makeText(this, "Successfully logged in",
+                        Toast.makeText(LoginActivity.this, "Successfully logged in",
                                 Toast.LENGTH_LONG).show();
                         binding.loadingLogin.setVisibility(View.GONE);
-                        startActivity(new Intent(this, MainActivity.class));
+                        LoginActivity.this.startActivity(
+                                new Intent(LoginActivity.this, MainActivity.class));
                     } else {
                         firebaseUser.sendEmailVerification()
-                                .addOnCompleteListener((Task<Void> sendTask) -> {
-
-                                    String toastSendText;
-                                    if (sendTask.isSuccessful()) {
-                                        toastSendText = "Check your e-mail to verify your account " +
-                                        "and try again after verifying";
-                                    } else {
-                                        toastSendText = "Failed to send verify message on your e-mail." +
-                                                " Please try again";
-                                    }
-
-                                    Toast.makeText(this, toastSendText,
-                                            Toast.LENGTH_LONG).show();
-                                    binding.loadingLogin.setVisibility(View.GONE);
-                        });
+                                .addOnCompleteListener(LoginActivity.this.sendOnComplete());
                     }
                 }
 
             } else {
 
-                Toast.makeText(this,
+                Toast.makeText(LoginActivity.this,
                         "Failed to log in! Please check again your credentials",
                         Toast.LENGTH_LONG).show();
                 binding.loadingLogin.setVisibility(View.GONE);
             }
-        });
+        };
+    }
+
+    @NonNull
+    private OnCompleteListener<Void> sendOnComplete() {
+
+        return (Task<Void> sendTask) -> {
+
+            String toastSendText;
+            if (sendTask.isSuccessful()) {
+                toastSendText = "Check your e-mail to verify your account " +
+                        "and try again after verifying";
+            } else {
+                toastSendText = "Failed to send verify message on your e-mail. " +
+                        "Please try again";
+            }
+
+            Toast.makeText(LoginActivity.this, toastSendText,
+                    Toast.LENGTH_LONG).show();
+            binding.loadingLogin.setVisibility(View.GONE);
+        };
     }
 }
