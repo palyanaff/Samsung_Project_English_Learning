@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +29,7 @@ import ru.palyanaff.samsung_project_english_learning.databinding.FragmentRunnerB
 public class RunnerFragment extends Fragment {
     private static final String TAG = "RunnerFragment";
 
+    // TODO: replace user getting in viewModel
     private User user;
 
     private FirebaseAuth mAuth;
@@ -37,7 +39,7 @@ public class RunnerFragment extends Fragment {
     private String userID;
 
     FragmentRunnerBinding binding;
-    RunnerViewModel viewModel = new RunnerViewModel();
+    RunnerViewModel viewModel;
 
     public RunnerFragment() {
         // Required empty public constructor
@@ -47,6 +49,8 @@ public class RunnerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentRunnerBinding.inflate(getLayoutInflater());
+
+        viewModel = new ViewModelProvider(requireActivity()).get(RunnerViewModel.class);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
@@ -83,7 +87,9 @@ public class RunnerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.runnerHeader.setText(viewModel.getCurrentWord());
+        if (viewModel.getCurrentWord().getValue() != null){
+            binding.runnerHeader.setText(viewModel.getCurrentWord().getValue());
+        }
 
         // Setup a click listener for the Submit and Skip buttons.
         binding.runnerCheckButton.setOnClickListener(onSubmitWord());
@@ -93,14 +99,12 @@ public class RunnerFragment extends Fragment {
     private View.OnClickListener onSubmitWord(){
         return v -> {
             String playerWord = Objects.requireNonNull(binding.runnerInputEditText.getText()).toString().toLowerCase(Locale.ROOT).trim();
-            if (playerWord.equals(viewModel.getAnswerWord().toLowerCase(Locale.ROOT))){
+            if (playerWord.equals(viewModel.getAnswerWord().getValue().toLowerCase(Locale.ROOT))){
 
                 viewModel.getNextWord();
-                binding.runnerHeader.setText(viewModel.getCurrentWord());
-                binding.progressBar.setProgress(viewModel.wordCounter.getValue());
-                // TODO: use (Word playerWord) instead of (String playerWord)
-                //  and then we can add educated word in user
-//                user.addEducatedWord(playerWord);
+                binding.runnerHeader.setText(viewModel.getCurrentWord().getValue());
+                binding.progressBar.setProgress(viewModel.getWordCounter().getValue());
+                user.addEducatedWord(viewModel.getWord());
                 setErrorTextField(false);
             } else {
                 setErrorTextField(true);
@@ -111,8 +115,8 @@ public class RunnerFragment extends Fragment {
     private View.OnClickListener onSkipWord(){
         return v -> {
             viewModel.getSkipWord();
-            binding.runnerHeader.setText(viewModel.getCurrentWord());
-            binding.progressBar.setProgress(viewModel.wordCounter.getValue().intValue());
+            binding.runnerHeader.setText(viewModel.getCurrentWord().getValue());
+            binding.progressBar.setProgress(viewModel.getWordCounter().getValue());
 
             binding.runnerEditText.setErrorEnabled(false);
             binding.runnerInputEditText.setText(null);
@@ -129,6 +133,7 @@ public class RunnerFragment extends Fragment {
         }
     }
 
+    // TODO: remove all saves in onDestroyView
     @Override
     public void onDetach() {
         super.onDetach();
