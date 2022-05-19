@@ -52,24 +52,6 @@ public class LevelsFragment extends Fragment {
         firebaseUser = auth.getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("Users");
-
-        setUserByUserFromDB();
-    }
-
-    private void setUserByUserFromDB() {
-        usersRef.child(firebaseUser.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        user = new User(snapshot.getValue(User.class));
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(getContext(),
-                                "Failed to get actual data", Toast.LENGTH_LONG).show();
-                    }
-                });
     }
 
 
@@ -80,6 +62,7 @@ public class LevelsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_levels, container, false);
 
+        setUserByUserFromDB();
         initRecyclerView(view);
 
         return view;
@@ -95,5 +78,22 @@ public class LevelsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         ItemAdapter itemAdapter = new ItemAdapter(new Datasource().loadLevel(), user);
         recyclerView.setAdapter(itemAdapter);
+    }
+
+    // FIXME: firebaseUser is null for some reason
+    private void setUserByUserFromDB() {
+        usersRef.child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        user = new User(snapshot.getValue(User.class));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(getContext(),
+                                "Failed to get actual data", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 }
