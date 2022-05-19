@@ -1,14 +1,23 @@
 package ru.palyanaff.samsung_project_english_learning.screens.levels.task;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
@@ -18,9 +27,11 @@ import ru.palyanaff.samsung_project_english_learning.databinding.FragmentTaskBin
 public class TaskFragment extends Fragment {
     private static final String TAG = "TaskFragment";
 
-    FragmentTaskBinding binding;
+    private FragmentTaskBinding binding;
 
-    // TODO: get user from db
+    private FirebaseUser firebaseUser;
+    private DatabaseReference usersRef;
+
     private User user;
 
     private String levelId;
@@ -36,12 +47,33 @@ public class TaskFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentTaskBinding.inflate(getLayoutInflater());
-        // TODO: get user
-        user = new User("s", "z");
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        firebaseUser = auth.getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        usersRef = database.getReference("Users");
+
+        setUserByUserFromDB();
+    }
+
+    private void setUserByUserFromDB() {
+        usersRef.child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        user = new User(snapshot.getValue(User.class));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(getContext(),
+                                "Failed to get actual data", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         levelId = TaskFragmentArgs.fromBundle(getArguments()).getLevelId();
         taskHeaderText = TaskFragmentArgs.fromBundle(getArguments()).getTask()[0];
@@ -88,7 +120,7 @@ public class TaskFragment extends Fragment {
     private String getHintWord(String playerWord){
         int i = 0;
         String hintWord = "";
-        if (!playerWord.equals("")) {
+        if (!playerWord.isEmpty()) {
             for (i = 0; i < playerWord.length(); i++) {
                 if (playerWord.charAt(i) == taskAnswer.charAt(i)) {
                     hintWord += taskAnswer.charAt(i);
@@ -121,6 +153,17 @@ public class TaskFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        // TODO: save in db
+
+        usersRef.child(firebaseUser.getUid())
+                .setValue(user).addOnCompleteListener(setValueOnComplete());
+    }
+
+    @NonNull
+    private OnCompleteListener<Void> setValueOnComplete() {
+        return setValueTask -> {
+            if (!setValueTask.isSuccessful()) {
+                Toast.makeText(getContext(), "Failed to save word", Toast.LENGTH_SHORT).show();
+            }
+        };
     }
 }

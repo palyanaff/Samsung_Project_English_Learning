@@ -1,5 +1,7 @@
 package ru.palyanaff.samsung_project_english_learning.screens.runner;
 
+import androidx.core.widget.ListViewAutoScrollHelper;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
@@ -8,21 +10,27 @@ import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
 
 public class RunnerViewModel extends ViewModel {
 
-    Datasource datasource = new Datasource();
-    ArrayList<Word> words = datasource.runnerWords();
-    MutableLiveData<Integer> wordCounter = new MutableLiveData<>(0);
+    private final Datasource datasource = new Datasource();
+    private final ArrayList<Word> words = datasource.runnerWords();
+
+    private final MutableLiveData<Integer> wordCounter = new MutableLiveData<>(0
+            /*TODO: wordCounter = user.getEducatedWords.size()*/);
 
     private Word word = words.get(wordCounter.getValue());
 
     MutableLiveData<String> _currentWord = new MutableLiveData<>(word.getWordText());
     MutableLiveData<String> _answerWord = new MutableLiveData<>(word.getWordTranslation());
 
-    public String getCurrentWord() {
-        return _currentWord.getValue();
+    public LiveData<Integer> getWordCounter() {
+        return wordCounter;
     }
 
-    public String getAnswerWord() {
-        return _answerWord.getValue();
+    public LiveData<String> getCurrentWord() {
+        return _currentWord;
+    }
+
+    public LiveData<String> getAnswerWord() {
+        return _answerWord;
     }
 
     public void getNextWord() {
@@ -32,6 +40,10 @@ public class RunnerViewModel extends ViewModel {
             _currentWord.setValue(word.getWordText());
             _answerWord.setValue(word.getWordTranslation());
         }
+    }
+
+    public Word getWord() {
+        return word;
     }
 
     public void getSkipWord(){

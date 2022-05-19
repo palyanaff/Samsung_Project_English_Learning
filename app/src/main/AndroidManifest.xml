@@ -16,11 +16,11 @@
             android:name=".authentification.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".authentification.LoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".authentification.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

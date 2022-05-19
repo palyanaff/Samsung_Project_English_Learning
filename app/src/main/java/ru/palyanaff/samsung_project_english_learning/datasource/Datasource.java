@@ -21,7 +21,15 @@ public class Datasource {
         levels.add(new Level("1", "First level", "First task", "Enter: first", "first"));
         levels.add(new Level("2", "Second level", "Second task", "DO A FLIP x2", "2"));
         levels.add(new Level("3", "Third level", "Third task", "DO A FLIP x3", "3"));
-
+        levels.add(new Level("4", "First level", "First task", "Enter: first", "first"));
+        levels.add(new Level("5", "Second level", "Second task", "DO A FLIP x2", "2"));
+        levels.add(new Level("6", "Third level", "Third task", "DO A FLIP x3", "3"));
+        levels.add(new Level("7", "First level", "First task", "Enter: first", "first"));
+        levels.add(new Level("8", "Second level", "Second task", "DO A FLIP x2", "2"));
+        levels.add(new Level("9", "Third level", "Third task", "DO A FLIP x3", "3"));
+        levels.add(new Level("10", "First level", "First task", "Enter: first", "first"));
+        levels.add(new Level("11", "Second level", "Second task", "DO A FLIP x2", "2"));
+        levels.add(new Level("12", "Third level", "Third task", "DO A FLIP x3", "3"));
         return levels;
     }
 
@@ -56,6 +64,7 @@ public class Datasource {
 
         headers.add("A1");
         headers.add("B2");
+        headers.add("C2");
 
         return headers;
     }

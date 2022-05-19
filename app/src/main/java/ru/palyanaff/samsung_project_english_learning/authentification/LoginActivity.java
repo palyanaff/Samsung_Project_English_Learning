@@ -1,26 +1,20 @@
 package ru.palyanaff.samsung_project_english_learning.authentification;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import ru.palyanaff.samsung_project_english_learning.MainActivity;
-import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -33,11 +27,15 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        mAuth = FirebaseAuth.getInstance();
 
         setListeners();
     }
@@ -96,50 +94,20 @@ public class LoginActivity extends AppCompatActivity {
 
         return (Task<AuthResult> signInTask) -> {
 
-            if (signInTask.isSuccessful()) {
+            if (signInTask.isSuccessful() && mAuth.getCurrentUser() != null) {
 
-                FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                if (firebaseUser != null) {
+                Toast.makeText(LoginActivity.this, "Successfully logged in",
+                        Toast.LENGTH_LONG).show();
+                binding.loadingLogin.setVisibility(View.GONE);
 
-                    if (firebaseUser.isEmailVerified()) {
-                        Toast.makeText(LoginActivity.this, "Successfully logged in",
-                                Toast.LENGTH_LONG).show();
-                        binding.loadingLogin.setVisibility(View.GONE);
-                        LoginActivity.this.startActivity(
-                                new Intent(LoginActivity.this, MainActivity.class));
-                    } else {
-                        firebaseUser.sendEmailVerification()
-                                .addOnCompleteListener(LoginActivity.this.sendOnComplete());
-                    }
-                }
-
+                LoginActivity.this.startActivity(new Intent(
+                        LoginActivity.this, MainActivity.class));
             } else {
-
                 Toast.makeText(LoginActivity.this,
                         "Failed to log in! Please check again your credentials",
                         Toast.LENGTH_LONG).show();
                 binding.loadingLogin.setVisibility(View.GONE);
             }
-        };
-    }
-
-    @NonNull
-    private OnCompleteListener<Void> sendOnComplete() {
-
-        return (Task<Void> sendTask) -> {
-
-            String toastSendText;
-            if (sendTask.isSuccessful()) {
-                toastSendText = "Check your e-mail to verify your account " +
-                        "and try again after verifying";
-            } else {
-                toastSendText = "Failed to send verify message on your e-mail. " +
-                        "Please try again";
-            }
-
-            Toast.makeText(LoginActivity.this, toastSendText,
-                    Toast.LENGTH_LONG).show();
-            binding.loadingLogin.setVisibility(View.GONE);
         };
     }
 }

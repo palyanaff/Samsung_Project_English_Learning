@@ -50,4 +50,6 @@
     <string name="profile">Profile</string>
     <string name="email_text">E-mail:</string>
     <string name="username_text">Username:</string>
+    <string name="email_not_verified">E-mail not verified!</string>
+    <string name="email_verified">E-mail verified!</string>
 </resources>
