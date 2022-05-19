@@ -57,8 +57,10 @@ public class MenuFragment extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("Users");
 
+        // FIXME: 'user' keeps being null for some reason
         setUserByUserFromDB();
-        setProfileData();
+        // and so it crashes here
+//        setProfileData();
     }
 
     private void setUserByUserFromDB() {
@@ -134,7 +136,7 @@ public class MenuFragment extends Fragment {
     }
 
     private void setProfileData() {
-        binding.usernameInput.setText(this.user.getName());
-        binding.emailInput.setText(this.user.getEmail());
+        binding.usernameInput.setText(user.getName());
+        binding.emailInput.setText(user.getEmail());
     }
 }
