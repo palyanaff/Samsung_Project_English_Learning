@@ -1,6 +1,5 @@
 package ru.palyanaff.samsung_project_english_learning.screens.levels;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.adapter.ItemAdapter;
-import ru.palyanaff.samsung_project_english_learning.authentification.LoginActivity;
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentLevelsBinding;
 import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;

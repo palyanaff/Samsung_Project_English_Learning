@@ -16,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
-import ru.palyanaff.samsung_project_english_learning.authentification.LoginActivity;
 import ru.palyanaff.samsung_project_english_learning.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

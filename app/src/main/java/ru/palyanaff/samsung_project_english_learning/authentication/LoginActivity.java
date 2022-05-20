@@ -1,4 +1,4 @@
-package ru.palyanaff.samsung_project_english_learning.authentification;
+package ru.palyanaff.samsung_project_english_learning.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(this, MainActivity.class));
-            finish();
         }
 
         super.onCreate(savedInstanceState);

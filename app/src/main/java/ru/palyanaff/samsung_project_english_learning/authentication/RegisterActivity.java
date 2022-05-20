@@ -1,4 +1,4 @@
-package ru.palyanaff.samsung_project_english_learning.authentification;
+package ru.palyanaff.samsung_project_english_learning.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -129,6 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 RegisterActivity.this.startActivity(new Intent(RegisterActivity.this,
                         LoginActivity.class));
+                finish();
             } else {
 
                 Toast.makeText(RegisterActivity.this,

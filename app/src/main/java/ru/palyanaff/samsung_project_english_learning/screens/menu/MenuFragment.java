@@ -1,4 +1,4 @@
-package ru.palyanaff.samsung_project_english_learning.screens;
+package ru.palyanaff.samsung_project_english_learning.screens.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,13 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import ru.palyanaff.samsung_project_english_learning.R;
-import ru.palyanaff.samsung_project_english_learning.authentification.LoginActivity;
+import ru.palyanaff.samsung_project_english_learning.authentication.LoginActivity;
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentMenuBinding;
 
