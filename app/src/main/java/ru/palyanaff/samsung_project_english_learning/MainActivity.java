@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // TODO: set back button navigation
-        //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        //NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -46,15 +44,12 @@ public class MainActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     public boolean onSupportNavigateUp() {
-        if (navController.navigateUp()){
-            return true;
-        } else {
-            return super.onSupportNavigateUp();
-        }
+        return navController.navigateUp() || super.onSupportNavigateUp();
+
     }
 
 

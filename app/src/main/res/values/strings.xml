@@ -52,4 +52,5 @@
     <string name="username_text">Username:</string>
     <string name="email_not_verified">E-mail not verified!</string>
     <string name="email_verified">E-mail verified!</string>
+    <string name="add_new_topic">Add new topic</string>
 </resources>
