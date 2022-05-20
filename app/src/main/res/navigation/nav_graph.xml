@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/levelsFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragment"
-        android:label="fragment_levels"
-        tools:layout="@layout/fragment_levels" >
+        android:label="Levels"
+        tools:layout="@layout/fragment_levels">
         <action
             android:id="@+id/action_levelsFragment_to_taskFragment"
             app:destination="@id/taskFragment" />
@@ -18,23 +18,26 @@
     <fragment
         android:id="@+id/runnerFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.runner.RunnerFragment"
-        android:label="fragment_runner"
+        android:label="Runner"
         tools:layout="@layout/fragment_runner" />
     <fragment
         android:id="@+id/dictionaryFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.DictionaryFragment"
-        android:label="fragment_dictionary"
-        tools:layout="@layout/fragment_dictionary" >
+        android:label="Dictionary"
+        tools:layout="@layout/fragment_dictionary">
         <action
-            android:id="@+id/action_dictionaryFragment_to_wordFragment"
-            app:destination="@id/wordFragment" />
+            android:id="@+id/action_dictionaryFragment_to_wordListFragment"
+            app:destination="@id/wordListFragment" />
+        <action
+            android:id="@+id/action_dictionaryFragment_to_newDictionary"
+            app:destination="@id/newDictionary" />
     </fragment>
 
     <fragment
         android:id="@+id/taskFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.levels.task.TaskFragment"
-        android:label="fragment_task"
-        tools:layout="@layout/fragment_task" >
+        android:label="Task"
+        tools:layout="@layout/fragment_task">
         <argument
             android:name="Task"
             app:argType="string[]" />
@@ -44,21 +47,35 @@
     </fragment>
 
     <fragment
-        android:id="@+id/wordFragment"
-        android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.WordFragment"
-        android:label="fragment_word_list"
-        tools:layout="@layout/fragment_word_list" >
-        <argument android:name="dictionaryHeader"
+        android:id="@+id/wordListFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.WordListFragment"
+        android:label="Words"
+        tools:layout="@layout/fragment_word_list">
+        <argument
+            android:name="dictionaryHeader"
             app:argType="string" />
+        <action
+            android:id="@+id/action_wordFragment_to_newWordFragment"
+            app:destination="@id/newWordFragment" />
     </fragment>
     <fragment
         android:id="@+id/examsFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.ExamsFragment"
-        android:label="fragment_exams"
+        android:label="Exams"
         tools:layout="@layout/fragment_exams" />
     <fragment
         android:id="@+id/menuFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.MenuFragment"
-        android:label="fragment_menu"
+        android:label="Menu"
         tools:layout="@layout/fragment_menu" />
+    <fragment
+        android:id="@+id/newDictionary"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.NewDictionary"
+        android:label="New dictionary"
+        tools:layout="@layout/fragment_new_dictionary" />
+    <fragment
+        android:id="@+id/newWordFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.NewWordFragment"
+        android:label="New word"
+        tools:layout="@layout/fragment_new_word" />
 </navigation>

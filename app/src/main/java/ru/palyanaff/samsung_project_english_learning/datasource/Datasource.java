@@ -55,10 +55,12 @@ public class Datasource {
 
         return words;
     }
+
     /**
      * Load dictionary headers
      * @return list with data of headers
      */
+
     public ArrayList<String> loadDictionaryHeader(){
         ArrayList<String> headers = new ArrayList<>();
 
@@ -67,7 +69,10 @@ public class Datasource {
         headers.add("C2");
 
         return headers;
+
     }
+
+
 
     public ArrayList<Word> runnerWords() {
         ArrayList<Word> words = new ArrayList<>();

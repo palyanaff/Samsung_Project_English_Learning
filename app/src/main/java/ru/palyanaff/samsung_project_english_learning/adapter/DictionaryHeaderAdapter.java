@@ -38,8 +38,8 @@ public class DictionaryHeaderAdapter extends RecyclerView.Adapter<DictionaryHead
             try {
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
-                @NonNull DictionaryFragmentDirections.ActionDictionaryFragmentToWordFragment action
-                        = DictionaryFragmentDirections.actionDictionaryFragmentToWordFragment(arrayList.get(position));
+                @NonNull DictionaryFragmentDirections.ActionDictionaryFragmentToWordListFragment action
+                        = DictionaryFragmentDirections.actionDictionaryFragmentToWordListFragment(arrayList.get(position));
                 navController.navigate(action);
             } catch (Exception e){
                 Log.e(TAG,e.getMessage());

@@ -9,6 +9,7 @@ public class User {
     private String email;
     private List<String> completeLevels;
     private List<Word> educatedWords;
+    // TODO: add new List for dictionary headers
 
     public User(){
     }

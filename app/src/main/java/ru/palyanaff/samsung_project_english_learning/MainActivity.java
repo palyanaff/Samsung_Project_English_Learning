@@ -3,13 +3,18 @@ package ru.palyanaff.samsung_project_english_learning;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 import ru.palyanaff.samsung_project_english_learning.authentification.LoginActivity;
 import ru.palyanaff.samsung_project_english_learning.databinding.ActivityMainBinding;
@@ -27,13 +32,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // TODO: set back button navigation
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.levelsFragment, R.id.examsFragment, R.id.menuFragment,
+                R.id.runnerFragment, R.id.dictionaryFragment)
+                .build();
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        navController = Objects.requireNonNull(navHostFragment).getNavController();
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
     }
 
     public boolean onSupportNavigateUp() {
-        return Navigation.findNavController(this, R.id.nav_host_fragment).navigateUp();
+        return navController.navigateUp() || super.onSupportNavigateUp();
+
     }
 
 
