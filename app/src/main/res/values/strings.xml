@@ -26,7 +26,6 @@
     <string name="check">Check</string>
     <string name="hint">Hint</string>
     <string name="try_again">Try again</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="task">Task</string>
     <string name="title_activity_login">LoginActivity</string>
@@ -53,4 +52,7 @@
     <string name="email_not_verified">E-mail not verified!</string>
     <string name="email_verified">E-mail verified!</string>
     <string name="add_new_topic">Add new topic</string>
+    <string name="plus_word">+ Word</string>
+    <string name="add_new_english_word">Add new english word</string>
+    <string name="add_translation">Add translation</string>
 </resources>

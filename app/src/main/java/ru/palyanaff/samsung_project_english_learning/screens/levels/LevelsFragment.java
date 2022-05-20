@@ -65,7 +65,6 @@ public class LevelsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_levels, container, false);
 
-        // TODO: uncomment
         setUserByUserFromDB();
         initRecyclerView(view);
 

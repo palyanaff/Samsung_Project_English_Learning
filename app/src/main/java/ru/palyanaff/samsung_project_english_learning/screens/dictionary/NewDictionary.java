@@ -44,7 +44,7 @@ public class NewDictionary extends Fragment {
 
     private View.OnClickListener addHeader(){
         return v -> {
-            // TODO: add headers in adapter(Dictionary fragment)
+            // TODO: update user data (add header in arrayList)
             String str = binding.textInputEditText.getText().toString().trim();
             Log.d(TAG, str);
 

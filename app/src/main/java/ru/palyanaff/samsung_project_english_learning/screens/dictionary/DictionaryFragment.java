@@ -70,6 +70,7 @@ public class DictionaryFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.dictionary_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
+        // TODO: load dictionary headers from user data
         DictionaryHeaderAdapter dictionaryHeaderAdapter = new DictionaryHeaderAdapter(new Datasource().loadDictionaryHeader());
         recyclerView.setAdapter(dictionaryHeaderAdapter);
     }
