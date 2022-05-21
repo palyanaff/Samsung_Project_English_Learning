@@ -11,11 +11,8 @@ public class User {
     private String email;
     private List<String> completeLevels;
     private List<Word> educatedWords;
+    private List<Dictionary> dictionaries;
 
-    // these fields are related by index
-    private List<String> dictionaryHeaders;
-    private List<List<Word>> dictionaryWords;
-    //
 
     public User(){
         // required for dataSnapshot.getValue(User.class)
@@ -26,9 +23,7 @@ public class User {
         this.email = email;
         completeLevels = new ArrayList<>();
         educatedWords = new ArrayList<>();
-
-        dictionaryHeaders = new ArrayList<>();
-        dictionaryWords = new ArrayList<>();
+        dictionaries = new ArrayList<>();
     }
 
     // copy constructor
@@ -40,11 +35,8 @@ public class User {
                 new ArrayList<>() : user.completeLevels);
         this.educatedWords = (user.educatedWords == null ?
                 new ArrayList<>() : user.educatedWords);
-
-        this.dictionaryHeaders = (user.dictionaryHeaders == null ?
-                new ArrayList<>() : user.dictionaryHeaders);
-        this.dictionaryWords = (user.dictionaryWords == null ?
-                new ArrayList<>() : user.dictionaryWords);
+        this.dictionaries = (user.dictionaries == null ?
+                new ArrayList<>() : user.dictionaries);
     }
 
     public String getName() {
@@ -63,16 +55,37 @@ public class User {
         return educatedWords;
     }
 
+    public List<Dictionary> getDictionaries() {
+        return dictionaries;
+    }
+
     public List<String> getDictionaryHeaders() {
+        List<String> dictionaryHeaders = new ArrayList<>();
+
+        for (Dictionary dict : dictionaries) {
+            dictionaryHeaders.add(dict.getHeader());
+        }
+
         return dictionaryHeaders;
+    }
+
+    public Dictionary getDictionary(String header) {
+        for (Dictionary dict : dictionaries) {
+            if (dict.getHeader().equals(header)) {
+                return dict;
+            }
+        }
+        // if not found
+        return null;
     }
 
     public List<Word> getWordsFromDictionary(String header) {
 
-        if (dictionaryHeaders.contains(header)) {
-            int headerPos = dictionaryHeaders.indexOf(header);
-            return dictionaryWords.get(headerPos);
+        Dictionary dict = this.getDictionary(header);
+        if (dict != null) {
+            return dict.getWords();
         }
+
         return null;
     }
 
@@ -85,31 +98,25 @@ public class User {
     }
 
     public void addDictionary(String header, List<Word> words) {
-        dictionaryHeaders.add(header);
-        dictionaryWords.add(words);
+        dictionaries.add(new Dictionary(header, words));
     }
 
     public void addWordInDictionary(String header, Word word) {
-
-        if (!dictionaryHeaders.contains(header)) {
-            addDictionary(header, new ArrayList<>());
+        Dictionary dict = this.getDictionary(header);
+        if (dict != null) { // if found
+            dict.getWords().add(word);
+        } else {
+            List<Word> newWords = new ArrayList<>();
+            newWords.add(word);
+            dictionaries.add(new Dictionary(header, newWords));
         }
-        this.getWordsFromDictionary(header).add(word);
     }
 
     public void deleteWordFromDictionary(String header, Word word) {
-        int headerPos = dictionaryHeaders.indexOf(header);
-
-        dictionaryWords.get(headerPos).remove(word);
+        this.getDictionary(header).getWords().remove(word);
     }
 
     public void deleteDictionary(String header) {
-        if (dictionaryHeaders.contains(header)) {
-
-            int index = dictionaryHeaders.indexOf(header);
-
-            dictionaryHeaders.remove(index);
-            dictionaryWords.remove(index);
-        }
+        dictionaries.remove(getDictionary(header));
     }
 }
