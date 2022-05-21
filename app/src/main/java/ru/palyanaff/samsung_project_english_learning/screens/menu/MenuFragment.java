@@ -58,25 +58,7 @@ public class MenuFragment extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("Users");
 
-        // FIXME: 'user' keeps being null for some reason
-        setUserByUserFromDB();
-        // and so it crashes here
-        setProfileData();
-    }
-
-    private void setUserByUserFromDB() {
-        usersRef.child(firebaseUser.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        user = new User(snapshot.getValue(User.class));
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e(TAG, "Failed to get current user data", error.toException());
-                    }
-                });
+        workWithUser();
     }
 
     @Override
@@ -87,6 +69,37 @@ public class MenuFragment extends Fragment {
         binding.verifyEmailButton.setOnClickListener(verifyEmailOnClick());
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.logOutButton.setOnClickListener(logOut());
+    }
+
+    private void workWithUser() {
+        usersRef.child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        user = new User(snapshot.getValue(User.class));
+
+                        setProfileData();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.e(TAG, "Failed to get current user data", error.toException());
+                    }
+                });
+    }
+
+    private void setProfileData() {
+        if (user != null) {
+            binding.usernameInput.setText(user.getName());
+            binding.emailInput.setText(user.getEmail());
+        }
     }
 
     @NonNull
@@ -120,25 +133,11 @@ public class MenuFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        binding.logOutButton.setOnClickListener(logOut());
-    }
-
     private View.OnClickListener logOut() {
         return (View v) -> {
             mAuth.signOut();
             Toast.makeText(MenuFragment.this.getActivity(), "Successfully logged out", Toast.LENGTH_LONG).show();
             MenuFragment.this.startActivity(new Intent(MenuFragment.this.getActivity(), LoginActivity.class));
         };
-    }
-
-    private void setProfileData() {
-        if (user != null) {
-            binding.usernameInput.setText(user.getName());
-            binding.emailInput.setText(user.getEmail());
-        }
     }
 }

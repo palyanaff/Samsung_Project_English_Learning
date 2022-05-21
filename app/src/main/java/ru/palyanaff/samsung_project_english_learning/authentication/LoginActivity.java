@@ -29,21 +29,23 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
 
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        }
-
-        mAuth.addAuthStateListener((FirebaseAuth firebaseAuth) -> {
-            if (firebaseAuth.getCurrentUser() != null) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            }
-        });
-
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setListeners();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mAuth.addAuthStateListener((FirebaseAuth firebaseAuth) -> {
+            if (firebaseAuth.getCurrentUser() != null) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            }
+        });
     }
 
     private void setListeners() {
