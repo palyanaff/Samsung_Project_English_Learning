@@ -84,7 +84,11 @@ public class LevelsFragment extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        user = new User(snapshot.getValue(User.class));
+                        try{
+                            user = new User(snapshot.getValue(User.class));
+                        } catch (Exception e){
+                            Log.e(TAG, e.getMessage());
+                        }
                     }
 
                     @Override

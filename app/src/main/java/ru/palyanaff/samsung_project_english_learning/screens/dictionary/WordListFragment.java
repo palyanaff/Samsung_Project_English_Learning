@@ -2,48 +2,61 @@ package ru.palyanaff.samsung_project_english_learning.screens.dictionary;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentWordBinding;
 import ru.palyanaff.samsung_project_english_learning.adapter.WordAdapter;
+import ru.palyanaff.samsung_project_english_learning.databinding.FragmentWordListBinding;
 import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
 
 /**
  * A fragment representing a list of Items.
  */
-public class WordFragment extends Fragment {
+public class WordListFragment extends Fragment {
     private static final String TAG = "WordFragment";
-    FragmentWordBinding binding;
+    FragmentWordListBinding binding;
     String dictionaryHeader;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public WordFragment() {
+    public WordListFragment() {
     }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = FragmentWordBinding.inflate(getLayoutInflater());
+        binding = FragmentWordListBinding.inflate(getLayoutInflater());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_word_list, container, false);
-        dictionaryHeader = WordFragmentArgs.fromBundle(getArguments()).getDictionaryHeader();
-        initRecyclerView(view);
+        dictionaryHeader = WordListFragmentArgs.fromBundle(getArguments()).getDictionaryHeader();
+        binding.addWordButton.setOnClickListener(v -> {
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+            NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
+            //@NonNull WordFragmentDirections action = WordFragmentDirections.actionWordFragmentToNewWordFragment();
+            navController.navigate(R.id.action_wordFragment_to_newWordFragment);
+        });
 
-        return view;
+        initRecyclerView(binding.getRoot());
+
+        return binding.getRoot();
     }
 
     public void initRecyclerView(View view){
