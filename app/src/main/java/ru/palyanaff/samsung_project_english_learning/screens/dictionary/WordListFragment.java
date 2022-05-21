@@ -10,14 +10,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import ru.palyanaff.samsung_project_english_learning.R;
-import ru.palyanaff.samsung_project_english_learning.databinding.FragmentWordBinding;
 import ru.palyanaff.samsung_project_english_learning.adapter.WordAdapter;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentWordListBinding;
 import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
@@ -47,6 +46,7 @@ public class WordListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         dictionaryHeader = WordListFragmentArgs.fromBundle(getArguments()).getDictionaryHeader();
+        setHasOptionsMenu(true);
         binding.addWordButton.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
@@ -57,6 +57,13 @@ public class WordListFragment extends Fragment {
         initRecyclerView(binding.getRoot());
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.search_word_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
     }
 
     public void initRecyclerView(View view){

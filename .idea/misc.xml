@@ -31,6 +31,7 @@
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_main.xml" value="0.24912280701754386" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_splash_screen.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/definition_item.xml" value="0.2099236641221374" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/dictionary_header_item.xml" value="0.4" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_dictionary.xml" value="0.1" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_exams.xml" value="0.13020833333333334" />
@@ -41,10 +42,16 @@
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_new_word.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_runner.xml" value="0.2" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_task.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_translation.xml" value="0.21739130434782608" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_word.xml" value="0.264" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_word_list.xml" value="0.23777173913043478" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/level_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/meaning_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/phonetic_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/menu/button_navigation_menu.xml" value="0.15267175572519084" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/menu/search_dictionary_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/menu/search_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/menu/search_word_menu.xml" value="0.11354166666666667" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/xml/root_preferences.xml" value="0.4" />
       </map>
     </option>

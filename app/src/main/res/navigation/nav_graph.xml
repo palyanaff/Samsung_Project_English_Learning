@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_dictionaryFragment_to_newDictionary"
             app:destination="@id/newDictionary" />
+        <action
+            android:id="@+id/action_dictionaryFragment_to_translationFragment"
+            app:destination="@id/translationFragment" />
     </fragment>
 
     <fragment
@@ -78,4 +81,9 @@
         android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.NewWordFragment"
         android:label="New word"
         tools:layout="@layout/fragment_new_word" />
+    <fragment
+        android:id="@+id/translationFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.TranslationFragment"
+        android:label="Translation"
+        tools:layout="@layout/fragment_translation" />
 </navigation>
