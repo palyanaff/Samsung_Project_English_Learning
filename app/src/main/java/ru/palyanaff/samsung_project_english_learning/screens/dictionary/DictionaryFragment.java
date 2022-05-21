@@ -1,6 +1,11 @@
 package ru.palyanaff.samsung_project_english_learning.screens.dictionary;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,31 +15,30 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.adapter.DictionaryHeaderAdapter;
+import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentDictionaryBinding;
 import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
-import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragmentDirections;
 
 public class DictionaryFragment extends Fragment {
 
     private static final String TAG = "DictionaryFragment";
     private FragmentDictionaryBinding binding;
     private FloatingActionButton button;
-    // TODO: try add new header
-    public ArrayList<String> headers;
+    private User user;
+    public List<String> headers;
 
     public DictionaryFragment() {
         // Required empty public constructor
@@ -70,8 +74,33 @@ public class DictionaryFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.dictionary_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        // TODO: load dictionary headers from user data
-        DictionaryHeaderAdapter dictionaryHeaderAdapter = new DictionaryHeaderAdapter(new Datasource().loadDictionaryHeader());
+        setHeadersList();
+        DictionaryHeaderAdapter dictionaryHeaderAdapter = new DictionaryHeaderAdapter(
+                new Datasource().loadDictionaryHeader());
         recyclerView.setAdapter(dictionaryHeaderAdapter);
+    }
+
+    private void setHeadersList() {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
+
+        usersRef.child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.getValue(User.class) != null) {
+                            user = new User(snapshot.getValue(User.class));
+
+                            headers = user.getDictionaryHeaders();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(getContext(),
+                                "Failed to get actual data", Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "Failed to get actual data");
+                    }
+                });
     }
 }

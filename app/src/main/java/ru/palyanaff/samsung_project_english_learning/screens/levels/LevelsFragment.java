@@ -1,10 +1,12 @@
 package ru.palyanaff.samsung_project_english_learning.screens.levels;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.adapter.ItemAdapter;
+import ru.palyanaff.samsung_project_english_learning.authentication.LoginActivity;
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentLevelsBinding;
 import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
@@ -33,6 +36,7 @@ public class LevelsFragment extends Fragment {
     private static final String TAG = "LevelsFragment";
     private FragmentLevelsBinding binding;
 
+    private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
     private DatabaseReference usersRef;
 
@@ -48,8 +52,8 @@ public class LevelsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         binding = FragmentLevelsBinding.inflate(getLayoutInflater());
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        firebaseUser = auth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("Users");
     }
@@ -84,10 +88,17 @@ public class LevelsFragment extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        try{
+
+                        if (snapshot.getValue(User.class) == null) {
+                            mAuth.signOut();
+                            Toast.makeText(LevelsFragment.this.getActivity(),
+                                    "Successfully logged out", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(
+                                    LevelsFragment.this.getActivity(), LoginActivity.class));
+                            LevelsFragment.this.getActivity().finish();
+
+                        } else {
                             user = new User(snapshot.getValue(User.class));
-                        } catch (Exception e){
-                            Log.e(TAG, e.getMessage());
                         }
                     }
 

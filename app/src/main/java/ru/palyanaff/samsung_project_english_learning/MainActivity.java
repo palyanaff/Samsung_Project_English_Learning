@@ -9,15 +9,12 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.Objects;
 
 import ru.palyanaff.samsung_project_english_learning.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
     private ActivityMainBinding binding;
     private NavController navController;
     @SuppressLint("NonConstantResourceId")

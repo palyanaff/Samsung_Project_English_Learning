@@ -52,13 +52,13 @@ public class LoginActivity extends AppCompatActivity {
         binding.loginButton.setOnClickListener(v -> loginUser());
 
         binding.registerButton.setOnClickListener(v -> startActivity(
-                new Intent(this, RegisterActivity.class)));
+                new Intent(LoginActivity.this, RegisterActivity.class)));
 
         binding.resetButton.setOnClickListener(v -> startActivity(
-                new Intent(this, ResetPasswordActivity.class)));
+                new Intent(LoginActivity.this, ResetPasswordActivity.class)));
 
         binding.skipLogIn.setOnClickListener(v -> startActivity(
-                new Intent(this, MainActivity.class)));
+                new Intent(LoginActivity.this, MainActivity.class)));
 
     }
 
@@ -110,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 LoginActivity.this.startActivity(new Intent(
                         LoginActivity.this, MainActivity.class));
+                finish();
             } else {
                 Toast.makeText(LoginActivity.this,
                         "Failed to log in! Please check again your credentials",

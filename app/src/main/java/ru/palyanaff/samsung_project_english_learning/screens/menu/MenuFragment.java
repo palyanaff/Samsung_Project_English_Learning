@@ -113,11 +113,10 @@ public class MenuFragment extends Fragment {
         return (Task<Void> sendTask) -> {
             String toastSendText;
             if (sendTask.isSuccessful()) {
-                toastSendText = "Check your e-mail to verify your account " +
-                        "and try again after verifying";
+                toastSendText = "Check your e-mail to verify your account";
             } else {
                 toastSendText = "Failed to send verify message on your e-mail. " +
-                        "Please try again";
+                        "Please try again later";
             }
 
             Toast.makeText(getContext(), toastSendText, Toast.LENGTH_LONG).show();
@@ -136,8 +135,9 @@ public class MenuFragment extends Fragment {
     private View.OnClickListener logOut() {
         return (View v) -> {
             mAuth.signOut();
-            Toast.makeText(MenuFragment.this.getActivity(), "Successfully logged out", Toast.LENGTH_LONG).show();
-            MenuFragment.this.startActivity(new Intent(MenuFragment.this.getActivity(), LoginActivity.class));
+            Toast.makeText(MenuFragment.this.getActivity(),
+                    "Successfully logged out", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(MenuFragment.this.getActivity(), LoginActivity.class));
         };
     }
 }

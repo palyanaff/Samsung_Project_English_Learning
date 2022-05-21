@@ -1,13 +1,13 @@
 package ru.palyanaff.samsung_project_english_learning.authentication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import ru.palyanaff.samsung_project_english_learning.MainActivity;
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.ActivityRegisterBinding;
 
@@ -44,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void setListeners() {
         binding.logoReg.setOnClickListener(v -> startActivity(
-                new Intent(this, LoginActivity.class)));
+                new Intent(RegisterActivity.this, LoginActivity.class)));
 
         binding.registerUserButton.setOnClickListener(v -> registerUser());
     }
@@ -127,8 +128,8 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
                 binding.loadingReg.setVisibility(View.GONE);
 
-                RegisterActivity.this.startActivity(new Intent(RegisterActivity.this,
-                        LoginActivity.class));
+                RegisterActivity.this.startActivity(new Intent(
+                        RegisterActivity.this, MainActivity.class));
                 finish();
             } else {
 
