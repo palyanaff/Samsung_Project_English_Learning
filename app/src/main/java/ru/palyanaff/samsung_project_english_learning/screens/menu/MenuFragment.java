@@ -18,8 +18,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.authentication.LoginActivity;
@@ -58,30 +60,21 @@ public class MenuFragment extends Fragment {
 
         // FIXME: 'user' keeps being null for some reason
         setUserByUserFromDB();
-
-        if (user == null) {
-            Log.e(TAG, "outer user is null");
-        } else {
-            Log.e(TAG, "outer user is not null");
-        }
         // and so it crashes here
         setProfileData();
     }
 
     private void setUserByUserFromDB() {
-        usersRef.child(firebaseUser.getUid()).get()
-                .addOnCompleteListener(getUserTask -> {
-                    if (getUserTask.isSuccessful()) {
+        usersRef.child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        user = new User(snapshot.getValue(User.class));
+                    }
 
-                        DataSnapshot dataSnapshot = getUserTask.getResult();
-                        this.user = new User(dataSnapshot.getValue(User.class));
-                        if (this.user == null) {
-                            Log.e(TAG, "user in method is null");
-                        } else {
-                            Log.e(TAG, "user in method is not null");
-                        }
-                    } else {
-                        Log.e(TAG, "Error getting data", getUserTask.getException());
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.e(TAG, "Failed to get current user data", error.toException());
                     }
                 });
     }
@@ -135,7 +128,7 @@ public class MenuFragment extends Fragment {
     }
 
     private View.OnClickListener logOut() {
-        return v -> {
+        return (View v) -> {
             mAuth.signOut();
             Toast.makeText(MenuFragment.this.getActivity(), "Successfully logged out", Toast.LENGTH_LONG).show();
             MenuFragment.this.startActivity(new Intent(MenuFragment.this.getActivity(), LoginActivity.class));

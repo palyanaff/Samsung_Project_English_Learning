@@ -9,8 +9,10 @@ public class User {
     private String email;
     private List<String> completeLevels;
     private List<Word> educatedWords;
+    private List<String> dictionaryHeaders;
 
     public User(){
+        // required for dataSnapshot.getValue(User.class)
     }
 
     public User(String name, String email) {
@@ -18,6 +20,7 @@ public class User {
         this.email = email;
         completeLevels = new ArrayList<>();
         educatedWords = new ArrayList<>();
+        dictionaryHeaders = new ArrayList<>();
     }
 
     // copy constructor
@@ -27,9 +30,10 @@ public class User {
 
         this.completeLevels = (user.completeLevels == null ?
                 new ArrayList<>() : user.completeLevels);
-
         this.educatedWords = (user.educatedWords == null ?
                 new ArrayList<>() : user.educatedWords);
+        this.dictionaryHeaders = (user.dictionaryHeaders == null ?
+                new ArrayList<>() : user.dictionaryHeaders);
     }
 
     public String getName() {
@@ -48,11 +52,19 @@ public class User {
         return educatedWords;
     }
 
+    public List<String> getDictionaryHeaders() {
+        return dictionaryHeaders;
+    }
+
     public void addCompleteLevel(String id){
-        completeLevels.add(id);
+        this.completeLevels.add(id);
     }
 
     public void addEducatedWord(Word word) {
         this.educatedWords.add(word);
+    }
+
+    public void addDictionaryHeader(String header) {
+        this.dictionaryHeaders.add(header);
     }
 }

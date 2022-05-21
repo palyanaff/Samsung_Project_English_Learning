@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -55,7 +54,6 @@ public class LevelsFragment extends Fragment {
         usersRef = database.getReference("Users");
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
@@ -63,7 +61,6 @@ public class LevelsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_levels, container, false);
 
-        setUserByUserFromDB();
         initRecyclerView(view);
 
         return view;
@@ -74,6 +71,7 @@ public class LevelsFragment extends Fragment {
      * @param view
      */
     public void initRecyclerView(View view){
+        setUserByUserFromDB();
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -86,17 +84,12 @@ public class LevelsFragment extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        try{
-                            user = new User(snapshot.getValue(User.class));
-                        } catch (Exception e){
-                            Log.e(TAG, e.getMessage());
-                        }
+                        user = new User(snapshot.getValue(User.class));
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(getContext(),
-                                "Failed to get actual data", Toast.LENGTH_LONG).show();
+                        Log.e(TAG, "Failed to get current user data", error.toException());
                     }
                 });
     }
