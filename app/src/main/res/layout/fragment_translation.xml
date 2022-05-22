@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:layout_margin="16dp"
-            android:text="Meaning"
+            android:text="@string/meaning"
             android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@+id/recycler_view_translation_phonetics"
             app:layout_constraintLeft_toLeftOf="parent"

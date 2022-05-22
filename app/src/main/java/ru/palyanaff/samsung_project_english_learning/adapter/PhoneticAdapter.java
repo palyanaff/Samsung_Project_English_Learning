@@ -2,6 +2,7 @@ package ru.palyanaff.samsung_project_english_learning.adapter;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import ru.palyanaff.samsung_project_english_learning.translation.models.Phonetic
 
 public class PhoneticAdapter extends RecyclerView.Adapter<PhoneticAdapter.PhoneticViewHolder>{
 
+    private static final String TAG = "PhoneticAdapter";
     private final List<Phonetics> phoneticsList;
 
     public PhoneticAdapter(List<Phonetics> phoneticsList) {
@@ -39,11 +41,12 @@ public class PhoneticAdapter extends RecyclerView.Adapter<PhoneticAdapter.Phonet
             MediaPlayer player = new MediaPlayer();
             try {
                 player.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                player.setDataSource("https" + phoneticsList.get(position).getAudio());
+                player.setDataSource("https:" + phoneticsList.get(position).getAudio());
                 player.prepare();
                 player.start();
             } catch (Exception e){
                 e.printStackTrace();
+                Log.e(TAG, e.getMessage());
                 Toast.makeText(v.getContext(),"Couldn't play audio", Toast.LENGTH_SHORT).show();
             }
         });

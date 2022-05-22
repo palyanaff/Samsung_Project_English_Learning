@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -50,7 +51,7 @@ public class TranslationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         searchView = binding.searchView;
-        textView_translation_word =binding.textViewTranslationWord;
+        textView_translation_word = binding.textViewTranslationWord;
         recycler_view_translation_meaning = binding.recyclerViewTranslationMeaning;
         recycler_view_translation_phonetics = binding.recyclerViewTranslationPhonetics;
 
@@ -64,8 +65,6 @@ public class TranslationFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(getContext(), "context", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "context");
                 progressDialog.setTitle("Fetching response for " + query);
                 progressDialog.show();
                 RequestManager manager = new RequestManager(getContext());
@@ -101,13 +100,12 @@ public class TranslationFragment extends Fragment {
 
     private void showData(APIResponse apiResponse) {
         textView_translation_word.setText("Word: " + apiResponse.getWord());
-        recycler_view_translation_phonetics.setHasFixedSize(true);
-        recycler_view_translation_phonetics.setLayoutManager(new GridLayoutManager(getContext(), 1));
+
+        recycler_view_translation_phonetics.setLayoutManager(new LinearLayoutManager(getContext()));
         phoneticAdapter = new PhoneticAdapter(apiResponse.getPhonetics());
         recycler_view_translation_phonetics.setAdapter(phoneticAdapter);
 
-        recycler_view_translation_meaning.setHasFixedSize(true);
-        recycler_view_translation_meaning.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        recycler_view_translation_meaning.setLayoutManager(new LinearLayoutManager(getContext()));
         meaningAdapter = new MeaningAdapter(getContext(), apiResponse.getMeanings());
         recycler_view_translation_meaning.setAdapter(meaningAdapter);
 

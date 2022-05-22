@@ -3,7 +3,7 @@ package ru.palyanaff.samsung_project_english_learning.translation.models;
 import java.util.List;
 
 public class Definitions {
-    private String definitions = "";
+    private String definition = "";
     private String example = "";
     private  List<String> synonyms = null;
     private  List<String> antonyms = null;
@@ -24,12 +24,12 @@ public class Definitions {
         this.antonyms = antonyms;
     }
 
-    public String getDefinitions() {
-        return definitions;
+    public String getDefinition() {
+        return definition;
     }
 
-    public void setDefinitions(String definitions) {
-        this.definitions = definitions;
+    public void setDefinitions(String definition) {
+        this.definition = definition;
     }
 
     public String getExample() {

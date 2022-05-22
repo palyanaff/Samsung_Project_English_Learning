@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ConcatAdapter;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -41,8 +42,8 @@ public class MeaningAdapter extends RecyclerView.Adapter<MeaningAdapter.MeaningV
     @Override
     public void onBindViewHolder(@NonNull MeaningViewHolder holder, int position) {
         holder.textView_translation_partOfSpeech.setText("Part of speech: " + meaningsList.get(position).getPartOfSpeech());
-        holder.recycler_view_definition_translation.setHasFixedSize(true);
-        holder.recycler_view_definition_translation.setLayoutManager(new GridLayoutManager(context, 1));
+//        holder.recycler_view_definition_translation.setHasFixedSize(true);
+        holder.recycler_view_definition_translation.setLayoutManager(new LinearLayoutManager(context));
         DefinitionAdapter definitionAdapter = new DefinitionAdapter(context, meaningsList.get(position).getDefinitions());
         holder.recycler_view_definition_translation.setAdapter(definitionAdapter);
     }
