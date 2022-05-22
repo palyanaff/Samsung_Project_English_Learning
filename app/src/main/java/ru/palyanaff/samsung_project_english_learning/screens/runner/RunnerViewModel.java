@@ -1,10 +1,11 @@
 package ru.palyanaff.samsung_project_english_learning.screens.runner;
 
-import androidx.core.widget.ListViewAutoScrollHelper;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 import java.util.ArrayList;
+
 import ru.palyanaff.samsung_project_english_learning.data.Word;
 import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
 

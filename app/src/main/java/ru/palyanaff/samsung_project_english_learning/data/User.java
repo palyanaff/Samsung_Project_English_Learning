@@ -21,9 +21,9 @@ public class User {
     public User(String name, String email) {
         this.name = name;
         this.email = email;
-        completeLevels = new ArrayList<>();
-        educatedWords = new ArrayList<>();
-        dictionaries = new ArrayList<>();
+        this.completeLevels = new ArrayList<>();
+        this.educatedWords = new ArrayList<>();
+        this.dictionaries = new ArrayList<>();
     }
 
     // copy constructor
@@ -90,21 +90,30 @@ public class User {
     }
 
     public void addCompleteLevel(String id){
-        this.completeLevels.add(id);
+        if (!completeLevels.contains(id)) {
+            completeLevels.add(id);
+        }
     }
 
     public void addEducatedWord(Word word) {
-        this.educatedWords.add(word);
+        if (!educatedWords.contains(word)) {
+            educatedWords.add(word);
+        }
     }
 
     public void addDictionary(String header, List<Word> words) {
-        dictionaries.add(new Dictionary(header, words));
+        Dictionary newDict = new Dictionary(header, words);
+        if (!dictionaries.contains(newDict)) {
+            dictionaries.add(newDict);
+        }
     }
 
     public void addWordInDictionary(String header, Word word) {
         Dictionary dict = this.getDictionary(header);
         if (dict != null) { // if found
-            dict.getWords().add(word);
+            if (!dict.getWords().contains(word)) {
+                dict.getWords().add(word);
+            }
         } else {
             List<Word> newWords = new ArrayList<>();
             newWords.add(word);

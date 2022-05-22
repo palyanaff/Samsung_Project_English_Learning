@@ -55,6 +55,8 @@ public class RegisterActivity extends AppCompatActivity {
         String email = binding.emailReg.getText().toString().trim();
         String username = binding.usernameReg.getText().toString().trim();
         String password = binding.passwordReg.getText().toString().trim();
+        String repeatPassword = binding.repeatPasswordReg.getText().toString().trim();
+
 
         if (email.isEmpty()) {
             binding.emailReg.setError("E-mail is required!");
@@ -83,6 +85,12 @@ public class RegisterActivity extends AppCompatActivity {
         if (password.length() < 6) {
             binding.passwordReg.setError("Password's length must be at least 6 characters!");
             binding.passwordReg.requestFocus();
+            return;
+        }
+
+        if (!repeatPassword.equals(password)) {
+            binding.repeatPasswordReg.setError("Please make sure your passwords match!");
+            binding.repeatPasswordReg.requestFocus();
             return;
         }
 

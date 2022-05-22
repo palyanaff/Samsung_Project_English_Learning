@@ -6,8 +6,11 @@ import java.util.Objects;
 
 public class Word {
 
-    private final String wordText;
-    private final String wordTranslation;
+    private String wordText;
+    private String wordTranslation;
+
+    public Word() {
+    }
 
     public Word(String wordText, String wordTranslation) {
         this.wordText = wordText;

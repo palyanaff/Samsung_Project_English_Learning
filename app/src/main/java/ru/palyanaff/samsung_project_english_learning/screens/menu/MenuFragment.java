@@ -83,7 +83,9 @@ public class MenuFragment extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        user = new User(snapshot.getValue(User.class));
+                        if (snapshot.getValue(User.class) != null) {
+                            user = new User(snapshot.getValue(User.class));
+                        }
 
                         setProfileData();
                     }
