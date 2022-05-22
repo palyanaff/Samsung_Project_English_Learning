@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Samsung_Project_English_Learning</string>
+    <string name="app_name">ROO</string>
     <string name="levels">Levels</string>
     <string name="settings_button">Settings button</string>
     <string name="runner">Runner</string>
@@ -55,4 +55,6 @@
     <string name="plus_word">+ Word</string>
     <string name="add_new_english_word">Add new english word</string>
     <string name="add_translation">Add translation</string>
+    <string name="search">Search</string>
+    <string name="meaning">Meaning</string>
 </resources>
