@@ -56,10 +56,6 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.resetButton.setOnClickListener(v -> startActivity(
                 new Intent(LoginActivity.this, ResetPasswordActivity.class)));
-
-        binding.skipLogIn.setOnClickListener(v -> startActivity(
-                new Intent(LoginActivity.this, MainActivity.class)));
-
     }
 
     private void loginUser() {
