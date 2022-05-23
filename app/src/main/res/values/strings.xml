@@ -55,6 +55,8 @@
     <string name="plus_word">+ Word</string>
     <string name="add_new_english_word">Add new english word</string>
     <string name="add_translation">Add translation</string>
+    <string name="prompt_repeat_password">Repeat Password</string>
+    <string name="dark_theme">Dark theme</string>
     <string name="search">Search</string>
     <string name="meaning">Meaning</string>
 </resources>

@@ -62,11 +62,8 @@ public class TaskFragment extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        try {
+                        if (snapshot.getValue(User.class) != null) {
                             user = new User(snapshot.getValue(User.class));
-
-                        } catch (Exception e){
-                            Log.e(TAG, e.getMessage());
                         }
                     }
 
@@ -74,6 +71,7 @@ public class TaskFragment extends Fragment {
                     public void onCancelled(@NonNull DatabaseError error) {
                         Toast.makeText(getContext(),
                                 "Failed to get actual data", Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "Failed to get actual data");
                     }
                 });
     }
@@ -101,21 +99,22 @@ public class TaskFragment extends Fragment {
 
     private View.OnClickListener onSubmitWord(){
         return v -> {
-            String playerWord = binding.textInputEditText.getText().toString().toLowerCase(Locale.ROOT).trim();
+            String playerWord = binding.textInputEditText.getText()
+                    .toString().toLowerCase(Locale.ROOT).trim();
             if (playerWord.equals(taskAnswer)){
                 setErrorTextField(false);
                 Toast.makeText(getContext(), "Correct", Toast.LENGTH_LONG).show();
                 user.addCompleteLevel(levelId);
             } else {
                 setErrorTextField(true);
-
             }
         };
     }
 
     private View.OnClickListener onHintWord(){
         return v -> {
-            String playerWord = binding.textInputEditText.getText().toString().toLowerCase(Locale.ROOT).trim();
+            String playerWord = binding.textInputEditText.getText()
+                    .toString().toLowerCase(Locale.ROOT).trim();
             String hintWord = getHintWord(playerWord);
 
             binding.taskEditText.setErrorEnabled(false);
@@ -157,11 +156,15 @@ public class TaskFragment extends Fragment {
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onPause() {
+        super.onPause();
 
-        usersRef.child(firebaseUser.getUid())
-                .setValue(user).addOnCompleteListener(setValueOnComplete());
+        if (user != null) {
+            usersRef.child(firebaseUser.getUid())
+                    .setValue(user).addOnCompleteListener(setValueOnComplete());
+        } else {
+            Log.d(TAG, "User is null on saving user in DB");
+        }
     }
 
     @NonNull
@@ -169,6 +172,7 @@ public class TaskFragment extends Fragment {
         return setValueTask -> {
             if (!setValueTask.isSuccessful()) {
                 Toast.makeText(getContext(), "Failed to save word", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Failed on saving word");
             }
         };
     }

@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,8 +51,9 @@ public class WordListFragment extends Fragment {
         binding.addWordButton.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
-            //@NonNull WordFragmentDirections action = WordFragmentDirections.actionWordFragmentToNewWordFragment();
-            navController.navigate(R.id.action_wordFragment_to_newWordFragment);
+            WordListFragmentDirections.ActionWordFragmentToNewWordFragment action =
+                    WordListFragmentDirections.actionWordFragmentToNewWordFragment(dictionaryHeader);
+            navController.navigate(action);
         });
 
         initRecyclerView(binding.getRoot());

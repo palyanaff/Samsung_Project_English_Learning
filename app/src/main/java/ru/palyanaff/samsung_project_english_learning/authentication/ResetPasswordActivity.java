@@ -1,4 +1,4 @@
-package ru.palyanaff.samsung_project_english_learning.authentification;
+package ru.palyanaff.samsung_project_english_learning.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

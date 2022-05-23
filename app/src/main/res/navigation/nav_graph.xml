@@ -68,7 +68,7 @@
         tools:layout="@layout/fragment_exams" />
     <fragment
         android:id="@+id/menuFragment"
-        android:name="ru.palyanaff.samsung_project_english_learning.screens.MenuFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.menu.MenuFragment"
         android:label="Menu"
         tools:layout="@layout/fragment_menu" />
     <fragment
@@ -80,7 +80,11 @@
         android:id="@+id/newWordFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.NewWordFragment"
         android:label="New word"
-        tools:layout="@layout/fragment_new_word" />
+        tools:layout="@layout/fragment_new_word" >
+        <argument
+            android:name="header"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/translationFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.TranslationFragment"
