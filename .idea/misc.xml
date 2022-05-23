@@ -7,6 +7,11 @@
         <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_reset_password.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_levels.xml" value="0.29438405797101447" />
         <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_menu.xml" value="0.2752808988764045" />
+        <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_runner.xml" value="0.29438405797101447" />
+        <entry key="..\:/Users/aleksseiiD/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/aleksseiiD/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_add_circle.xml" value="0.1" />
+        <entry key="..\:/Users/aleksseiiD/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_dictionary.xml" value="0.1" />
+        <entry key="..\:/Users/aleksseiiD/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_new_dictionary.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_new_word.xml" value="0.22" />
         <entry key="..\:/Users/Other/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_runner.xml" value="0.1" />
@@ -47,6 +52,7 @@
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/definition_item.xml" value="0.2099236641221374" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/dictionary_header_item.xml" value="0.4" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_congratulation.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_dictionary.xml" value="0.1" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_dictionary.xml" value="0.1" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_exams.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/fragment_levels.xml" value="0.25416666666666665" />
