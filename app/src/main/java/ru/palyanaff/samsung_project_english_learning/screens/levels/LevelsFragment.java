@@ -72,13 +72,6 @@ public class LevelsFragment extends Fragment {
         return view;
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    @Override
-    public void onStart() {
-        itemAdapter.notifyDataSetChanged();
-        super.onStart();
-    }
-
     /**
      * Initialise RecyclerView
      * @param view
@@ -90,6 +83,7 @@ public class LevelsFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         itemAdapter = new ItemAdapter(new Datasource().loadLevel(), user);
         recyclerView.setAdapter(itemAdapter);
+        itemAdapter.notifyDataSetChanged();
     }
 
     private void setUserByUserFromDB() {
