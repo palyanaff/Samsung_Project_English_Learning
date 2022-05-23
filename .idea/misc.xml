@@ -27,11 +27,15 @@
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_error.xml" value="0.192" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_exam.xml" value="0.2703125" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_frame.xml" value="0.4" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_icon.xml" value="0.1825" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_runner.xml" value="0.2703125" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/ic_settings.xml" value="0.2703125" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/drawable/splash_screen.xml" value="0.2" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_main.xml" value="0.24912280701754386" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/activity_splash_screen.xml" value="0.24818840579710144" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/definition_item.xml" value="0.2099236641221374" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/layout/dictionary_header_item.xml" value="0.4" />
@@ -52,6 +56,8 @@
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/menu/search_dictionary_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/menu/search_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/menu/search_word_menu.xml" value="0.11354166666666667" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2335" />
+        <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2335" />
         <entry key="..\:/Users/maxim/AndroidStudioProjects/Samsung_Project_English_Learning/app/src/main/res/xml/root_preferences.xml" value="0.4" />
       </map>
     </option>

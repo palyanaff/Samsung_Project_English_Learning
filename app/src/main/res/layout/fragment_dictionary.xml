@@ -24,7 +24,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/purple_200"
+        android:backgroundTint="@color/blue_200"
         app:maxImageSize="38dp"
         app:srcCompat="@drawable/ic_add" />
 </FrameLayout>
