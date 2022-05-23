@@ -21,7 +21,7 @@ public class NewWordFragment extends Fragment {
 
     private static final String TAG = "NewWordFragment";
     FragmentNewWordBinding binding;
-
+    private String dictionaryHeader;
     public NewWordFragment() {
         // Required empty public constructor
     }
@@ -36,7 +36,8 @@ public class NewWordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        // header
+        dictionaryHeader = NewWordFragmentArgs.fromBundle(getArguments()).getHeader();
         binding.addButton.setOnClickListener(v -> {
             String wordText = binding.textInputEditTextWord.getText().toString().trim();
             String wordTranslation = binding.textInputEditTextTranslation.getText().toString().trim();
