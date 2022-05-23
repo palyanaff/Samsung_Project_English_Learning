@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Collections;
 import java.util.List;
 
 import ru.palyanaff.samsung_project_english_learning.R;
@@ -112,6 +113,8 @@ public class DictionaryFragment extends Fragment {
                         if (snapshot.getValue(User.class) != null) {
                             user = new User(snapshot.getValue(User.class));
                             headers = user.getDictionaryHeaders();
+
+                            Collections.sort(headers);
                             List<String> totalHeaders = new Datasource().loadDictionaryHeader();
                             totalHeaders.addAll(headers);
 

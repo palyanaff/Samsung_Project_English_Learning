@@ -67,8 +67,38 @@ public class NewWordFragment extends Fragment {
             String wordRus = binding.textInputEditTextTranslation
                     .getText().toString().trim();
 
-            Word word = new Word(wordRus, wordEng)  ;
+            if (wordEng.isEmpty()) {
+                binding.textInputEditTextWord.setError("Word cannot be empty!");
+                binding.textInputEditTextWord.requestFocus();
+                return;
+            }
+
+            if (wordEng.length() > 255) {
+                binding.textInputEditTextWord.setError("Your word is too long!");
+                binding.textInputEditTextWord.requestFocus();
+                return;
+            }
+
+            if (wordRus.isEmpty()) {
+                binding.textInputEditTextTranslation.setError("Word cannot be empty!");
+                binding.textInputEditTextTranslation.requestFocus();
+                return;
+            }
+
+            if (wordRus.length() > 255) {
+                binding.textInputEditTextTranslation.setError("Your word is too long!");
+                binding.textInputEditTextTranslation.requestFocus();
+                return;
+            }
+
+            Word word = new Word(wordEng, wordRus)  ;
             user.addWordInDictionary(dictionaryHeader, word);
+
+            binding.textInputEditTextWord.getText().clear();
+            binding.textInputEditTextTranslation.getText().clear();
+
+            Toast.makeText(NewWordFragment.this.getContext(),
+                    "New word added!", Toast.LENGTH_SHORT).show();
         };
     }
 

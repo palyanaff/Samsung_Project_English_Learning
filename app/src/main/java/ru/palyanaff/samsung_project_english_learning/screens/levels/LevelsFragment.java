@@ -71,7 +71,6 @@ public class LevelsFragment extends Fragment {
     }
     
     public void initRecyclerView(View view, User user) {
-//        setUserByUserFromDB();
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);

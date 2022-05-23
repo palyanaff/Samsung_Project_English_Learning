@@ -83,7 +83,7 @@ public class NewDictionary extends Fragment {
 
             binding.textInputEditText.getText().clear();
             Toast.makeText(NewDictionary.this.getContext(),
-                    "New dictionary added!", Toast.LENGTH_LONG).show();
+                    "New dictionary added!", Toast.LENGTH_SHORT).show();
         };
     }
 

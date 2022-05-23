@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import ru.palyanaff.samsung_project_english_learning.R;
@@ -105,7 +106,7 @@ public class WordListFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_word_list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        WordAdapter wordAdapter = new WordAdapter(words);
+        WordAdapter wordAdapter = new WordAdapter(dictionaryHeader, words);
         recyclerView.setAdapter(wordAdapter);
     }
 
@@ -119,11 +120,16 @@ public class WordListFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.getValue(User.class) != null) {
                             User newUser = new User(snapshot.getValue(User.class));
-                            List<Word> words = (
-                                    isDefaultHeader(dictionaryHeader) ?
-                                    new Datasource().loadWords(dictionaryHeader) :
-                                    newUser.getWordsFromDictionary(dictionaryHeader)
-                            );
+
+                            List<Word> words;
+
+                            if (isDefaultHeader(dictionaryHeader)) {
+                                words = new Datasource().loadWords(dictionaryHeader);
+                            } else {
+                                words = newUser.getWordsFromDictionary(dictionaryHeader);
+                                Collections.sort(words,
+                                        (o1, o2) -> o1.getWordText().compareTo(o2.getWordText()));
+                            }
 
                             initRecyclerView(view, words);
                         }

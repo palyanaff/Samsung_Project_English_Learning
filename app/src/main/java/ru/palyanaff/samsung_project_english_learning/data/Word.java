@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class Word {
 
-    private String wordText;
-    private String wordTranslation;
+    private String wordText; // english word
+    private String wordTranslation; // russian word
 
     public Word() {
     }
