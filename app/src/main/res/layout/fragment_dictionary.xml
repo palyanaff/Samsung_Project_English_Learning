@@ -8,21 +8,23 @@
     tools:listitem="@layout/dictionary_header_item"
     tools:context=".screens.dictionary.DictionaryFragment">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dictionary_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        app:layoutManager="LinearLayoutManager"
-        />
+        app:layoutManager="LinearLayoutManager" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_button"
+        android:elevation="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/purple_200"
         app:maxImageSize="38dp"
-        app:srcCompat="@drawable/ic_add_circle" />
+        app:srcCompat="@drawable/ic_add" />
 </FrameLayout>
