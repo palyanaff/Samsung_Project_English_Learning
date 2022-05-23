@@ -62,7 +62,8 @@ public class DictionaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dictionary, container, false);
-        initRecyclerView(view);
+        workWithHeaders(view);
+
         setHasOptionsMenu(true);
         button = view.findViewById(R.id.add_button);
         button.setOnClickListener(v -> {
@@ -91,17 +92,16 @@ public class DictionaryFragment extends Fragment {
         });
     }
 
-    private void initRecyclerView(View view){
+    private void initRecyclerView(View view, List<String> headers){
         RecyclerView recyclerView = view.findViewById(R.id.dictionary_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        setHeadersList();
-        DictionaryHeaderAdapter dictionaryHeaderAdapter = new DictionaryHeaderAdapter(
-                new Datasource().loadDictionaryHeader());
+
+        DictionaryHeaderAdapter dictionaryHeaderAdapter = new DictionaryHeaderAdapter(headers);
         recyclerView.setAdapter(dictionaryHeaderAdapter);
     }
 
-    private void setHeadersList() {
+    private void workWithHeaders(View view) {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -111,8 +111,11 @@ public class DictionaryFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.getValue(User.class) != null) {
                             user = new User(snapshot.getValue(User.class));
-
                             headers = user.getDictionaryHeaders();
+                            List<String> totalHeaders = new Datasource().loadDictionaryHeader();
+                            totalHeaders.addAll(headers);
+
+                            initRecyclerView(view, totalHeaders);
                         }
                     }
 

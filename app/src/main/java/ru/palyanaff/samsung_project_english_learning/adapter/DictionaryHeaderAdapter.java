@@ -5,23 +5,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
+
+import java.util.List;
+
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.screens.dictionary.DictionaryFragmentDirections;
 
 public class DictionaryHeaderAdapter extends RecyclerView.Adapter<DictionaryHeaderAdapter.ItemViewHolder>{
     private static final String TAG = "DictionaryHeaderAdapter";
-    ArrayList<String> arrayList;
+    private List<String> list;
 
-    public DictionaryHeaderAdapter (ArrayList<String> arrayList){
-        this.arrayList = arrayList;
+    public DictionaryHeaderAdapter (List<String> list){
+        this.list = list;
     }
 
     @NonNull
@@ -33,13 +35,13 @@ public class DictionaryHeaderAdapter extends RecyclerView.Adapter<DictionaryHead
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        holder.dictionaryHeader.setText(arrayList.get(position));
+        holder.dictionaryHeader.setText(list.get(position));
         holder.cardView.setOnClickListener(v -> {
             try {
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
                 @NonNull DictionaryFragmentDirections.ActionDictionaryFragmentToWordListFragment action
-                        = DictionaryFragmentDirections.actionDictionaryFragmentToWordListFragment(arrayList.get(position));
+                        = DictionaryFragmentDirections.actionDictionaryFragmentToWordListFragment(list.get(position));
                 navController.navigate(action);
             } catch (Exception e){
                 Log.e(TAG,e.getMessage());
@@ -49,7 +51,7 @@ public class DictionaryHeaderAdapter extends RecyclerView.Adapter<DictionaryHead
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return list.size();
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {

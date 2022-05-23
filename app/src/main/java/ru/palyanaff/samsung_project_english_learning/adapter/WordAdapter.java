@@ -1,24 +1,25 @@
 package ru.palyanaff.samsung_project_english_learning.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
+
+import java.util.List;
+
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.data.Word;
 
 public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ItemViewHolder> {
 
     private static final String TAG = "WordAdapter";
-    private ArrayList<Word> arrayList;
+    private List<Word> list;
 
-    public WordAdapter(ArrayList<Word> arrayList) {
-        this.arrayList = arrayList;
+    public WordAdapter(List<Word> list) {
+        this.list = list;
     }
 
     @NonNull
@@ -30,13 +31,13 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        holder.wordText.setText(arrayList.get(position).getWordText());
-        holder.wordTranslation.setText((arrayList.get(position).getWordTranslation()));
+        holder.wordText.setText(list.get(position).getWordText());
+        holder.wordTranslation.setText((list.get(position).getWordTranslation()));
     }
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return list.size();
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {

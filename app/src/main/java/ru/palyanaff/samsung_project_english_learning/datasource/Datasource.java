@@ -47,7 +47,31 @@ public class Datasource {
             words.add(new Word("English", "Английский"));
         }
 
+        if (dictionaryHeader.equals("A2")){
+            words.add(new Word("Abandon", "Покидать"));
+            words.add(new Word("Edition", "Версия"));
+            words.add(new Word("Minister", "Министр"));
+        }
+
+        if (dictionaryHeader.equals("B1")){
+            words.add(new Word("Hello", "Привет"));
+            words.add(new Word("Word", "Мир"));
+            words.add(new Word("English", "Английский"));
+        }
+
         if (dictionaryHeader.equals("B2")){
+            words.add(new Word("Abandon", "Покидать"));
+            words.add(new Word("Edition", "Версия"));
+            words.add(new Word("Minister", "Министр"));
+        }
+
+        if (dictionaryHeader.equals("C1")){
+            words.add(new Word("Hello", "Привет"));
+            words.add(new Word("Word", "Мир"));
+            words.add(new Word("English", "Английский"));
+        }
+
+        if (dictionaryHeader.equals("C2")){
             words.add(new Word("Abandon", "Покидать"));
             words.add(new Word("Edition", "Версия"));
             words.add(new Word("Minister", "Министр"));
@@ -65,11 +89,13 @@ public class Datasource {
         ArrayList<String> headers = new ArrayList<>();
 
         headers.add("A1");
+        headers.add("A2");
+        headers.add("B1");
         headers.add("B2");
+        headers.add("C1");
         headers.add("C2");
 
         return headers;
-
     }
 
 

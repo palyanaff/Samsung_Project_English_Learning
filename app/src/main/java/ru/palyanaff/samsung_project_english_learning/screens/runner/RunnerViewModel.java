@@ -35,12 +35,12 @@ public class RunnerViewModel extends ViewModel {
     }
 
     public void getNextWord() {
-        wordCounter.setValue(wordCounter.getValue() + 1);
         if (wordCounter.getValue() < words.size()){
             word = words.get(wordCounter.getValue());
             _currentWord.setValue(word.getWordText());
             _answerWord.setValue(word.getWordTranslation());
         }
+        wordCounter.setValue(wordCounter.getValue() + 1);
     }
 
     public Word getWord() {

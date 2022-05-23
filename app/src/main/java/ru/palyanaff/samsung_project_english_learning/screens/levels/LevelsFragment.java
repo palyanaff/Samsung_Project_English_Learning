@@ -65,17 +65,13 @@ public class LevelsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_levels, container, false);
 
-        initRecyclerView(view);
+        workWithUser(view);
 
         return view;
     }
-
-    /**
-     * Initialise RecyclerView
-     * @param view
-     */
-    public void initRecyclerView(View view){
-        setUserByUserFromDB();
+    
+    public void initRecyclerView(View view, User user) {
+//        setUserByUserFromDB();
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -83,9 +79,11 @@ public class LevelsFragment extends Fragment {
         recyclerView.setAdapter(itemAdapter);
     }
 
-    private void setUserByUserFromDB() {
+    private void workWithUser(View view) {
+
         usersRef.child(firebaseUser.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -98,7 +96,8 @@ public class LevelsFragment extends Fragment {
                             LevelsFragment.this.getActivity().finish();
 
                         } else {
-                            user = new User(snapshot.getValue(User.class));
+                            User newUser = new User(snapshot.getValue(User.class));
+                            initRecyclerView(view, newUser);
                         }
                     }
 
