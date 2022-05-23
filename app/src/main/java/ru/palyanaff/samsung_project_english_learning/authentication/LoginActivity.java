@@ -1,4 +1,4 @@
-package ru.palyanaff.samsung_project_english_learning.authentification;
+package ru.palyanaff.samsung_project_english_learning.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,10 +48,6 @@ public class LoginActivity extends AppCompatActivity {
 
         binding.resetButton.setOnClickListener(v -> startActivity(
                 new Intent(this, ResetPasswordActivity.class)));
-
-        binding.skipLogIn.setOnClickListener(v -> startActivity(
-                new Intent(this, MainActivity.class)));
-
     }
 
     private void loginUser() {

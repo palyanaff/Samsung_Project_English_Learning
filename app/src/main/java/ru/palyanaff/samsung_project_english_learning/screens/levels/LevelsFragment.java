@@ -1,5 +1,6 @@
 package ru.palyanaff.samsung_project_english_learning.screens.levels;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,7 @@ import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
 public class LevelsFragment extends Fragment {
     private static final String TAG = "LevelsFragment";
     private FragmentLevelsBinding binding;
+    private ItemAdapter itemAdapter;
 
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
@@ -70,6 +72,13 @@ public class LevelsFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    @Override
+    public void onStart() {
+        itemAdapter.notifyDataSetChanged();
+        super.onStart();
+    }
+
     /**
      * Initialise RecyclerView
      * @param view
@@ -79,7 +88,7 @@ public class LevelsFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        ItemAdapter itemAdapter = new ItemAdapter(new Datasource().loadLevel(), user);
+        itemAdapter = new ItemAdapter(new Datasource().loadLevel(), user);
         recyclerView.setAdapter(itemAdapter);
     }
 
