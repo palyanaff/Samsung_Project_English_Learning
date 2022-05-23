@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.adapter.ItemAdapter;
-import ru.palyanaff.samsung_project_english_learning.authentification.LoginActivity;
+import ru.palyanaff.samsung_project_english_learning.authentication.LoginActivity;
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentLevelsBinding;
 import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
@@ -36,6 +36,7 @@ public class LevelsFragment extends Fragment {
     private static final String TAG = "LevelsFragment";
     private FragmentLevelsBinding binding;
 
+    private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
     private DatabaseReference usersRef;
 
@@ -51,12 +52,11 @@ public class LevelsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         binding = FragmentLevelsBinding.inflate(getLayoutInflater());
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        firebaseUser = auth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("Users");
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -65,7 +65,6 @@ public class LevelsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_levels, container, false);
 
-        setUserByUserFromDB();
         initRecyclerView(view);
 
         return view;
@@ -76,6 +75,7 @@ public class LevelsFragment extends Fragment {
      * @param view
      */
     public void initRecyclerView(View view){
+        setUserByUserFromDB();
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -88,17 +88,23 @@ public class LevelsFragment extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        try{
+
+                        if (snapshot.getValue(User.class) == null) {
+                            mAuth.signOut();
+                            Toast.makeText(LevelsFragment.this.getActivity(),
+                                    "Successfully logged out", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(
+                                    LevelsFragment.this.getActivity(), LoginActivity.class));
+                            LevelsFragment.this.getActivity().finish();
+
+                        } else {
                             user = new User(snapshot.getValue(User.class));
-                        } catch (Exception e){
-                            Log.e(TAG, e.getMessage());
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(getContext(),
-                                "Failed to get actual data", Toast.LENGTH_LONG).show();
+                        Log.e(TAG, "Failed to get current user data", error.toException());
                     }
                 });
     }

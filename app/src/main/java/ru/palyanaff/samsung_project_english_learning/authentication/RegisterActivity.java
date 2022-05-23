@@ -1,13 +1,13 @@
-package ru.palyanaff.samsung_project_english_learning.authentification;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package ru.palyanaff.samsung_project_english_learning.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import ru.palyanaff.samsung_project_english_learning.MainActivity;
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.ActivityRegisterBinding;
 
@@ -44,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void setListeners() {
         binding.logoReg.setOnClickListener(v -> startActivity(
-                new Intent(this, LoginActivity.class)));
+                new Intent(RegisterActivity.this, LoginActivity.class)));
 
         binding.registerUserButton.setOnClickListener(v -> registerUser());
     }
@@ -54,6 +55,8 @@ public class RegisterActivity extends AppCompatActivity {
         String email = binding.emailReg.getText().toString().trim();
         String username = binding.usernameReg.getText().toString().trim();
         String password = binding.passwordReg.getText().toString().trim();
+        String repeatPassword = binding.repeatPasswordReg.getText().toString().trim();
+
 
         if (email.isEmpty()) {
             binding.emailReg.setError("E-mail is required!");
@@ -82,6 +85,12 @@ public class RegisterActivity extends AppCompatActivity {
         if (password.length() < 6) {
             binding.passwordReg.setError("Password's length must be at least 6 characters!");
             binding.passwordReg.requestFocus();
+            return;
+        }
+
+        if (!repeatPassword.equals(password)) {
+            binding.repeatPasswordReg.setError("Please make sure your passwords match!");
+            binding.repeatPasswordReg.requestFocus();
             return;
         }
 
@@ -127,8 +136,9 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
                 binding.loadingReg.setVisibility(View.GONE);
 
-                RegisterActivity.this.startActivity(new Intent(RegisterActivity.this,
-                        LoginActivity.class));
+                RegisterActivity.this.startActivity(new Intent(
+                        RegisterActivity.this, MainActivity.class));
+                finish();
             } else {
 
                 Toast.makeText(RegisterActivity.this,

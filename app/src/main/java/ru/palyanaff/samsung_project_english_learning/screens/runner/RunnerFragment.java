@@ -1,7 +1,6 @@
 package ru.palyanaff.samsung_project_english_learning.screens.runner;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,11 +66,8 @@ public class RunnerFragment extends Fragment {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        try {
+                        if (snapshot.getValue(User.class) != null) {
                             user = new User(snapshot.getValue(User.class));
-
-                        } catch (Exception e){
-                            Log.e(TAG, e.getMessage());
                         }
                     }
 
@@ -139,10 +135,9 @@ public class RunnerFragment extends Fragment {
         }
     }
 
-    // TODO: remove all saves in onDestroyView
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onPause() {
+        super.onPause();
 
         usersRef.child(userID).setValue(user)
                 .addOnCompleteListener(setValueOnComplete());
