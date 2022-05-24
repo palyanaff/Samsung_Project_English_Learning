@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.data.Word;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentNewWordBinding;
@@ -63,9 +65,10 @@ public class NewWordFragment extends Fragment {
     @NonNull
     private View.OnClickListener addButtonListener() {
         return (View v) -> {
-            String wordEng = binding.textInputEditTextWord.getText().toString().trim();
-            String wordRus = binding.textInputEditTextTranslation
-                    .getText().toString().trim();
+            String wordEng = binding.textInputEditTextWord.getText().toString()
+                    .trim().toLowerCase(Locale.ROOT);
+            String wordRus = binding.textInputEditTextTranslation.getText().toString()
+                    .trim().toLowerCase(Locale.ROOT);
 
             if (wordEng.isEmpty()) {
                 binding.textInputEditTextWord.setError("Word cannot be empty!");
@@ -96,6 +99,7 @@ public class NewWordFragment extends Fragment {
 
             binding.textInputEditTextWord.getText().clear();
             binding.textInputEditTextTranslation.getText().clear();
+            binding.textInputEditTextWord.requestFocus();
 
             Toast.makeText(NewWordFragment.this.getContext(),
                     "New word added!", Toast.LENGTH_SHORT).show();
