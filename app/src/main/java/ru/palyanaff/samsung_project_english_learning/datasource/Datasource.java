@@ -19,17 +19,17 @@ public class Datasource {
 
         // TODO: make normal counter of levels(Id)
         levels.add(new Level("1", "First level", "First task", "Enter: first", "first"));
-        levels.add(new Level("2", "Second level", "Second task", "DO A FLIP x2", "2"));
+        levels.add(new Level("2", "Second level", "Enter the correct form", "I have ... (do) my homework", "done"));
         levels.add(new Level("3", "Third level", "Third task", "DO A FLIP x3", "3"));
-        levels.add(new Level("4", "First level", "First task", "Enter: first", "first"));
-        levels.add(new Level("5", "Second level", "Second task", "DO A FLIP x2", "2"));
-        levels.add(new Level("6", "Third level", "Third task", "DO A FLIP x3", "3"));
-        levels.add(new Level("7", "First level", "First task", "Enter: first", "first"));
-        levels.add(new Level("8", "Second level", "Second task", "DO A FLIP x2", "2"));
-        levels.add(new Level("9", "Third level", "Third task", "DO A FLIP x3", "3"));
-        levels.add(new Level("10", "First level", "First task", "Enter: first", "first"));
-        levels.add(new Level("11", "Second level", "Second task", "DO A FLIP x2", "2"));
-        levels.add(new Level("12", "Third level", "Third task", "DO A FLIP x3", "3"));
+        levels.add(new Level("4", "Fourth level", "Fourth task", "Enter: first", "first"));
+        levels.add(new Level("5", "Fifth level", "Fifth task", "DO A FLIP x2", "2"));
+        levels.add(new Level("6", "Sixth level", "Sixth task", "DO A FLIP x3", "3"));
+        levels.add(new Level("7", "Seventh level", "Seventh task", "Enter: first", "first"));
+        levels.add(new Level("8", "Eighth level", "Eighth task", "DO A FLIP x2", "2"));
+        levels.add(new Level("9", "Ninth level", "Ninth task", "DO A FLIP x3", "3"));
+        levels.add(new Level("10", "Tenth level", "Tenth task", "Enter: first", "first"));
+        levels.add(new Level("11", "Eleventh level", "Eleventh task", "DO A FLIP x2", "2"));
+        levels.add(new Level("12", "Twelfth level", "Twelfth task", "DO A FLIP x3", "3"));
         return levels;
     }
 

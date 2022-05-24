@@ -59,4 +59,7 @@
     <string name="dark_theme">Dark theme</string>
     <string name="search">Search</string>
     <string name="meaning">Meaning</string>
+    <string name="progress">Progress</string>
+    <string name="educated_words">Educated words:</string>
+    <string name="competed_levels">Competed levels:</string>
 </resources>
