@@ -47,6 +47,10 @@
         <argument
             android:name="levelId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_taskFragment_to_congratulationFragment"
+            app:destination="@id/congratulationFragment"
+            app:popUpTo="@id/levelsFragment" />
     </fragment>
 
     <fragment
@@ -59,7 +63,8 @@
             app:argType="string" />
         <action
             android:id="@+id/action_wordFragment_to_newWordFragment"
-            app:destination="@id/newWordFragment" />
+            app:destination="@id/newWordFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/examsFragment"
@@ -90,4 +95,9 @@
         android:name="ru.palyanaff.samsung_project_english_learning.screens.dictionary.TranslationFragment"
         android:label="Translation"
         tools:layout="@layout/fragment_translation" />
+    <fragment
+        android:id="@+id/congratulationFragment"
+        android:name="ru.palyanaff.samsung_project_english_learning.screens.levels.CongratulationFragment"
+        android:label="Congratulation"
+        tools:layout="@layout/fragment_congratulation" />
 </navigation>

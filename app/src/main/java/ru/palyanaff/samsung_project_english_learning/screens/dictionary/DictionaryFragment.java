@@ -1,22 +1,6 @@
 package ru.palyanaff.samsung_project_english_learning.screens.dictionary;
 
-import android.content.ClipData;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,8 +8,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Collections;
 import java.util.List;
 
 import ru.palyanaff.samsung_project_english_learning.R;
@@ -43,7 +35,6 @@ import ru.palyanaff.samsung_project_english_learning.adapter.DictionaryHeaderAda
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentDictionaryBinding;
 import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
-import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragmentDirections;
 
 public class DictionaryFragment extends Fragment {
 
@@ -72,7 +63,8 @@ public class DictionaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dictionary, container, false);
-        initRecyclerView(view);
+        workWithHeaders(view);
+
         setHasOptionsMenu(true);
         button = view.findViewById(R.id.add_button);
         button.setOnClickListener(v -> {
@@ -101,17 +93,16 @@ public class DictionaryFragment extends Fragment {
         });
     }
 
-    private void initRecyclerView(View view){
+    private void initRecyclerView(View view, List<String> headers){
         RecyclerView recyclerView = view.findViewById(R.id.dictionary_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        setHeadersList();
-        DictionaryHeaderAdapter dictionaryHeaderAdapter = new DictionaryHeaderAdapter(
-                new Datasource().loadDictionaryHeader());
+
+        DictionaryHeaderAdapter dictionaryHeaderAdapter = new DictionaryHeaderAdapter(headers);
         recyclerView.setAdapter(dictionaryHeaderAdapter);
     }
 
-    private void setHeadersList() {
+    private void workWithHeaders(View view) {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -121,8 +112,13 @@ public class DictionaryFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.getValue(User.class) != null) {
                             user = new User(snapshot.getValue(User.class));
-
                             headers = user.getDictionaryHeaders();
+
+                            Collections.sort(headers);
+                            List<String> totalHeaders = new Datasource().loadDictionaryHeader();
+                            totalHeaders.addAll(headers);
+
+                            initRecyclerView(view, totalHeaders);
                         }
                     }
 
