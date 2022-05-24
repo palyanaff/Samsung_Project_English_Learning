@@ -9,7 +9,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
+import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentTaskBinding;
 
@@ -105,6 +109,11 @@ public class TaskFragment extends Fragment {
                 setErrorTextField(false);
                 Toast.makeText(getContext(), "Correct", Toast.LENGTH_LONG).show();
                 user.addCompleteLevel(levelId);
+
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
+
+                navController.navigate(R.id.action_taskFragment_to_congratulationFragment);
             } else {
                 setErrorTextField(true);
             }

@@ -28,10 +28,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        }
 
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
@@ -40,14 +36,26 @@ public class LoginActivity extends AppCompatActivity {
         setListeners();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mAuth.addAuthStateListener((FirebaseAuth firebaseAuth) -> {
+            if (firebaseAuth.getCurrentUser() != null) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            }
+        });
+    }
+
     private void setListeners() {
         binding.loginButton.setOnClickListener(v -> loginUser());
 
         binding.registerButton.setOnClickListener(v -> startActivity(
-                new Intent(this, RegisterActivity.class)));
+                new Intent(LoginActivity.this, RegisterActivity.class)));
 
         binding.resetButton.setOnClickListener(v -> startActivity(
-                new Intent(this, ResetPasswordActivity.class)));
+                new Intent(LoginActivity.this, ResetPasswordActivity.class)));
     }
 
     private void loginUser() {
@@ -98,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 LoginActivity.this.startActivity(new Intent(
                         LoginActivity.this, MainActivity.class));
+                finish();
             } else {
                 Toast.makeText(LoginActivity.this,
                         "Failed to log in! Please check again your credentials",

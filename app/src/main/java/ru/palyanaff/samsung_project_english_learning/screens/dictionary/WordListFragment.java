@@ -1,6 +1,13 @@
 package ru.palyanaff.samsung_project_english_learning.screens.dictionary;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,15 +17,22 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.adapter.WordAdapter;
+import ru.palyanaff.samsung_project_english_learning.data.User;
+import ru.palyanaff.samsung_project_english_learning.data.Word;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentWordListBinding;
 import ru.palyanaff.samsung_project_english_learning.datasource.Datasource;
 
@@ -44,22 +58,42 @@ public class WordListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         dictionaryHeader = WordListFragmentArgs.fromBundle(getArguments()).getDictionaryHeader();
         setHasOptionsMenu(true);
-        binding.addWordButton.setOnClickListener(v -> {
+        binding.addWordButton.setOnClickListener(addWordListener());
+
+        View view = binding.getRoot();
+        workWithWords(view);
+
+        return view;
+    }
+
+    @NonNull
+    private View.OnClickListener addWordListener() {
+        return (View v) -> {
+            if (isDefaultHeader(dictionaryHeader)) {
+                Toast.makeText(WordListFragment.this.getActivity(),
+                                "Impossible to add words in default dictionaries", Toast.LENGTH_LONG)
+                        .show();
+                return;
+            }
+
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
             WordListFragmentDirections.ActionWordFragmentToNewWordFragment action =
                     WordListFragmentDirections.actionWordFragmentToNewWordFragment(dictionaryHeader);
             navController.navigate(action);
-        });
-
-        initRecyclerView(binding.getRoot());
-
-        return binding.getRoot();
+        };
     }
+
+    private static boolean isDefaultHeader(String header) {
+        final String[] defaultHeaders = { "A1", "A2", "B1", "B2", "C1", "C2" };
+
+        return Arrays.asList(defaultHeaders).contains(header);
+    }
+
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -68,11 +102,43 @@ public class WordListFragment extends Fragment {
 
     }
 
-    public void initRecyclerView(View view){
+    public void initRecyclerView(View view, List<Word> words) {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_word_list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        WordAdapter wordAdapter = new WordAdapter(new Datasource().loadWords(dictionaryHeader));
+        WordAdapter wordAdapter = new WordAdapter(dictionaryHeader, words);
         recyclerView.setAdapter(wordAdapter);
+    }
+
+    private void workWithWords(View view) {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
+
+        usersRef.child(firebaseUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.getValue(User.class) != null) {
+                            User newUser = new User(snapshot.getValue(User.class));
+
+                            List<Word> words;
+
+                            if (isDefaultHeader(dictionaryHeader)) {
+                                words = new Datasource().loadWords(dictionaryHeader);
+                            } else {
+                                words = newUser.getWordsFromDictionary(dictionaryHeader);
+                                Collections.sort(words,
+                                        (o1, o2) -> o1.getWordText().compareTo(o2.getWordText()));
+                            }
+
+                            initRecyclerView(view, words);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d(TAG, "Failed on getting actual words");
+                    }
+                });
     }
 }
