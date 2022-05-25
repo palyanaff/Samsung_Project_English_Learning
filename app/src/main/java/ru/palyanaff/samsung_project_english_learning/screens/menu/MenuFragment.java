@@ -194,7 +194,6 @@ public class MenuFragment extends Fragment {
     }
 
     private void setTextColor(int colorWhite) {
-        binding.menuText.setTextColor(colorWhite);
         binding.profileText.setTextColor(colorWhite);
         binding.emailText.setTextColor(colorWhite);
         binding.emailInput.setTextColor(colorWhite);
