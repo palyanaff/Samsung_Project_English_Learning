@@ -41,37 +41,25 @@ public class Datasource {
 
         // TODO: Need to update (load from server or add normal string resource)
         ArrayList<Word> words = new ArrayList<>();
-        if (dictionaryHeader.equals("A1")){
+        if (dictionaryHeader.equals("Starts with A-G")){
             words.add(new Word("Hello", "Привет"));
             words.add(new Word("Word", "Мир"));
             words.add(new Word("English", "Английский"));
         }
 
-        if (dictionaryHeader.equals("A2")){
+        if (dictionaryHeader.equals("Starts with H-M")){
             words.add(new Word("Abandon", "Покидать"));
             words.add(new Word("Edition", "Версия"));
             words.add(new Word("Minister", "Министр"));
         }
 
-        if (dictionaryHeader.equals("B1")){
+        if (dictionaryHeader.equals("Starts with N-S")){
             words.add(new Word("Hello", "Привет"));
             words.add(new Word("Word", "Мир"));
             words.add(new Word("English", "Английский"));
         }
 
-        if (dictionaryHeader.equals("B2")){
-            words.add(new Word("Abandon", "Покидать"));
-            words.add(new Word("Edition", "Версия"));
-            words.add(new Word("Minister", "Министр"));
-        }
-
-        if (dictionaryHeader.equals("C1")){
-            words.add(new Word("Hello", "Привет"));
-            words.add(new Word("Word", "Мир"));
-            words.add(new Word("English", "Английский"));
-        }
-
-        if (dictionaryHeader.equals("C2")){
+        if (dictionaryHeader.equals("Starts with T-Z")){
             words.add(new Word("Abandon", "Покидать"));
             words.add(new Word("Edition", "Версия"));
             words.add(new Word("Minister", "Министр"));
@@ -88,12 +76,11 @@ public class Datasource {
     public ArrayList<String> loadDictionaryHeader(){
         ArrayList<String> headers = new ArrayList<>();
 
-        headers.add("A1");
-        headers.add("A2");
-        headers.add("B1");
-        headers.add("B2");
-        headers.add("C1");
-        headers.add("C2");
+        headers.add("Starts with A-G");
+        headers.add("Starts with H-M");
+        headers.add("Starts with N-S");
+        headers.add("Starts with T-Z");
+
 
         return headers;
     }

@@ -27,6 +27,7 @@ import java.util.List;
 import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.data.Word;
+import ru.palyanaff.samsung_project_english_learning.screens.dictionary.WordListFragment;
 
 public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ItemViewHolder> {
 
@@ -62,6 +63,12 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ItemViewHolder
     @NonNull
     private View.OnClickListener closeButtonListener(Word word) {
         return (View v) -> {
+
+            if (WordListFragment.isDefaultHeader(header)) {
+                Toast.makeText(context, "Impossible to delete words from default dictionaries",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             usersRef = FirebaseDatabase.getInstance().getReference("Users");
