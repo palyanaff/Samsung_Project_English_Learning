@@ -106,7 +106,8 @@ public class WordListFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_word_list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        WordAdapter wordAdapter = new WordAdapter(dictionaryHeader, words);
+        WordAdapter wordAdapter = new WordAdapter(
+                WordListFragment.this.getContext(), dictionaryHeader, words);
         recyclerView.setAdapter(wordAdapter);
     }
 
@@ -127,6 +128,7 @@ public class WordListFragment extends Fragment {
                                 words = new Datasource().loadWords(dictionaryHeader);
                             } else {
                                 words = newUser.getWordsFromDictionary(dictionaryHeader);
+                                //noinspection ComparatorCombinators
                                 Collections.sort(words,
                                         (o1, o2) -> o1.getWordText().compareTo(o2.getWordText()));
                             }
