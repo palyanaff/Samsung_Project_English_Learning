@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ROO</string>
+    <string name="app_name" translatable="false">ROO</string>
     <string name="levels">Levels</string>
     <string name="settings_button">Settings button</string>
     <string name="runner">Runner</string>
@@ -10,28 +10,28 @@
 
     <!-- Preference Titles -->
     <string name="messages_header">First level</string>
-    <string name="sync_header">Sync</string>
+    <string name="sync_header" translatable="false">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
     <string name="edit_hint">Enter answer</string>
     <string name="check">Check</string>
     <string name="hint">Hint</string>
     <string name="try_again">Try again</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="task">Task</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">E-mail</string>
+    <string name="title_activity_login" translatable="false">LoginActivity</string>
+    <string name="prompt_email" translatable="false">E-mail</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in" translatable="false">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
@@ -47,7 +47,7 @@
     <string name="reset_password">Reset password</string>
     <string name="skip">Skip</string>
     <string name="profile">Profile</string>
-    <string name="email_text">E-mail:</string>
+    <string name="email_text" translatable="false">E-mail:</string>
     <string name="username_text">Username:</string>
     <string name="email_not_verified">E-mail not verified!</string>
     <string name="email_verified">E-mail verified!</string>
@@ -62,4 +62,5 @@
     <string name="progress">Progress</string>
     <string name="educated_words">Educated words:</string>
     <string name="competed_levels">Competed levels:</string>
+    <string name="word">Word:</string>
 </resources>
