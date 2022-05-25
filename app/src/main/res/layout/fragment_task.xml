@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="12dp"
                 android:text="@string/check"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/task_edit_text" />
@@ -85,7 +85,7 @@
                 android:id="@+id/task_hint_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/hint"
                 app:layout_constraintStart_toStartOf="parent"

@@ -10,7 +10,7 @@
     <string name="messages_header">Первый уровень</string>
     <string name="edit_hint">Введите ответ</string>
     <string name="check">Проверить</string>
-    <string name="hint">Подсказка</string>
+    <string name="hint">Намек</string>
     <string name="try_again">Попробуйте еще раз</string>
     <string name="task">Задание</string>
     <string name="prompt_password">Пароль</string>
