@@ -31,8 +31,6 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ItemViewHolder
     private FirebaseUser firebaseUser;
     private DatabaseReference usersRef;
 
-    private User user;
-
     private String header;
     private List<Word> list;
 
@@ -68,8 +66,9 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ItemViewHolder
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.getValue(User.class) != null) {
 
-                                user = new User(snapshot.getValue(User.class));
+                                User user = new User(snapshot.getValue(User.class));
                                 user.deleteWordFromDictionary(header, word);
+                                setNewUserToDB(user);
                             }
                         }
 
@@ -78,12 +77,12 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ItemViewHolder
                             Log.d(TAG, "Failed to get actual user");
                         }
                     });
-
-            if (user != null) {
-                usersRef.child(firebaseUser.getUid()).setValue(user);
-                notifyDataSetChanged();
-            }
         };
+    }
+
+    private void setNewUserToDB(User user) {
+        usersRef.child(firebaseUser.getUid()).setValue(user);
+        notifyDataSetChanged();
     }
 
     @Override
