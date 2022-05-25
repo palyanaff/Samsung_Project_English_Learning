@@ -89,6 +89,10 @@
         <argument
             android:name="header"
             app:argType="string" />
+        <action
+            android:id="@+id/action_newWordFragment_to_dictionaryFragment"
+            app:destination="@id/dictionaryFragment"
+            app:popUpTo="@id/dictionaryFragment" />
     </fragment>
     <fragment
         android:id="@+id/translationFragment"

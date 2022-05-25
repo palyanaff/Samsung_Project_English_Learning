@@ -2,6 +2,7 @@ package ru.palyanaff.samsung_project_english_learning.data;
 
 import androidx.annotation.Nullable;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class Word {
@@ -23,6 +24,16 @@ public class Word {
 
     public String getWordTranslation() {
         return wordTranslation;
+    }
+
+    public void setToLowerCase() {
+        wordText = wordText.toLowerCase();
+        wordText = wordTranslation.toLowerCase();
+    }
+
+    public void setToLowerCase(Locale locale) {
+        wordText = wordText.toLowerCase(locale);
+        wordText = wordTranslation.toLowerCase(locale);
     }
 
     @Override

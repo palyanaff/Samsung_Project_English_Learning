@@ -1,15 +1,19 @@
 package ru.palyanaff.samsung_project_english_learning.adapter;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,12 +35,12 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ItemViewHolder
     private FirebaseUser firebaseUser;
     private DatabaseReference usersRef;
 
-    private User user;
+    private final Context context;
+    private final String header;
+    private final List<Word> list;
 
-    private String header;
-    private List<Word> list;
-
-    public WordAdapter(String header, List<Word> list) {
+    public WordAdapter(Context context, String header, List<Word> list) {
+        this.context = context;
         this.header = header;
         this.list = list;
     }
@@ -68,20 +72,36 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ItemViewHolder
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.getValue(User.class) != null) {
 
-                                user = new User(snapshot.getValue(User.class));
+                                User user = new User(snapshot.getValue(User.class));
                                 user.deleteWordFromDictionary(header, word);
+                                setNewUserToDB(user);
+                                Toast.makeText(context, "Word has been successfully deleted!",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(context, "Word deleting has been canceled!",
+                                    Toast.LENGTH_SHORT).show();
                             Log.d(TAG, "Failed to get actual user");
                         }
                     });
+        };
+    }
 
-            if (user != null) {
-                usersRef.child(firebaseUser.getUid()).setValue(user);
-                this.notifyDataSetChanged();
+    private void setNewUserToDB(User user) {
+        usersRef.child(firebaseUser.getUid())
+                .setValue(user).addOnCompleteListener(setValueOnComplete());
+        notifyDataSetChanged();
+    }
+
+    @NonNull
+    private OnCompleteListener<Void> setValueOnComplete() {
+        return (Task<Void> setValueTask) -> {
+            if (!setValueTask.isSuccessful()) {
+                Toast.makeText(context, "Failed to update user data!",
+                        Toast.LENGTH_LONG).show();
             }
         };
     }

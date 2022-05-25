@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:layout_margin="16dp"
-            android:text="Word"
+            android:text="@string/word"
             android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
             app:layout_constraintLeft_toLeftOf="parent"

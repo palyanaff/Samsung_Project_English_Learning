@@ -2,22 +2,18 @@ package ru.palyanaff.samsung_project_english_learning.screens.dictionary;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ru.palyanaff.samsung_project_english_learning.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import ru.palyanaff.samsung_project_english_learning.adapter.MeaningAdapter;
 import ru.palyanaff.samsung_project_english_learning.adapter.PhoneticAdapter;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentTranslationBinding;
@@ -48,7 +44,7 @@ public class TranslationFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         searchView = binding.searchView;
         textView_translation_word = binding.textViewTranslationWord;
@@ -99,7 +95,8 @@ public class TranslationFragment extends Fragment {
     };
 
     private void showData(APIResponse apiResponse) {
-        textView_translation_word.setText("Word: " + apiResponse.getWord());
+        String textWord = textView_translation_word.getText().toString().split(" ")[0] + " ";
+        textView_translation_word.setText(textWord + apiResponse.getWord());
 
         recycler_view_translation_phonetics.setLayoutManager(new LinearLayoutManager(getContext()));
         phoneticAdapter = new PhoneticAdapter(apiResponse.getPhonetics());
