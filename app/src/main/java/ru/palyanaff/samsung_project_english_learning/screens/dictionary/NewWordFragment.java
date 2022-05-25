@@ -71,22 +71,6 @@ public class NewWordFragment extends Fragment {
         return binding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        getView().setOnKeyListener((View v, int keyCode, KeyEvent event) -> {
-        // FIXME: not working correctly, not even getting into this 'if' statement
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                Log.e(TAG, "Back button pressed");
-                activity = (AppCompatActivity) getContext();
-                navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
-                navController.navigate(R.id.action_newWordFragment_to_dictionaryFragment);
-            }
-
-            return false;
-        });
-    }
 
     @NonNull
     private View.OnClickListener addButtonListener() {
