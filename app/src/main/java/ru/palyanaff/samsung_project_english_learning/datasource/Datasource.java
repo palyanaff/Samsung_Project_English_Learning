@@ -78,7 +78,8 @@ public class Datasource {
 
             Scanner scanner = new Scanner(inputStream);
 
-            while (scanner.hasNextLine()) {
+            int i = 0;
+            while (i++ < 1000 && scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 if (!line.isEmpty()) {
                     String[] wordAsArray = line.split(" : ");
