@@ -75,7 +75,7 @@ public class WordListFragment extends Fragment {
         return (View v) -> {
             if (isDefaultHeader(dictionaryHeader)) {
                 Toast.makeText(WordListFragment.this.getActivity(),
-                                "Impossible to add words in default dictionaries", Toast.LENGTH_LONG)
+                                "Impossible to add words in default dictionaries", Toast.LENGTH_SHORT)
                         .show();
                 return;
             }
@@ -88,8 +88,13 @@ public class WordListFragment extends Fragment {
         };
     }
 
-    private static boolean isDefaultHeader(String header) {
-        final String[] defaultHeaders = { "A1", "A2", "B1", "B2", "C1", "C2" };
+    public static boolean isDefaultHeader(String header) {
+        final String[] defaultHeaders = {
+                "Starts with A-G",
+                "Starts with H-M",
+                "Starts with N-S",
+                "Starts with T-Z"
+        };
 
         return Arrays.asList(defaultHeaders).contains(header);
     }

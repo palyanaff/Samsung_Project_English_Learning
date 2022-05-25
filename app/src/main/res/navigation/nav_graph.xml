@@ -66,11 +66,7 @@
             app:destination="@id/newWordFragment"
             app:popUpToInclusive="false" />
     </fragment>
-    <fragment
-        android:id="@+id/examsFragment"
-        android:name="ru.palyanaff.samsung_project_english_learning.screens.ExamsFragment"
-        android:label="Exams"
-        tools:layout="@layout/fragment_exams" />
+
     <fragment
         android:id="@+id/menuFragment"
         android:name="ru.palyanaff.samsung_project_english_learning.screens.menu.MenuFragment"
