@@ -96,6 +96,7 @@ public class MenuFragment extends Fragment {
                         }
 
                         setProfileData();
+                        setProfileProgress();
                     }
 
                     @Override
@@ -103,6 +104,15 @@ public class MenuFragment extends Fragment {
                         Log.e(TAG, "Failed to get current user data", error.toException());
                     }
                 });
+    }
+
+    private void setProfileProgress() {
+        if (user != null) {
+            binding.usernameEducatedWordsCounter.setText(
+                    String.valueOf(user.getEducatedWords().size()));
+            binding.usernameCompletedLevelsCounter.setText(
+                    String.valueOf(user.getCompleteLevels().size()));
+            }
     }
 
     private void setProfileData() {
