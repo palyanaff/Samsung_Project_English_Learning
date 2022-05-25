@@ -65,7 +65,17 @@ public class WordListFragment extends Fragment {
         binding.addWordButton.setOnClickListener(addWordListener());
 
         View view = binding.getRoot();
-        workWithWords(view);
+
+        if (isDefaultHeader(dictionaryHeader)) {
+            Datasource datasource = new Datasource(getContext());
+            List<Word> words = datasource.loadWords(dictionaryHeader);
+            //noinspection ComparatorCombinators
+            Collections.sort(words,
+                    (o1, o2) -> o1.getWordText().compareTo(o2.getWordText()));
+            initRecyclerView(view, words);
+        } else {
+            workWithWords(view);
+        }
 
         return view;
     }
@@ -127,16 +137,10 @@ public class WordListFragment extends Fragment {
                         if (snapshot.getValue(User.class) != null) {
                             User newUser = new User(snapshot.getValue(User.class));
 
-                            List<Word> words;
-
-                            if (isDefaultHeader(dictionaryHeader)) {
-                                words = new Datasource().loadWords(dictionaryHeader);
-                            } else {
-                                words = newUser.getWordsFromDictionary(dictionaryHeader);
-                                //noinspection ComparatorCombinators
-                                Collections.sort(words,
-                                        (o1, o2) -> o1.getWordText().compareTo(o2.getWordText()));
-                            }
+                            List<Word> words = newUser.getWordsFromDictionary(dictionaryHeader);
+                            //noinspection ComparatorCombinators
+                            Collections.sort(words,
+                                    (o1, o2) -> o1.getWordText().compareTo(o2.getWordText()));
 
                             initRecyclerView(view, words);
                         }

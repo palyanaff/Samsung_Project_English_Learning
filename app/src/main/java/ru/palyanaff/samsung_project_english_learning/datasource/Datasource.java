@@ -1,14 +1,119 @@
 package ru.palyanaff.samsung_project_english_learning.datasource;
 
-import java.util.ArrayList;
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.util.Log;
 
-import ru.palyanaff.samsung_project_english_learning.data.Word;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
+
 import ru.palyanaff.samsung_project_english_learning.data.Level;
+import ru.palyanaff.samsung_project_english_learning.data.Word;
 
 /**
  * Class which work with data of levels
  */
 public class Datasource {
+
+    private static final String TAG = "Datasource";
+
+    private final Context context;
+
+    private final List<Word> wordsAtoG;
+    private final List<Word> wordsHtoM;
+    private final List<Word> wordsNtoS;
+    private final List<Word> wordsTtoZ;
+
+    public Datasource() {
+        wordsAtoG = null;
+        wordsHtoM = null;
+        wordsNtoS = null;
+        wordsTtoZ = null;
+
+        context = null;
+    }
+
+    public Datasource(Context context) {
+        this.context = context;
+
+        List<Word>[] wordsLists = Datasource.getSourceLists(context);
+
+        wordsAtoG = wordsLists[0];
+        wordsHtoM = wordsLists[1];
+        wordsNtoS = wordsLists[2];
+        wordsTtoZ = wordsLists[3];
+    }
+
+    public List<Word> getWordsAtoG() {
+        return wordsAtoG;
+    }
+
+    public List<Word> getWordsHtoM() {
+        return wordsHtoM;
+    }
+
+    public List<Word> getWordsNtoS() {
+        return wordsNtoS;
+    }
+
+    public List<Word> getWordsTtoZ() {
+        return wordsTtoZ;
+    }
+
+    private static List<Word>[] getSourceLists(Context context) {
+        List<Word> wordsAtoG = new LinkedList<>();
+        List<Word> wordsHtoM = new LinkedList<>();
+        List<Word> wordsNtoS = new LinkedList<>();
+        List<Word> wordsTtoZ = new LinkedList<>();
+
+        AssetManager assetManager = context.getAssets();
+
+        try {
+            InputStream inputStream = assetManager.open("WordsWithTranslations.txt");
+
+            Scanner scanner = new Scanner(inputStream);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (!line.isEmpty()) {
+                    String[] wordAsArray = line.split(" : ");
+
+                    // Word(eng, rus)
+                    Word word = new Word(wordAsArray[1], wordAsArray[0]);
+                    word.setToLowerCase(Locale.ROOT);
+
+                    Log.e(TAG, word.getWordText() + " " + word.getWordTranslation());
+
+                    char firstLetter = word.getWordText().charAt(0);
+
+                    if (firstLetter >= 'a' && firstLetter <= 'g') {
+                        wordsAtoG.add(word);
+                    } else if (firstLetter >= 'h' && firstLetter <= 'm') {
+                        wordsHtoM.add(word);
+                    } else if (firstLetter >= 'n' && firstLetter <= 's') {
+                        wordsNtoS.add(word);
+                    } else if (firstLetter >= 't' && firstLetter <= 'z') {
+                        wordsTtoZ.add(word);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return new List[] {
+                wordsAtoG,
+                wordsHtoM,
+                wordsNtoS,
+                wordsTtoZ
+        };
+    }
+
     /**
      * Load levels recourse
      * @return list with data(¿numbers?) of levels
@@ -37,35 +142,25 @@ public class Datasource {
      * Load words for dictionary
      * @return list with data of words
      */
-    public ArrayList<Word> loadWords(String dictionaryHeader) {
+    public List<Word> loadWords(String dictionaryHeader) {
 
-        // TODO: Need to update (load from server or add normal string resource)
-        ArrayList<Word> words = new ArrayList<>();
         if (dictionaryHeader.equals("Starts with A-G")){
-            words.add(new Word("Hello", "Привет"));
-            words.add(new Word("Word", "Мир"));
-            words.add(new Word("English", "Английский"));
+            return getWordsAtoG();
         }
 
         if (dictionaryHeader.equals("Starts with H-M")){
-            words.add(new Word("Abandon", "Покидать"));
-            words.add(new Word("Edition", "Версия"));
-            words.add(new Word("Minister", "Министр"));
+            return getWordsHtoM();
         }
 
         if (dictionaryHeader.equals("Starts with N-S")){
-            words.add(new Word("Hello", "Привет"));
-            words.add(new Word("Word", "Мир"));
-            words.add(new Word("English", "Английский"));
+            return getWordsNtoS();
         }
 
         if (dictionaryHeader.equals("Starts with T-Z")){
-            words.add(new Word("Abandon", "Покидать"));
-            words.add(new Word("Edition", "Версия"));
-            words.add(new Word("Minister", "Министр"));
+            return getWordsTtoZ();
         }
 
-        return words;
+        return null;
     }
 
     /**

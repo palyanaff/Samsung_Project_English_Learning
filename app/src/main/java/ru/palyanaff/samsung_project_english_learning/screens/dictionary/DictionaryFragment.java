@@ -115,7 +115,7 @@ public class DictionaryFragment extends Fragment {
                             headers = user.getDictionaryHeaders();
 
                             Collections.sort(headers);
-                            List<String> totalHeaders = new Datasource().loadDictionaryHeader();
+                            List<String> totalHeaders = new Datasource(getContext()).loadDictionaryHeader();
                             totalHeaders.addAll(headers);
 
                             initRecyclerView(view, totalHeaders);
