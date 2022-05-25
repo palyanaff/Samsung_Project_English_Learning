@@ -81,7 +81,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ItemViewHolder
 
             if (user != null) {
                 usersRef.child(firebaseUser.getUid()).setValue(user);
-                this.notifyDataSetChanged();
+                notifyDataSetChanged();
             }
         };
     }
