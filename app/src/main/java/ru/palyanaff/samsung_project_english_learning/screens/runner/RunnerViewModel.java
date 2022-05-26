@@ -43,6 +43,8 @@ public class RunnerViewModel extends AndroidViewModel {
 
         _currentWord = new MutableLiveData<>(word.getWordTranslation());
         _answerWord = new MutableLiveData<>(word.getWordText());
+
+        getNextWord();
     }
 
 
@@ -73,9 +75,6 @@ public class RunnerViewModel extends AndroidViewModel {
 
     public void getSkipWord(){
         words.add(words.get(wordCounter.getValue()));
-        wordCounter.setValue(wordCounter.getValue() + 1);
-        word = words.get(wordCounter.getValue());
-        _currentWord.setValue(word.getWordTranslation());
-        _answerWord.setValue(word.getWordText());
+        getNextWord();
     }
 }
