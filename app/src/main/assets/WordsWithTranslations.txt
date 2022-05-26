@@ -2,8 +2,8 @@
 и : and
 из : of
 в : in
-имеют : have
-это : it
+иметь : have
+оно : it
 я : i
 тот : that
 за : for
@@ -15,14 +15,13 @@
 сказать : say
 это : this
 oни : they
-в : at
+на : at
 но : but
 мы : we
 его : his
-от : from
+из : from
 тот : that
 нет : not
-по : by
 она : she
 или : or
 в виде : as
@@ -33,7 +32,6 @@ oни : they
 кто : who
 получить : get
 если : if
-бы : would
 ее : her
 все : all
 мой : my
@@ -51,12 +49,9 @@ oни : they
 когда : when
 который : which
 их : them
-некоторый : some
 меня : me
 люди : people
 брать : take
-из : out
-в : into
 только что : just
 видеть : see
 его : him
@@ -69,7 +64,6 @@ oни : they
 другие : other
 как : how
 потом : then
-это : its
 наш : our
 два : two
 более : more

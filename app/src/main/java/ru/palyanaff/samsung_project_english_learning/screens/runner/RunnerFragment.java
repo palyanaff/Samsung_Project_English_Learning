@@ -38,8 +38,8 @@ public class RunnerFragment extends Fragment {
     private DatabaseReference usersRef;
     private String userID;
 
-    FragmentRunnerBinding binding;
-    RunnerViewModel viewModel;
+    private FragmentRunnerBinding binding;
+    private RunnerViewModel viewModel;
 
     public RunnerFragment() {
         // Required empty public constructor
@@ -68,6 +68,9 @@ public class RunnerFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.getValue(User.class) != null) {
                             user = new User(snapshot.getValue(User.class));
+
+                            int currIndex = user.getCompleteLevels().size();
+                            viewModel.setWordCounter(currIndex);
                         }
                     }
 
@@ -91,6 +94,7 @@ public class RunnerFragment extends Fragment {
 
         if (viewModel.getCurrentWord().getValue() != null){
             binding.runnerHeader.setText(viewModel.getCurrentWord().getValue());
+
         }
 
         // Setup a click listener for the Submit and Skip buttons.

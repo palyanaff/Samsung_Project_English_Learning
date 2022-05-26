@@ -2,7 +2,10 @@ package ru.palyanaff.samsung_project_english_learning.datasource;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.Contract;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,15 +31,6 @@ public class Datasource {
     private final List<Word> wordsHtoM;
     private final List<Word> wordsNtoS;
     private final List<Word> wordsTtoZ;
-
-    public Datasource() {
-        wordsAtoG = null;
-        wordsHtoM = null;
-        wordsNtoS = null;
-        wordsTtoZ = null;
-
-        context = null;
-    }
 
     public Datasource(Context context) {
         this.context = context;
@@ -65,7 +59,9 @@ public class Datasource {
         return wordsTtoZ;
     }
 
-    private static List<Word>[] getSourceLists(Context context) {
+    @NonNull
+    @Contract("_ -> new")
+    private static List<Word>[] getSourceLists(@NonNull Context context) {
         List<Word> wordsAtoG = new LinkedList<>();
         List<Word> wordsHtoM = new LinkedList<>();
         List<Word> wordsNtoS = new LinkedList<>();
@@ -87,8 +83,6 @@ public class Datasource {
                     // Word(eng, rus)
                     Word word = new Word(wordAsArray[1], wordAsArray[0]);
                     word.setToLowerCase(Locale.ROOT);
-
-                    Log.e(TAG, word.getWordText() + " " + word.getWordTranslation());
 
                     char firstLetter = word.getWordText().charAt(0);
 
@@ -119,9 +113,9 @@ public class Datasource {
      * Load levels recourse
      * @return list with data(¿numbers?) of levels
      */
-    public ArrayList<Level> loadLevel() {
+    public List<Level> loadLevel() {
         // TODO: Need to update (load from server or add normal string resource)
-        ArrayList<Level> levels = new ArrayList<>();
+        List<Level> levels = new ArrayList<>();
 
         // TODO: make normal counter of levels(Id)
         levels.add(new Level("1", "First level", "First task", "Enter: first", "first"));
@@ -169,8 +163,8 @@ public class Datasource {
      * @return list with data of headers
      */
 
-    public ArrayList<String> loadDictionaryHeader(){
-        ArrayList<String> headers = new ArrayList<>();
+    public List<String> loadDictionaryHeader(){
+        List<String> headers = new ArrayList<>();
 
         headers.add("Starts with A-G");
         headers.add("Starts with H-M");
@@ -181,18 +175,12 @@ public class Datasource {
         return headers;
     }
 
-
-
-    public ArrayList<Word> runnerWords() {
-        ArrayList<Word> words = new ArrayList<>();
-
-        words.add(new Word("Привет", "Hello"));
-        words.add(new Word("Мир", "World"));
-        words.add(new Word("Английский", "English"));
-        words.add(new Word("Покидать", "Abandon"));
-        words.add(new Word("Версия", "Edition"));
-        words.add(new Word("Министр", "Minister"));
-
+    public List<Word> getWordsForRunner() {
+        List<Word> words = new ArrayList<>();
+        words.addAll(getWordsAtoG());
+        words.addAll(getWordsHtoM());
+        words.addAll(getWordsNtoS());
+        words.addAll(getWordsTtoZ());
         return words;
     }
 }

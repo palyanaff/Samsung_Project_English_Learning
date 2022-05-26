@@ -15,21 +15,20 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
+import java.util.List;
 
 import ru.palyanaff.samsung_project_english_learning.R;
+import ru.palyanaff.samsung_project_english_learning.data.Level;
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragmentDirections;
-import ru.palyanaff.samsung_project_english_learning.data.Level;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
-    private ArrayList<Level> arrayList;
+    private List<Level> arrayList;
     private final User user;
     private static final String TAG = "ItemAdapter";
 
-    public ItemAdapter(ArrayList<Level> arrayList, @NonNull User user) {
+    public ItemAdapter(List<Level> arrayList, @NonNull User user) {
         this.arrayList = arrayList;
         this.user = user;
     }
