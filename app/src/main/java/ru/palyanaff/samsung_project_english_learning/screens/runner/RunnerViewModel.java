@@ -35,7 +35,7 @@ public class RunnerViewModel extends AndroidViewModel {
         super(application);
         context = application.getApplicationContext();
         datasource = new Datasource(context);
-        words = datasource.getWordsForRunner();
+        words = datasource.loadWordsForRunner();
         Collections.shuffle(words);
 
         wordCounter= new MutableLiveData<>(0);

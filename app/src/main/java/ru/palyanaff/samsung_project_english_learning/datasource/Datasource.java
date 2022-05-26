@@ -114,10 +114,8 @@ public class Datasource {
      * @return list with data(¿numbers?) of levels
      */
     public List<Level> loadLevel() {
-        // TODO: Need to update (load from server or add normal string resource)
         List<Level> levels = new ArrayList<>();
 
-        // TODO: make normal counter of levels(Id)
         levels.add(new Level("1", "First level", "First task", "Enter: first", "first"));
         levels.add(new Level("2", "Second level", "Enter the correct form", "I have ... (do) my homework", "done"));
         levels.add(new Level("3", "Third level", "Third task", "DO A FLIP x3", "3"));
@@ -163,7 +161,7 @@ public class Datasource {
      * @return list with data of headers
      */
 
-    public List<String> loadDictionaryHeader(){
+    public List<String> loadDictionaryHeaders(){
         List<String> headers = new ArrayList<>();
 
         headers.add("Starts with A-G");
@@ -175,7 +173,7 @@ public class Datasource {
         return headers;
     }
 
-    public List<Word> getWordsForRunner() {
+    public List<Word> loadWordsForRunner() {
         List<Word> words = new ArrayList<>();
         words.addAll(getWordsAtoG());
         words.addAll(getWordsHtoM());

@@ -45,7 +45,6 @@ public class DictionaryFragment extends Fragment {
     private NavController navController;
     
     private User user;
-    // TODO: try add new header
     public List<String> headers;
 
     public DictionaryFragment() {
@@ -70,7 +69,6 @@ public class DictionaryFragment extends Fragment {
         button.setOnClickListener(v -> {
             activity = (AppCompatActivity) v.getContext();
             navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
-            //@NonNull DictionaryFragmentDirections action =  DictionaryFragmentDirections.actionDictionaryFragmentToNewDictionary();
 
             navController.navigate(R.id.action_dictionaryFragment_to_newDictionary);
 
@@ -115,7 +113,7 @@ public class DictionaryFragment extends Fragment {
                             headers = user.getDictionaryHeaders();
 
                             Collections.sort(headers);
-                            List<String> totalHeaders = new Datasource(getContext()).loadDictionaryHeader();
+                            List<String> totalHeaders = new Datasource(getContext()).loadDictionaryHeaders();
                             totalHeaders.addAll(headers);
 
                             initRecyclerView(view, totalHeaders);

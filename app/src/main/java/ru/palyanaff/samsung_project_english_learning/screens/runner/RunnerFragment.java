@@ -29,7 +29,6 @@ import ru.palyanaff.samsung_project_english_learning.databinding.FragmentRunnerB
 public class RunnerFragment extends Fragment {
     private static final String TAG = "RunnerFragment";
 
-    // TODO: replace user getting in viewModel
     private User user;
 
     private FirebaseAuth mAuth;
@@ -94,7 +93,6 @@ public class RunnerFragment extends Fragment {
 
         }
 
-        // Setup a click listener for the Submit and Skip buttons.
         binding.runnerCheckButton.setOnClickListener(onSubmitWord());
         binding.runnerSkipButton.setOnClickListener(onSkipWord());
     }
