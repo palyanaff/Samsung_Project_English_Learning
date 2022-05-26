@@ -68,9 +68,6 @@ public class RunnerFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.getValue(User.class) != null) {
                             user = new User(snapshot.getValue(User.class));
-
-                            int currIndex = user.getCompleteLevels().size();
-                            viewModel.setWordCounter(currIndex);
                         }
                     }
 
@@ -104,7 +101,8 @@ public class RunnerFragment extends Fragment {
 
     private View.OnClickListener onSubmitWord(){
         return v -> {
-            String playerWord = Objects.requireNonNull(binding.runnerInputEditText.getText()).toString().toLowerCase(Locale.ROOT).trim();
+            String playerWord = Objects.requireNonNull(binding.runnerInputEditText.getText())
+                    .toString().toLowerCase(Locale.ROOT).trim();
             if (playerWord.equals(viewModel.getAnswerWord().getValue().toLowerCase(Locale.ROOT))){
 
                 viewModel.getNextWord();

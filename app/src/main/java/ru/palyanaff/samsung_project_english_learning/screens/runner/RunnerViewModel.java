@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.Collections;
 import java.util.List;
 
 import ru.palyanaff.samsung_project_english_learning.data.Word;
@@ -35,12 +36,13 @@ public class RunnerViewModel extends AndroidViewModel {
         context = application.getApplicationContext();
         datasource = new Datasource(context);
         words = datasource.getWordsForRunner();
+        Collections.shuffle(words);
 
         wordCounter= new MutableLiveData<>(0);
         word = words.get(wordCounter.getValue());
 
-        _currentWord = new MutableLiveData<>(word.getWordText());
-        _answerWord = new MutableLiveData<>(word.getWordTranslation());
+        _currentWord = new MutableLiveData<>(word.getWordTranslation());
+        _answerWord = new MutableLiveData<>(word.getWordText());
     }
 
 
@@ -59,8 +61,8 @@ public class RunnerViewModel extends AndroidViewModel {
     public void getNextWord() {
         if (wordCounter.getValue() < words.size()){
             word = words.get(wordCounter.getValue());
-            _currentWord.setValue(word.getWordText());
-            _answerWord.setValue(word.getWordTranslation());
+            _currentWord.setValue(word.getWordTranslation());
+            _answerWord.setValue(word.getWordText());
         }
         wordCounter.setValue(wordCounter.getValue() + 1);
     }
@@ -73,11 +75,7 @@ public class RunnerViewModel extends AndroidViewModel {
         words.add(words.get(wordCounter.getValue()));
         wordCounter.setValue(wordCounter.getValue() + 1);
         word = words.get(wordCounter.getValue());
-        _currentWord.setValue(word.getWordText());
-        _answerWord.setValue(word.getWordTranslation());
-    }
-
-    public void setWordCounter(int currIndex) {
-        this.wordCounter = new MutableLiveData<>(currIndex);
+        _currentWord.setValue(word.getWordTranslation());
+        _answerWord.setValue(word.getWordText());
     }
 }
