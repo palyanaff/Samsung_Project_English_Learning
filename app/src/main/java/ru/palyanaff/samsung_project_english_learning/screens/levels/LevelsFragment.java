@@ -41,8 +41,6 @@ public class LevelsFragment extends Fragment {
     private FirebaseUser firebaseUser;
     private DatabaseReference usersRef;
 
-    private User user;
-
     public LevelsFragment() {
         // Required empty public constructor
     }

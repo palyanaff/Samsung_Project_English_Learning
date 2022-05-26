@@ -24,7 +24,7 @@ public class RunnerViewModel extends AndroidViewModel {
     private final Datasource datasource;
     private final List<Word> words;
 
-    private MutableLiveData<Integer> wordCounter;
+    private final MutableLiveData<Integer> wordCounter;
 
     private Word word;
 

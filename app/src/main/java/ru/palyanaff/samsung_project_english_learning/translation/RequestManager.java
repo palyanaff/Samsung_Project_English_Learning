@@ -14,7 +14,7 @@ import ru.palyanaff.samsung_project_english_learning.translation.models.APIRespo
 
 public class RequestManager {
 
-    private Context context;
+    private final Context context;
     private static final String TAG = "RequestManager";
     private static final String BASE_URL = "https://api.dictionaryapi.dev/api/v2/";
     Retrofit retrofit = new Retrofit.Builder()

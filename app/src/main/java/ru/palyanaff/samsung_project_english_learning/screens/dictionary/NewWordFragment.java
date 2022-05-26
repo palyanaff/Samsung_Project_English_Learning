@@ -2,18 +2,13 @@ package ru.palyanaff.samsung_project_english_learning.screens.dictionary;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,7 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
-import ru.palyanaff.samsung_project_english_learning.R;
 import ru.palyanaff.samsung_project_english_learning.data.User;
 import ru.palyanaff.samsung_project_english_learning.data.Word;
 import ru.palyanaff.samsung_project_english_learning.databinding.FragmentNewWordBinding;
@@ -41,9 +35,6 @@ public class NewWordFragment extends Fragment {
 
     private FirebaseUser firebaseUser;
     private DatabaseReference usersRef;
-
-    private AppCompatActivity activity;
-    private NavController navController;
 
     private FragmentNewWordBinding binding;
     private User user;

@@ -24,12 +24,12 @@ import ru.palyanaff.samsung_project_english_learning.screens.levels.LevelsFragme
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
-    private List<Level> arrayList;
+    private final List<Level> list;
     private final User user;
     private static final String TAG = "ItemAdapter";
 
-    public ItemAdapter(List<Level> arrayList, @NonNull User user) {
-        this.arrayList = arrayList;
+    public ItemAdapter(List<Level> list, @NonNull User user) {
+        this.list = list;
         this.user = user;
     }
 
@@ -42,7 +42,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Level currentLevel = arrayList.get(position);
+        Level currentLevel = list.get(position);
 
         holder.button.setText(currentLevel.getLevelId());
         holder.textView.setText(currentLevel.getHeader());
@@ -71,7 +71,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return list.size();
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder{
