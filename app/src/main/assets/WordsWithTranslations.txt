@@ -391,7 +391,7 @@ oни : they
 интерес : interest
 смерть : death
 курс : course
-кто то : someone
+кто-то : someone
 опыт : experience
 за : behind
 достигать : reach

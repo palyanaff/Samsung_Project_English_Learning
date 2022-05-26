@@ -116,18 +116,19 @@ public class Datasource {
     public List<Level> loadLevel() {
         List<Level> levels = new ArrayList<>();
 
-        levels.add(new Level("1", "First level", "First task", "Enter: first", "first"));
-        levels.add(new Level("2", "Second level", "Enter the correct form", "I have ... (do) my homework", "done"));
-        levels.add(new Level("3", "Third level", "Third task", "DO A FLIP x3", "3"));
-        levels.add(new Level("4", "Fourth level", "Fourth task", "Enter: first", "first"));
-        levels.add(new Level("5", "Fifth level", "Fifth task", "DO A FLIP x2", "2"));
-        levels.add(new Level("6", "Sixth level", "Sixth task", "DO A FLIP x3", "3"));
-        levels.add(new Level("7", "Seventh level", "Seventh task", "Enter: first", "first"));
-        levels.add(new Level("8", "Eighth level", "Eighth task", "DO A FLIP x2", "2"));
-        levels.add(new Level("9", "Ninth level", "Ninth task", "DO A FLIP x3", "3"));
-        levels.add(new Level("10", "Tenth level", "Tenth task", "Enter: first", "first"));
-        levels.add(new Level("11", "Eleventh level", "Eleventh task", "DO A FLIP x2", "2"));
-        levels.add(new Level("12", "Twelfth level", "Twelfth task", "DO A FLIP x3", "3"));
+        levels.add(new Level("1", "First level", "Enter the correct form", "Last week, we went on trip to the Museum of ... (nature) History", "natural"));
+        levels.add(new Level("2", "Second level", "Enter the correct form", "I was telling her all my ... (suggest)", "suggestions"));
+        levels.add(new Level("3", "Third level", "Enter the correct form", "That building is ... (locate) in Moscow", "located"));
+        levels.add(new Level("4", "Fourth level", "Enter the correct form", "It was a section on ... (history) animals", "historic"));
+        levels.add(new Level("5", "Fifth level", "Enter the correct form", "These creatures were ... (giant)", "gigantic"));
+        levels.add(new Level("6", "Sixth level", "Enter the correct form", "The teacher thanked children for their ... (patient)", "patience"));
+        levels.add(new Level("7", "Seventh level", "Enter the correct form", "I was telling her all my ... (suggest)", "suggestions"));
+        levels.add(new Level("8", "Eighth level", "Enter the correct form", "It was his program full of ... (tolerant)", "tolerance"));
+        levels.add(new Level("9", "Ninth level", "Enter the correct form", "It was pretty nice ... (move) of him", "movement"));
+        levels.add(new Level("10", "Tenth level", "Enter the correct form", "Is he a friend of ... (you)", "yours"));
+        levels.add(new Level("11", "Eleventh level", "Enter the correct form", "That guy was very ... (skill)", "skillful"));
+        levels.add(new Level("12", "Twelfth level", "Enter word according to context", "That girl was very ... (she looked nice)", "beautiful"));
+        levels.add(new Level("13", "Thirteenth level", "Enter word according to context", "That guy was very ... (he looked nice)", "handsome"));
         return levels;
     }
 
