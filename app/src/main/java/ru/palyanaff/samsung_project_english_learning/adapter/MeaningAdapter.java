@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ConcatAdapter;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +18,7 @@ import ru.palyanaff.samsung_project_english_learning.translation.models.Meanings
 public class MeaningAdapter extends RecyclerView.Adapter<MeaningAdapter.MeaningViewHolder> {
 
     private final List<Meanings> meaningsList;
-    private Context context;
+    private final Context context;
 
     public MeaningAdapter(Context context, List<Meanings> meaningsList) {
         this.meaningsList = meaningsList;

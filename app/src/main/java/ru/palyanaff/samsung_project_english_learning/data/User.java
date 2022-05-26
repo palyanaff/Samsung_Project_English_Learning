@@ -89,6 +89,14 @@ public class User {
         return null;
     }
 
+    public int getTotalWords() {
+        int totalWords = 0;
+        for (Dictionary dict : dictionaries) {
+            totalWords += dict.getWords().size();
+        }
+        return totalWords;
+    }
+
     public void addCompleteLevel(String id){
         if (!completeLevels.contains(id)) {
             completeLevels.add(id);
