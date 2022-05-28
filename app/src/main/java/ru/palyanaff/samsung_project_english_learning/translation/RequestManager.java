@@ -3,6 +3,8 @@ package ru.palyanaff.samsung_project_english_learning.translation;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -14,7 +16,7 @@ import ru.palyanaff.samsung_project_english_learning.translation.models.APIRespo
 
 public class RequestManager {
 
-    private Context context;
+    private final Context context;
     private static final String TAG = "RequestManager";
     private static final String BASE_URL = "https://api.dictionaryapi.dev/api/v2/";
     Retrofit retrofit = new Retrofit.Builder()
@@ -33,7 +35,7 @@ public class RequestManager {
         try {
             call.enqueue(new Callback<List<APIResponse>>() {
                 @Override
-                public void onResponse(Call<List<APIResponse>> call, Response<List<APIResponse>> response) {
+                public void onResponse(@NonNull Call<List<APIResponse>> call, @NonNull Response<List<APIResponse>> response) {
                     if (!response.isSuccessful()){
                         Toast.makeText(context, "Response is not successful", Toast.LENGTH_SHORT).show();
                         return;
@@ -42,7 +44,7 @@ public class RequestManager {
                 }
 
                 @Override
-                public void onFailure(Call<List<APIResponse>> call, Throwable t) {
+                public void onFailure(@NonNull Call<List<APIResponse>> call, @NonNull Throwable t) {
                     listener.onError("Request failed!");
                 }
             });

@@ -33,7 +33,7 @@ public class Word {
 
     public void setToLowerCase(Locale locale) {
         wordText = wordText.toLowerCase(locale);
-        wordText = wordTranslation.toLowerCase(locale);
+        wordTranslation = wordTranslation.toLowerCase(locale);
     }
 
     @Override

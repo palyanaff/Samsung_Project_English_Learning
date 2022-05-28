@@ -20,7 +20,7 @@ import ru.palyanaff.samsung_project_english_learning.screens.dictionary.Dictiona
 
 public class DictionaryHeaderAdapter extends RecyclerView.Adapter<DictionaryHeaderAdapter.ItemViewHolder>{
     private static final String TAG = "DictionaryHeaderAdapter";
-    private List<String> list;
+    private final List<String> list;
 
     public DictionaryHeaderAdapter (List<String> list){
         this.list = list;

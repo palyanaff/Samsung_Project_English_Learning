@@ -14,7 +14,7 @@ import ru.palyanaff.samsung_project_english_learning.translation.models.Definiti
 public class DefinitionAdapter extends RecyclerView.Adapter<DefinitionAdapter.DefinitionViewHolder> {
 
     private final List<Definitions> definitionsList;
-    private Context context;
+    private final Context context;
 
     public DefinitionAdapter(Context context, List<Definitions> definitionsList) {
         this.definitionsList = definitionsList;

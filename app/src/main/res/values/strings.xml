@@ -63,4 +63,7 @@
     <string name="educated_words">Educated words:</string>
     <string name="competed_levels">Competed levels:</string>
     <string name="word">Word:</string>
+    <string name="topics_created">Topics created:</string>
+    <string name="words_added">Words added:</string>
+    <string name="statistics">Statistics</string>
 </resources>

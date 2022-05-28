@@ -29,7 +29,6 @@ import ru.palyanaff.samsung_project_english_learning.databinding.FragmentRunnerB
 public class RunnerFragment extends Fragment {
     private static final String TAG = "RunnerFragment";
 
-    // TODO: replace user getting in viewModel
     private User user;
 
     private FirebaseAuth mAuth;
@@ -38,8 +37,8 @@ public class RunnerFragment extends Fragment {
     private DatabaseReference usersRef;
     private String userID;
 
-    FragmentRunnerBinding binding;
-    RunnerViewModel viewModel;
+    private FragmentRunnerBinding binding;
+    private RunnerViewModel viewModel;
 
     public RunnerFragment() {
         // Required empty public constructor
@@ -91,16 +90,17 @@ public class RunnerFragment extends Fragment {
 
         if (viewModel.getCurrentWord().getValue() != null){
             binding.runnerHeader.setText(viewModel.getCurrentWord().getValue());
+
         }
 
-        // Setup a click listener for the Submit and Skip buttons.
         binding.runnerCheckButton.setOnClickListener(onSubmitWord());
         binding.runnerSkipButton.setOnClickListener(onSkipWord());
     }
 
     private View.OnClickListener onSubmitWord(){
         return v -> {
-            String playerWord = Objects.requireNonNull(binding.runnerInputEditText.getText()).toString().toLowerCase(Locale.ROOT).trim();
+            String playerWord = Objects.requireNonNull(binding.runnerInputEditText.getText())
+                    .toString().toLowerCase(Locale.ROOT).trim();
             if (playerWord.equals(viewModel.getAnswerWord().getValue().toLowerCase(Locale.ROOT))){
 
                 viewModel.getNextWord();
